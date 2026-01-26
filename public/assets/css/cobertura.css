@@ -1,0 +1,279 @@
+.hero-cobertura {
+    background-image: url('../img/portadavf.png');
+    background-size: cover;
+    background-position: center; 
+/*     background-attachment: fixed; */
+   /*  background: linear-gradient(135deg, #005B9F 0%, #0077CC 100%); */
+    color: white;
+    padding: 150px 0 80px;
+    text-align: center;
+}
+
+.hero-cobertura h1 {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.8s ease-out;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.hero-cobertura p {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.95;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Verificador de cobertura */
+.verificador-section {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.verificador-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 91, 159, 0.15);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #005B9F;
+    font-size: 1.05rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #005B9F;
+    box-shadow: 0 0 0 3px rgba(0, 91, 159, 0.1);
+}
+
+.btn-verificar {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #005B9F, #0077CC);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-verificar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 91, 159, 0.3);
+}
+
+.resultado-cobertura {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.resultado-cobertura.disponible {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    color: #155724;
+}
+
+.resultado-cobertura.no-disponible {
+    background: #f8d7da;
+    border: 2px solid #dc3545;
+    color: #721c24;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mapa Section */
+.mapa-section {
+    padding: 80px 0;
+}
+
+#map {
+    height: 600px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 91, 159, 0.2);
+    margin-top: 40px;
+}
+
+/* Zonas de Cobertura */
+.zonas-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.zonas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.zona-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 91, 159, 0.1);
+    transition: all 0.3s ease;
+    border-left: 5px solid #005B9F;
+}
+
+.zona-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 91, 159, 0.15);
+}
+
+.zona-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.zona-icon {
+    font-size: 2.5rem;
+    color: #E58E21;
+}
+
+.zona-nombre {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #005B9F;
+}
+
+.zona-distritos {
+    list-style: none;
+    padding: 0;
+}
+
+.zona-distritos li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.zona-distritos li:last-child {
+    border-bottom: none;
+}
+
+.zona-distritos li i {
+    color: #28a745;
+    font-size: 0.9rem;
+}
+
+/* Proceso de instalación */
+.proceso-section {
+    padding: 80px 0;
+}
+
+.proceso-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.step-card {
+    text-align: center;
+    padding: 30px;
+    position: relative;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #005B9F, #0077CC);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 auto 20px;
+}
+
+.step-icon {
+    font-size: 3rem;
+    color: #E58E21;
+    margin-bottom: 20px;
+}
+
+.step-title {
+    font-size: 1.3rem;
+    color: #005B9F;
+    margin-bottom: 10px;
+}
+
+.step-description {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Animaciones */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-element.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-cobertura h1 {
+        font-size: 2rem;
+    }
+    
+    #map {
+        height: 400px;
+    }
+    
+    .verificador-card {
+        padding: 30px 20px;
+    }
+}
