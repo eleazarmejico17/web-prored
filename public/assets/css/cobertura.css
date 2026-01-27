@@ -276,4 +276,13 @@
     .verificador-card {
         padding: 30px 20px;
     }
+    .hero-cobertura {
+        background-image: url('../img/responsive/bg-nosotros2.png');
+        background-size: cover;
+        background-position: center; 
+        /* background-attachment: fixed; */
+        color: white;
+        padding: 150px 0 80px;
+        text-align: center;
+    }
 }

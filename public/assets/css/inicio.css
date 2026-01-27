@@ -379,6 +379,86 @@
     display: block; /* Solo el activo se muestra */
 }
 
+.plan-card-iptv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(0, 91, 159, 0.1);
+    transition: all 0.3s ease;
+}
+
+.plan-iptv-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.plan-iptv-channels {
+    overflow-y: auto;
+    max-height: 500px;
+    padding-right: 10px;
+}
+
+.channels-by-category {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.channel-category h5 {
+    color: #005B9F;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #E58E21;
+    padding-bottom: 5px;
+}
+
+.channel-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 15px;
+}
+
+.channel-logos img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 8px;
+    padding: 5px;
+    background: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.channel-logos img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Scrollbar styling */
+.plan-iptv-channels::-webkit-scrollbar {
+    width: 6px;
+}
+
+.plan-iptv-channels::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.plan-iptv-channels::-webkit-scrollbar-thumb {
+    background: #E58E21;
+    border-radius: 10px;
+}
+
+.plan-iptv-channels::-webkit-scrollbar-thumb:hover {
+    background: #d87d1a;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -411,6 +491,17 @@
     
     .hero-image {
         order: -1;
+    }
+        .plan-card-iptv {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px;
+        max-width: 450px;
+    }
+
+    .plan-iptv-channels {
+        max-height: none;
+        overflow-y: visible;
     }
 }
 
