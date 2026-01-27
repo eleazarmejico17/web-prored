@@ -32,131 +32,135 @@
     }
 }
 
-/* Historia Section */
-.historia-section {
+
+/* Estilos Bento Grid */
+.bento-section {
     padding: 80px 0;
+    background-color: #f4f7f9;
 }
-
-.historia-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-.historia-image {
-    background: linear-gradient(135deg, #005B9F 0%, #0077CC 100%);
-    border-radius: 20px;
-    padding: 60px;
+.bento-section h2 {
     text-align: center;
-    box-shadow: 0 10px 40px rgba(0, 91, 159, 0.2);
+    font-size: 2.3rem;
+    margin-bottom: 60px;
 }
 
-.historia-image i {
-    font-size: 15rem;
-    color: rgba(255, 255, 255, 0.2);
-}
-
-/* Mision Vision Valores */
-.mvv-section {
-    background: #f8f9fa;
-    padding: 80px 0;
-}
-
-.mvv-grid {
+.bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 280px 280px auto; 
+    gap: 20px;
+    min-height: 600px; 
 }
 
-.mvv-card {
+.bento-item {
     background: white;
-    border-radius: 20px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 5px 25px rgba(0, 91, 159, 0.1);
-    transition: all 0.3s ease;
-    border-top: 5px solid #005B9F;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 91, 159, 0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 91, 159, 0.1);
 }
 
-.mvv-card:nth-child(2) {
-    border-top-color: #E58E21;
+.bento-item:hover {
+    transform: translateY(-5px);
 }
 
-.mvv-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 40px rgba(0, 91, 159, 0.15);
+/* Posicionamiento de bloques */
+.historia-main {
+    grid-column: span 2;
 }
 
-.mvv-icon {
-    font-size: 4rem;
-    margin-bottom: 25px;
-    background: linear-gradient(135deg, #005B9F, #0077CC);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.slider-vertical-container {
+    grid-row: span 2;
+    padding: 0; /* Para que la imagen ocupe todo */
+    overflow: hidden;
+    position: relative;
+    min-height: 400px;
 }
 
-.mvv-card:nth-child(2) .mvv-icon {
-    background: linear-gradient(135deg, #E58E21, #F4A347);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.valores-full {
+    grid-column: span 3;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
 }
 
-.mvv-title {
-    font-size: 1.8rem;
-    color: #005B9F;
-    margin-bottom: 20px;
+/* Slider Vertical */
+.vertical-slider {
+    height: 100%;
+    width: 100%;
 }
 
-.mvv-text {
-    color: #666;
-    line-height: 1.8;
-    font-size: 1.05rem;
-}
-
-/* Valores List */
-.valores-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-}
-
-.valor-item {
+.slider-track {
     display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    padding: 20px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 3px 15px rgba(0, 91, 159, 0.08);
-    transition: all 0.3s ease;
+    flex-direction: column;
+    height: 100%;
+    animation: scrollVertical 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
 }
 
-.valor-item:hover {
-    transform: translateX(10px);
-    box-shadow: 0 5px 25px rgba(0, 91, 159, 0.12);
+.slider-track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
-.valor-item i {
-    font-size: 2rem;
-    color: #E58E21;
-    min-width: 40px;
+@keyframes scrollVertical {
+    0%, 20% { transform: translateY(0); }
+    25%, 45% { transform: translateY(-100%); }
+    50%, 70% { transform: translateY(-200%); }
+    75%, 100% { transform: translateY(-300%); }
 }
 
-.valor-content h4 {
+/* Detalles Estéticos */
+.bento-title {
     color: #005B9F;
-    margin-bottom: 8px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.valor-content p {
-    color: #666;
-    margin: 0;
-    font-size: 0.95rem;
+.mvv-icon-small {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #E58E21;
+}
+
+.valores-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.v-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #005B9F;
+    font-weight: 600;
+}
+
+.v-item i {
+    font-size: 1.5rem;
+    color: #E58E21;
+    margin-bottom: 5px;
+}
+
+/* Responsivo para Móviles */
+@media (max-width: 992px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+    .historia-main, .slider-vertical-container, .valores-full {
+        grid-column: span 1;
+    }
+    .slider-vertical-container {
+        height: 300px;
+    }
+    .valores-bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* Timeline */
