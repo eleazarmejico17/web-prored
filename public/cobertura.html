@@ -38,110 +38,68 @@
     <section class="hero-cobertura">
         <div class="container">
             <h1>Cobertura ProRed</h1>
-            <p>Descubre si ProRed llega a tu zona en Junin</p>
+            <p>Descubre si ProRed llega a tu zona en Junín y explora nuestro mapa interactivo</p>
         </div>
     </section>
 
-    <!-- Verificador de Cobertura -->
-    <section class="verificador-section">
+    <!-- Sección combinada: Verificador + Mapa -->
+    <section class="cobertura-combinada">
         <div class="container">
-            <h2 class="text-center mb-4">Verifica tu Cobertura</h2>
-            <p class="text-center text-secondary" style="max-width: 600px; margin: 0 auto 40px;">
-                Ingresa tu dirección para verificar si tenemos cobertura en tu zona
+            <h2 class="text-center mb-4 fade-in-element">Verifica tu Cobertura</h2>
+            <p class="text-center text-secondary fade-in-element" style="max-width: 700px; margin: 0 auto 40px;">
+                Ingresa tu dirección para verificar si tenemos cobertura en tu zona y explora nuestro mapa interactivo
             </p>
             
-            <div class="verificador-card">
-                <form id="verificadorForm">
-                    <div class="form-group">
-                        <label for="distrito">Distrito</label>
-                        <select id="distrito" class="form-control" required>
-                            <option value="">Selecciona tu distrito</option>
-                            <option value="huancayo">Huancayo</option>
-                            <option value="el-tambo">El Tambo</option>
-                            <option value="chilca">Chilca</option>
-                            <option value="concepcion">Concepción</option>
-                            <option value="san-jeronimo">San Jerónimo</option>
-                            <option value="pilcomayo">Pilcomayo</option>
-                        </select>
-                    </div>
+            <div class="cobertura-grid">
+                <!-- Verificador -->
+                <div class="verificador-card fade-in-element">
+                    <form id="verificadorForm">
+                        <div class="form-group">
+                            <label for="distrito">Distrito</label>
+                            <select id="distrito" class="form-control" required>
+                                <option value="">Selecciona tu distrito</option>
+                                <option value="huancayo">Huancayo</option>
+                                <option value="el-tambo">El Tambo</option>
+                                <option value="chilca">Chilca</option>
+                                <option value="concepcion">Concepción</option>
+                                <option value="san-jeronimo">San Jerónimo</option>
+                                <option value="pilcomayo">Pilcomayo</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" id="direccion" class="form-control" placeholder="Ej: Jr. Real 123, Barrio San Carlos" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="referencia">Referencia (opcional)</label>
+                            <input type="text" id="referencia" class="form-control" placeholder="Ej: Cerca al Mercado Modelo">
+                        </div>
+                        
+                        <button type="submit" class="btn-verificar">
+                            <i class="fas fa-search"></i> Verificar Cobertura
+                        </button>
+                    </form>
                     
-                    <div class="form-group">
-                        <label for="direccion">Dirección</label>
-                        <input type="text" id="direccion" class="form-control" placeholder="Ej: Jr. Real 123, Barrio San Carlos" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="referencia">Referencia (opcional)</label>
-                        <input type="text" id="referencia" class="form-control" placeholder="Ej: Cerca al Mercado Modelo">
-                    </div>
-                    
-                    <button type="submit" class="btn-verificar">
-                        <i class="fas fa-search"></i> Verificar Cobertura
-                    </button>
-                </form>
+                    <div id="resultado" class="resultado-cobertura"></div>
+                </div>
                 
-                <div id="resultado" class="resultado-cobertura"></div>
+                <!-- Mapa -->
+                <div class="fade-in-element">
+                    <div id="map"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Mapa Interactivo -->
-    <section class="mapa-section">
-        <div class="container">
-            <h2 class="text-center mb-4 fade-in-element">Mapa de Cobertura</h2>
-            <p class="text-center text-secondary fade-in-element" style="max-width: 700px; margin: 0 auto 20px;">
-                Explora nuestras zonas de cobertura en Huancayo y Concepción
-            </p>
-            
-            <div id="map" class="fade-in-element"></div>
-        </div>
-    </section>
-
-    <!-- Zonas de Cobertura -->
+    <!-- Zonas de Cobertura Mejoradas -->
     <section class="zonas-section">
         <div class="container">
             <h2 class="text-center mb-4 fade-in-element">Zonas con Cobertura</h2>
             
             <div class="zonas-grid">
-                <div class="zona-card fade-in-element">
-                    <div class="zona-header">
-                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">Huancayo Centro</div>
-                    </div>
-                    <ul class="zona-distritos">
-                        <li><i class="fas fa-check-circle"></i> Plaza Constitución</li>
-                        <li><i class="fas fa-check-circle"></i> Real</li>
-                        <li><i class="fas fa-check-circle"></i> San Carlos</li>
-                        <li><i class="fas fa-check-circle"></i> Tahuantinsuyo</li>
-                    </ul>
-                </div>
-                
-                <div class="zona-card fade-in-element">
-                    <div class="zona-header">
-                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">El Tambo</div>
-                    </div>
-                    <ul class="zona-distritos">
-                        <li><i class="fas fa-check-circle"></i> Palian</li>
-                        <li><i class="fas fa-check-circle"></i> Los Andes</li>
-                        <li><i class="fas fa-check-circle"></i> San Antonio</li>
-                        <li><i class="fas fa-check-circle"></i> Saños Chico</li>
-                    </ul>
-                </div>
-                
-                <div class="zona-card fade-in-element">
-                    <div class="zona-header">
-                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">Chilca</div>
-                    </div>
-                    <ul class="zona-distritos">
-                        <li><i class="fas fa-check-circle"></i> Chilca Centro</li>
-                        <li><i class="fas fa-check-circle"></i> Auquimarca</li>
-                        <li><i class="fas fa-check-circle"></i> Azapampa</li>
-                        <li><i class="fas fa-check-circle"></i> Ocopilla</li>
-                    </ul>
-                </div>
-                
+                <!-- Tarjeta Concepción -->
                 <div class="zona-card fade-in-element">
                     <div class="zona-header">
                         <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
@@ -153,8 +111,16 @@
                         <li><i class="fas fa-check-circle"></i> Miraflores</li>
                         <li><i class="fas fa-check-circle"></i> Santa Rosa</li>
                     </ul>
+                    <div class="zona-consultar">
+                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20servicio%20en%20la%20zona%20de%20Concepción" 
+                        target="_blank" 
+                        class="btn-consultar">
+                            Consultar
+                        </a>
+                    </div>
                 </div>
                 
+                <!-- Tarjeta San Jerónimo -->
                 <div class="zona-card fade-in-element">
                     <div class="zona-header">
                         <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
@@ -165,24 +131,95 @@
                         <li><i class="fas fa-check-circle"></i> Sausa</li>
                         <li><i class="fas fa-check-circle"></i> Cachicoto</li>
                     </ul>
+                    <div class="zona-consultar">
+                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20servicio%20en%20la%20zona%20de%20San%20Jerónimo" 
+                        target="_blank" 
+                        class="btn-consultar">
+                            Consultar
+                        </a>
+                    </div>
                 </div>
-                
+
+                <!-- Tarjeta San Pedro de Saños -->
                 <div class="zona-card fade-in-element">
                     <div class="zona-header">
                         <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">Pilcomayo</div>
+                        <div class="zona-nombre">San Pedro de Saños</div>
                     </div>
                     <ul class="zona-distritos">
-                        <li><i class="fas fa-check-circle"></i> Pilcomayo Centro</li>
-                        <li><i class="fas fa-check-circle"></i> Hualas</li>
-                        <li><i class="fas fa-check-circle"></i> Cochas</li>
+                        <li><i class="fas fa-check-circle"></i> San Jerónimo Centro</li>
+                        <li><i class="fas fa-check-circle"></i> Sausa</li>
+                        <li><i class="fas fa-check-circle"></i> Cachicoto</li>
                     </ul>
+                    <div class="zona-consultar">
+                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20servicio%20en%20la%20zona%20de%20San%20Pedro%20de%20Saños" 
+                        target="_blank" 
+                        class="btn-consultar">
+                            Consultar
+                        </a>
+                    </div>  
+                </div>
+
+                <!-- Tarjeta San Agustin de Cajas (NUEVA) -->
+                <div class="zona-card fade-in-element nueva">
+                    <div class="zona-header">
+                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="zona-nombre">San Agustin de Cajas</div>
+                    </div>
+                    <ul class="zona-distritos">
+                        <li><i class="fas fa-check-circle"></i> San Jerónimo Centro</li>
+                        <li><i class="fas fa-check-circle"></i> Sausa</li>
+                        <li><i class="fas fa-check-circle"></i> Cachicoto</li>
+                    </ul>
+                    <div class="zona-consultar">
+                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20servicio%20en%20la%20zona%20de%20San%20Agustin%20de%20Cajas" 
+                        target="_blank" 
+                        class="btn-consultar">
+                            Consultar
+                        </a>
+                    </div>  
+                </div>
+
+                <!-- Tarjeta Matahuasi (PRÓXIMO) -->
+                <div class="zona-card fade-in-element proximo">
+                    <div class="zona-header">
+                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="zona-nombre">Matahuasi</div>
+                    </div>
+                    <ul class="zona-distritos">
+                        <!-- Lista vacía porque es próxima -->
+                    </ul>
+                    <div class="zona-consultar">
+                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20saber%20cuándo%20tendrán%20cobertura%20en%20Matahuasi" 
+                        target="_blank" 
+                        class="btn-consultar">
+                            Consultar
+                        </a>
+                    </div>  
+                </div>
+
+                <!-- Tarjeta Apata (PRÓXIMO) -->
+                <div class="zona-card fade-in-element proximo">
+                    <div class="zona-header">
+                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="zona-nombre">Apata</div>
+                    </div>
+                    <ul class="zona-distritos">
+                        <!-- Lista vacía porque es próxima -->
+                    </ul>
+                    <div class="zona-consultar">
+                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20saber%20cuándo%20tendrán%20cobertura%20en%20Apata" 
+                        target="_blank" 
+                        class="btn-consultar">
+                            Consultar
+                        </a>
+                    </div>  
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Proceso de Instalación -->
+    <!-- Proceso de Instalación Mejorado -->
     <section class="proceso-section">
         <div class="container">
             <h2 class="text-center mb-4 fade-in-element">Proceso de Instalación</h2>
@@ -190,40 +227,50 @@
                 Simple, rápido y sin complicaciones
             </p>
             
-            <div class="proceso-steps">
-                <div class="step-card fade-in-element">
+            <div class="proceso-timeline">
+                <div class="proceso-step">
                     <div class="step-number">1</div>
-                    <div class="step-icon"><i class="fas fa-phone-alt"></i></div>
-                    <h3 class="step-title">Solicita el Servicio</h3>
-                    <p class="step-description">Contáctanos por teléfono, WhatsApp o visita nuestra oficina</p>
+                    <div class="step-content">
+                        <div class="step-icon"><i class="fas fa-phone-alt"></i></div>
+                        <h3 class="step-title">Solicita el Servicio</h3>
+                        <p class="step-description">Contáctanos por teléfono, WhatsApp o visita nuestra oficina</p>
+                    </div>
                 </div>
                 
-                <div class="step-card fade-in-element">
+                <div class="proceso-step">
                     <div class="step-number">2</div>
-                    <div class="step-icon"><i class="fas fa-search-location"></i></div>
-                    <h3 class="step-title">Verificamos Cobertura</h3>
-                    <p class="step-description">Confirmamos la disponibilidad del servicio en tu zona</p>
+                    <div class="step-content">
+                        <div class="step-icon"><i class="fas fa-search-location"></i></div>
+                        <h3 class="step-title">Verificamos Cobertura</h3>
+                        <p class="step-description">Confirmamos la disponibilidad del servicio en tu zona</p>
+                    </div>
                 </div>
                 
-                <div class="step-card fade-in-element">
+                <div class="proceso-step">
                     <div class="step-number">3</div>
-                    <div class="step-icon"><i class="fas fa-calendar-check"></i></div>
-                    <h3 class="step-title">Agendamos Visita</h3>
-                    <p class="step-description">Coordinamos fecha y hora para la instalación</p>
+                    <div class="step-content">
+                        <div class="step-icon"><i class="fas fa-calendar-check"></i></div>
+                        <h3 class="step-title">Agendamos Visita</h3>
+                        <p class="step-description">Coordinamos fecha y hora para la instalación</p>
+                    </div>
                 </div>
                 
-                <div class="step-card fade-in-element">
+                <div class="proceso-step">
                     <div class="step-number">4</div>
-                    <div class="step-icon"><i class="fas fa-tools"></i></div>
-                    <h3 class="step-title">Instalación Gratis</h3>
-                    <p class="step-description">Nuestros técnicos realizan la instalación sin costo</p>
+                    <div class="step-content">
+                        <div class="step-icon"><i class="fas fa-tools"></i></div>
+                        <h3 class="step-title">Instalación Gratis</h3>
+                        <p class="step-description">Nuestros técnicos realizan la instalación sin costo</p>
+                    </div>
                 </div>
                 
-                <div class="step-card fade-in-element">
+                <div class="proceso-step">
                     <div class="step-number">5</div>
-                    <div class="step-icon"><i class="fas fa-wifi"></i></div>
-                    <h3 class="step-title">¡Listo para Navegar!</h3>
-                    <p class="step-description">Disfruta de internet de alta velocidad al instante</p>
+                    <div class="step-content">
+                        <div class="step-icon"><i class="fas fa-wifi"></i></div>
+                        <h3 class="step-title">¡Listo para Navegar!</h3>
+                        <p class="step-description">Disfruta de internet de alta velocidad al instante</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -237,10 +284,10 @@
                 Contáctanos y te ayudamos a verificar la disponibilidad
             </p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="tel:+51123456789" class="btn btn-primary" style="background: white; color: #E58E21;">
+                <a href="tel:991 445 527" class="btn btn-primary" style="background: white; color: #E58E21;">
                     <i class="fas fa-phone"></i> Llamar Ahora
                 </a>
-                <a href="https://wa.me/51987654321" class="btn btn-outline" style="border-color: white; color: white;">
+                <a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%21%20quiero%20saber%20si%20ProRed%20tiene%20cobertura%20en%20mi%20zona" class="btn btn-outline" style="border-color: white; color: white;">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
             </div>
@@ -282,7 +329,7 @@
                     <ul>
                         <li><i class="fas fa-map-marker-alt"></i> AV.Ramòn Castilla Nº 631 - Concepcion</li>
                         <li><i class="fas fa-phone"></i> 064 624 507</li>
-                        <li><i class="fas fa-envelope"></i> info@prored.pe</li>
+                        <li><i class="fas fa-envelope"></i> ventas@proredperu.com</li>
                         <li><i class="fab fa-whatsapp"></i> 991445527</li>
                     </ul>
                 </div>
@@ -401,6 +448,15 @@
             marker.bindPopup(`<b>${zona.nombre}</b><br>Cobertura disponible`);
             
             circle.bindPopup(`<b>${zona.nombre}</b><br>Zona con cobertura ProRed`);
+        });
+        
+        // Funcionalidad para botones consultar
+        document.querySelectorAll('.btn-consultar').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const zonaNombre = this.closest('.zona-card').querySelector('.zona-nombre').textContent;
+                alert(`Consultando información de cobertura para ${zonaNombre}. Pronto nos pondremos en contacto contigo.`);
+            });
         });
         
         // Animaciones de scroll

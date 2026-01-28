@@ -1,9 +1,26 @@
 /* Hero Nosotros */
 .hero-nosotros {
-    background: linear-gradient(135deg, #005B9F 0%, #0077CC 100%);
+    background-image: url('../img/portada-nosotros.png');
+    background-size: cover;
+    background-position: center;
     color: white;
-    padding: 150px 0 80px;
+    padding: 120px 0 80px;
     text-align: center;
+    position: relative;
+}
+.hero-nosotros::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 90, 159, 0.5);
+    z-index: 1;
+}
+.hero-nosotros .container {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-nosotros h1 {
@@ -11,6 +28,7 @@
     font-size: 3rem;
     margin-bottom: 20px;
     animation: fadeInUp 0.8s ease-out;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 .hero-nosotros p {
@@ -19,6 +37,7 @@
     margin: 0 auto;
     opacity: 0.95;
     animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 @keyframes fadeInUp {

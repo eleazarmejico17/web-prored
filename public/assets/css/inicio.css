@@ -69,9 +69,11 @@
 }
 
 .hero-image {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-img {
@@ -83,12 +85,88 @@
     animation: float 3s ease-in-out infinite;
 }
 
-/* @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-} */
+/* Contenedor principal de la orbita */
+.hero-image {
+    position: relative; /* Asegura que los iconos se posicionen respecto a la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* Beneficios Section */
+.social-orbit-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 15rem;
+    left: 5rem;
+    pointer-events: none; 
+}
+
+
+.orbit-item {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    color: var(--color-principal);
+    font-size: 1.5rem;
+    /* Animación principal */
+    animation: orbit-animation 15s linear infinite;
+}
+
+.orbit-item:nth-child(1) { color: #1877f2; animation-delay: 0s; }
+.orbit-item:nth-child(2) { color: #e4405f; animation-delay: -2.14s; }
+.orbit-item:nth-child(3) { color: #25d366; animation-delay: -4.28s; }
+.orbit-item:nth-child(4) { color: #000000; animation-delay: -6.42s; }
+.orbit-item:nth-child(5) { color: #ff0000; animation-delay: -8.56s; }
+.orbit-item:nth-child(6) { color: #ff0505; animation-delay: -10.70s; }
+.orbit-item:nth-child(7) { color: #1db954; animation-delay: -12.84s; }
+
+@keyframes orbit-animation {
+    0% {
+        transform: rotate(0deg) translateX(100px) rotate(0deg) scale(1);
+        z-index: 10;
+        opacity: 1;
+    }
+    25% {
+        transform: rotate(90deg) translateX(100px) rotate(-90deg) scale(0.7);
+        z-index: -1; /* Pasa por detrás */
+        opacity: 0.8;
+    }
+    50% {
+        transform: rotate(180deg) translateX(100px) rotate(-180deg) scale(0.5);
+        z-index: -1;
+        opacity: 0.6;
+    }
+    75% {
+        transform: rotate(270deg) translateX(100px) rotate(-270deg) scale(0.8);
+        z-index: 10; /* Vuelve al frente */
+        opacity: 0.9;
+    }
+    100% {
+        transform: rotate(360deg) translateX(100px) rotate(-360deg) scale(1);
+        z-index: 10;
+        opacity: 1;
+    }
+}
+@media (max-width: 768px) {
+    .orbit-item {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    @keyframes orbit-animation {
+        0% { transform: rotate(0deg) translateX(100px) rotate(0deg) scale(1); }
+        100% { transform: rotate(360deg) translateX(100px) rotate(-360deg) scale(1); }
+    }
+}
+
+
 .beneficios {
     background-color: #f8f9fa;
 }
@@ -220,7 +298,7 @@
 }
 
 .plan-velocidad {
-    font-size: 2.8rem; /* Bajamos un poco de 3.5rem para que quepa bien */
+    font-size: 2.8rem; 
     font-weight: 700;
     color: #005B9F;
     margin-bottom: 10px;
@@ -270,50 +348,24 @@
     color: #E58E21;
     font-size: 1.1rem;
 }
-
-/* Internet Dedicado Section */
-.internet-dedicado {
-    background: linear-gradient(135deg, #E58E21 0%, #F4A347 100%);
-    color: white;
-}
-
-.dedicado-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.dedicado-content h2,
-.dedicado-content h3 {
-    color: white;
-}
-
-.dedicado-features {
-    list-style: none;
-    margin: 30px 0;
-}
-
-.dedicado-features li {
-    padding: 15px 0;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
+.plan-features-channels-logos {
+    display:flex;
     gap: 15px;
 }
-
-.dedicado-features i {
-    font-size: 1.5rem;
-    color: white;
-}
-
-.dedicado-image {
+.plan-features-channels-logos img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    border-radius: 8px;
+    padding: 5px;
     background: white;
-    border-radius: 20px;
-    padding: 40px;
-    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
+.plan-features-channels-logos img:hover {
+    rotate: 10deg;
 
+}
 /* CTA Section */
 .cta-section {
     background: linear-gradient(135deg, #005B9F 0%, #0077CC 100%);
@@ -457,6 +509,49 @@
 
 .plan-iptv-channels::-webkit-scrollbar-thumb:hover {
     background: #d87d1a;
+}
+
+/* Internet Dedicado Section */
+.internet-dedicado {
+    background: linear-gradient(135deg, #E58E21 0%, #F4A347 100%);
+    color: white;
+}
+
+.dedicado-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.dedicado-content h2,
+.dedicado-content h3 {
+    color: white;
+}
+
+.dedicado-features {
+    list-style: none;
+    margin: 30px 0;
+}
+
+.dedicado-features li {
+    padding: 15px 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dedicado-features i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.dedicado-image {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
 }
 
 @keyframes fadeIn {

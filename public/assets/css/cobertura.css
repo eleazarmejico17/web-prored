@@ -1,12 +1,27 @@
 .hero-cobertura {
-    background-image: url('../img/portadavf.png');
+    background-image: url('../img/portada-cobertura.png');
     background-size: cover;
-    background-position: center; 
-/*     background-attachment: fixed; */
-   /*  background: linear-gradient(135deg, #005B9F 0%, #0077CC 100%); */
+    background-position: center;
     color: white;
-    padding: 150px 0 80px;
+    padding: 120px 0 80px;
     text-align: center;
+    position: relative;
+}
+
+.hero-cobertura::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 90, 159, 0.5);
+    z-index: 1;
+}
+
+.hero-cobertura .container {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-cobertura h1 {
@@ -26,21 +41,17 @@
     text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Sección combinada Verificador + Mapa */
+.cobertura-combinada {
+    padding: 80px 0;
+    background: #f8f9fa;
 }
 
-/* Verificador de cobertura */
-.verificador-section {
-    padding: 60px 0;
-    background: #f8f9fa;
+.cobertura-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: start;
 }
 
 .verificador-card {
@@ -48,8 +59,15 @@
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0 10px 40px rgba(0, 91, 159, 0.15);
-    max-width: 600px;
-    margin: 0 auto;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+#map {
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 91, 159, 0.2);
 }
 
 .form-group {
@@ -122,27 +140,15 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Mapa Section */
-.mapa-section {
-    padding: 80px 0;
-}
-
-#map {
-    height: 600px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 91, 159, 0.2);
-    margin-top: 40px;
-}
-
-/* Zonas de Cobertura */
+/* Zonas de Cobertura Mejoradas */
 .zonas-section {
     padding: 80px 0;
-    background: #f8f9fa;
+    background: white;
 }
 
 .zonas-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 50px;
 }
@@ -152,13 +158,83 @@
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 5px 20px rgba(0, 91, 159, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border-left: 5px solid #005B9F;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Tarjeta con etiqueta NUEVO */
+.zona-card.nueva::after {
+    content: 'NUEVO';
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background: #E58E21;
+    color: white;
+    padding: 5px 35px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 10px rgba(229, 142, 33, 0.3);
+}
+
+/* Tarjeta con etiqueta PRÓXIMO */
+.zona-card.proximo::after {
+    content: 'PRÓXIMO';
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background: #6c757d; /* Un gris más acorde */
+    color: white;
+    padding: 5px 35px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 10px rgba(108, 117, 125, 0.3);
+}
+
+/* Estilos para la tarjeta próxima */
+.zona-card.proximo {
+    background: #f8f9fa; /* Fondo gris claro */
+    border-left: 5px solid #6c757d;
+    box-shadow: 0 5px 20px rgba(108, 117, 125, 0.1);
+}
+
+.zona-card.proximo .zona-nombre {
+    color: #6c757d; /* Color gris para el nombre */
+}
+
+.zona-card.proximo .zona-icon {
+    color: #6c757d; /* Color gris para el icono */
+}
+
+.zona-card.proximo:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(108, 117, 125, 0.2);
+    border-left-color: #495057; /* Un gris más oscuro al hover */
+    background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+}
+
+/* Estilos para el botón de consultar en tarjeta próxima */
+.zona-card.proximo .btn-consultar {
+    background: linear-gradient(135deg, #6c757d, #868e96);
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.2);
+}
+
+.zona-card.proximo .btn-consultar:hover {
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
+}
+
+/* Efecto hover para tarjetas normales */
 .zona-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 91, 159, 0.15);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 91, 159, 0.2);
+    border-left-color: #E58E21;
+    background: linear-gradient(135deg, #f8f9fa 0%, white 100%);
 }
 
 .zona-header {
@@ -171,26 +247,42 @@
 .zona-icon {
     font-size: 2.5rem;
     color: #E58E21;
+    transition: transform 0.3s ease;
+}
+
+.zona-card:hover .zona-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .zona-nombre {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #005B9F;
+    flex: 1;
 }
 
 .zona-distritos {
     list-style: none;
     padding: 0;
+    margin-bottom: 20px;
+    flex: 1;
 }
 
 .zona-distritos li {
-    padding: 8px 0;
-    border-bottom: 1px solid #f0f0f0;
-    color: #666;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    color: #555;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+}
+
+.zona-distritos li:hover {
+    color: #005B9F;
+    transform: translateX(5px);
+    border-bottom-color: rgba(0, 91, 159, 0.2);
 }
 
 .zona-distritos li:last-child {
@@ -199,30 +291,112 @@
 
 .zona-distritos li i {
     color: #28a745;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
-/* Proceso de instalación */
+.zona-consultar {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.zona-card:hover .zona-consultar {
+    height: 60px;
+    opacity: 1;
+    margin-top: 10px;
+}
+
+.btn-consultar {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #E58E21, #F4A347);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(229, 142, 33, 0.2);
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.btn-consultar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 142, 33, 0.3);
+    color: white;
+}
+
+/* Proceso de Instalación Mejorado */
 .proceso-section {
     padding: 80px 0;
-}
-
-.proceso-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
-}
-
-.step-card {
-    text-align: center;
-    padding: 30px;
+    background: #f8f9fa;
     position: relative;
+    overflow: hidden;
+}
+
+.proceso-timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-top: 5rem;
+    padding: 0 2rem;
+}
+
+.proceso-timeline::before {
+    content: '';
+    position: absolute;
+    top: 3rem;
+    left: 10%;
+    right: 10%;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        rgba(0, 91, 159, 1) 0%,
+        rgba(0, 91, 159, 0.8) 25%,
+        rgba(0, 91, 159, 0.6) 50%,
+        rgba(0, 91, 159, 0.4) 75%,
+        rgba(0, 91, 159, 0.2) 100%
+    );
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.proceso-step {
+    position: relative;
+    width: 18%;
+    text-align: center;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeInStep 0.6s ease-out forwards;
+}
+
+.proceso-step:nth-child(1) { animation-delay: 0.2s; }
+.proceso-step:nth-child(2) { animation-delay: 0.4s; }
+.proceso-step:nth-child(3) { animation-delay: 0.6s; }
+.proceso-step:nth-child(4) { animation-delay: 0.8s; }
+.proceso-step:nth-child(5) { animation-delay: 1s; }
+
+.step-content {
+    background: white;
+    padding: 2rem 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 91, 159, 0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.proceso-step:hover .step-content {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 91, 159, 0.15);
 }
 
 .step-number {
-    width: 60px;
-    height: 60px;
+    width: 4rem;
+    height: 4rem;
     background: linear-gradient(135deg, #005B9F, #0077CC);
     color: white;
     border-radius: 50%;
@@ -231,24 +405,40 @@
     justify-content: center;
     font-size: 1.8rem;
     font-weight: 700;
-    margin: 0 auto 20px;
+    margin: 1rem auto 1.5rem;
+    position: relative;
+    box-shadow: 0 0 0 4px white, 0 0 0 6px #005B9F;
 }
 
 .step-icon {
     font-size: 3rem;
     color: #E58E21;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
+    display: block;
 }
 
 .step-title {
     font-size: 1.3rem;
     color: #005B9F;
-    margin-bottom: 10px;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
 }
 
 .step-description {
     color: #666;
     line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+@keyframes fadeInStep {
+    from {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Animaciones */
@@ -263,10 +453,75 @@
     transform: translateY(0);
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Responsive */
+@media (max-width: 1024px) {
+    .proceso-timeline {
+        flex-direction: column;
+        gap: 3rem;
+    }
+    
+    .proceso-timeline::before {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, 
+            rgba(0, 91, 159, 1) 0%,
+            rgba(0, 91, 159, 0.8) 25%,
+            rgba(0, 91, 159, 0.6) 50%,
+            rgba(0, 91, 159, 0.4) 75%,
+            rgba(0, 91, 159, 0.2) 100%
+        );
+    }
+    
+    .proceso-step {
+        width: 80%;
+        text-align: left;
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+    
+    .step-number {
+        flex-shrink: 0;
+        margin: 0;
+    }
+    
+    .step-content {
+        text-align: left;
+        flex: 1;
+    }
+    
+    .cobertura-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .verificador-card {
+        position: static;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-cobertura h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+    }
+    
+    .hero-cobertura p {
+        font-size: 1.1rem;
+        padding: 0 20px;
     }
     
     #map {
@@ -276,13 +531,51 @@
     .verificador-card {
         padding: 30px 20px;
     }
+    
+    .zonas-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .proceso-step {
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .step-number {
+        margin: 0 auto 1rem;
+    }
+    
+    .step-content {
+        text-align: center;
+    }
+    
     .hero-cobertura {
         background-image: url('../img/responsive/bg-nosotros2.png');
-        background-size: cover;
-        background-position: center; 
-        /* background-attachment: fixed; */
-        color: white;
-        padding: 150px 0 80px;
-        text-align: center;
+        padding: 100px 0 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-cobertura h1 {
+        font-size: 1.8rem;
+    }
+    
+    .zona-card {
+        padding: 20px;
+    }
+    
+    .zona-nombre {
+        font-size: 1.3rem;
+    }
+    
+    .step-icon {
+        font-size: 2.5rem;
+    }
+    
+    .step-title {
+        font-size: 1.2rem;
     }
 }
