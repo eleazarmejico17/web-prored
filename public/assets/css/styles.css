@@ -366,14 +366,16 @@ footer {
   }
   
   .nav-menu {
+    margin-top: 1rem;
     position: fixed;
     top: 60px;
-    left: -100%;
+    left: -120%;
     flex-direction: column;
     background-color: #0367A6;
-    width: 100%;
-    height: calc(100vh - 60px);
-    padding: 20px;
+    width: 70%;
+    height: 58vh;
+    border-radius: 0.75rem;
+    padding: 10px;
     box-shadow: 0 8px 30px rgba(3,103,166,0.15);
     transition: left 0.3s ease;
     overflow-y: auto;
@@ -381,17 +383,17 @@ footer {
   }
   
   .nav-menu.active {
-    left: 0;
+    left: 1rem;
+    align-items: normal;
   }
   
   .nav-menu li {
     list-style: none;
-    margin: 15px 0;
   }
 
   .nav-menu .nav-link { 
     color: #ffffff; 
-    padding: 10px 0;
+    padding: 0.2rem 0;
     font-size: 1rem;
     display: block;
   }
@@ -426,7 +428,6 @@ footer {
   
   .nav-menu {
     top: 52px;
-    height: calc(100vh - 52px);
     padding: 15px;
   }
   

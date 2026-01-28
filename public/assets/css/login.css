@@ -312,7 +312,7 @@
 
 .ayuda-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     margin-top: 50px;
 }
@@ -408,20 +408,35 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 768px) {  
     .hero-portal h1 {
         font-size: 2rem;
     }
     
     .login-container {
         grid-template-columns: 1fr;
+
     }
     
     .login-info {
         order: 2;
+
     }
     
     .login-card {
         order: 1;
     }
+    
+    .slide-in-left,
+    .slide-in-right {
+        transform: translateY(30px) !important;
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .slide-in-left.visible,
+    .slide-in-right.visible {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+    }
+    
+
 }

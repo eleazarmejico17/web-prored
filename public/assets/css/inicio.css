@@ -598,6 +598,16 @@
         max-height: none;
         overflow-y: visible;
     }
+    .slide-in-left,
+    .slide-in-right {
+        transform: translateY(30px) !important;
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .slide-in-left.visible,
+    .slide-in-right.visible {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+    }
 }
 
 @media (max-width: 480px) {
