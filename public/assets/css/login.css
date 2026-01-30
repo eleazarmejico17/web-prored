@@ -51,6 +51,82 @@
     }
 }
 
+
+
+/* Estilos para formulario deshabilitado */
+.form-disabled .form-control,
+.form-disabled .password-toggle-btn,
+.form-disabled .btn-login,
+.form-disabled .remember-me input[type="checkbox"] {
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+    pointer-events: none !important;
+}
+
+.form-disabled .forgot-password,
+.form-disabled .register-link a {
+    pointer-events: none !important;
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+}
+
+/* Overlay adicional para toda la sección */
+.login-section.disabled {
+    position: relative;
+}
+
+.login-section.disabled::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(128, 128, 128, 0.3);
+    z-index: 5;
+    pointer-events: none; /* Permite hacer clic EN el overlay pero no en los elementos */
+}
+
+/* Mensaje de Próximamente */
+.coming-soon-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    z-index: 10;
+    background: linear-gradient(135deg, #005B9F, #0077CC);
+    color: white;
+    padding: 30px 60px;
+    border-radius: 15px;
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border: 5px solid white;
+    animation: pulse 2s infinite;
+    pointer-events: none;
+}
+
+.coming-soon-overlay span {
+    display: block;
+    font-size: 1.3rem;
+    margin-top: 15px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: none;
+    opacity: 0.9;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotate(-15deg) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(-15deg) scale(1.05);
+    }
+}
 /* Login Section */
 .login-section {
     padding: 80px 0;

@@ -43,18 +43,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Mapa interactivo con Leaflet
     if (window.L && document.getElementById('map')) {
-        const map = L.map('map').setView([-12.0658, -75.2127], 13);
+        const map = L.map('map').setView([-12.0658, -75.2127], 11); // Ajusté el zoom a 11 para ver todas las zonas
+        
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+
         const zonasCobertura = [
-            { lat: -12.0658, lng: -75.2127, nombre: 'Huancayo Centro', color: '#005B9F' },
-            { lat: -12.0456, lng: -75.2234, nombre: 'El Tambo', color: '#E58E21' },
-            { lat: -12.0890, lng: -75.1845, nombre: 'Chilca', color: '#005B9F' },
             { lat: -11.9176, lng: -75.3147, nombre: 'Concepción', color: '#E58E21' },
-            { lat: -12.0789, lng: -75.2567, nombre: 'San Jerónimo', color: '#005B9F' },
-            { lat: -12.0345, lng: -75.2456, nombre: 'Pilcomayo', color: '#E58E21' }
+            { lat: -11.9720885, lng: -75.2535674, nombre: 'Hualhuas', color: '#E58E21' },
+            { lat: -11.9959765, lng: -75.2453951, nombre: 'San Agustín de Cajas', color: '#E58E21' },
+            { lat: -11.9595235, lng: -75.258844, nombre: 'San Pedro de Saño', color: '#E58E21' },
+            { lat: -11.8920309, lng: -75.3477767, nombre: 'Matahuasi', color: '#6c757d' },
+            { lat: -11.8542782, lng: -75.3557927, nombre: 'Apata', color: '#6c757d' }
         ];
+
         zonasCobertura.forEach(zona => {
             const circle = L.circle([zona.lat, zona.lng], {
                 color: zona.color,
@@ -62,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 fillOpacity: 0.3,
                 radius: 1500
             }).addTo(map);
+
             const marker = L.marker([zona.lat, zona.lng]).addTo(map);
             marker.bindPopup(`<b>${zona.nombre}</b><br>Cobertura disponible`);
             circle.bindPopup(`<b>${zona.nombre}</b><br>Zona con cobertura ProRed`);

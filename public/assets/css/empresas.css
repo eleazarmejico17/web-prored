@@ -1,0 +1,1416 @@
+/* Hero Empresas */
+.hero-empresas {
+    background-image: url('../img/portada-nosotros.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 7.5rem 0 5rem; /* 120px 0 80px */
+    text-align: center;
+    position: relative;
+}
+
+
+.hero-content-empresas {
+    position: relative;
+    z-index: 1;
+    max-width: 56.25rem; /* 900px */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-empresas h1 {
+    color: white;
+    font-size: 3.5rem; /* 56px */
+    margin-bottom: 1.5625rem; /* 25px */
+    animation: fadeInUp 0.8s ease-out;
+    margin-bottom: 1rem;
+}
+
+.hero-empresas .subtitle {
+    font-size: 1.4rem; /* 22.4px */
+    margin-bottom: 2.1875rem; /* 35px */
+    opacity: 0.95;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1.875rem; /* 30px */
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+.badge-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* 12px */
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.9375rem 1.5625rem; /* 15px 25px */
+    border-radius: 3.125rem; /* 50px */
+    backdrop-filter: blur(10px);
+}
+
+.badge-item i {
+    font-size: 1.8rem; /* 28.8px */
+    color: #E58E21;
+}
+
+.badge-item span {
+    font-weight: 600;
+    font-size: 1.1rem; /* 17.6px */
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ========================================
+   PLANES EMPRESARIALES - DISEÑO MODERNO
+   ======================================== */
+
+.planes-empresariales-section {
+    padding: 6.25rem 0;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.planes-empresariales-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(0, 91, 159, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(229, 142, 33, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Section Header */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.gradient-text {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #005B9F 0%, #0077CC 50%, #E58E21 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    animation: gradientShift 5s ease infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.subtitle-empresas {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 50rem;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Plans Container */
+.planes-empresariales-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 32rem), 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Plan Cards */
+.plan-empresarial-card {
+    position: relative;
+    border-radius: 2rem;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 91, 159, 0.15);
+}
+
+.plan-empresarial-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 80px rgba(0, 91, 159, 0.25);
+}
+
+/* Card Glow Effect */
+.card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 91, 159, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.plan-empresarial-card:hover .card-glow {
+    opacity: 1;
+    animation: rotateGlow 10s linear infinite;
+}
+
+.card-glow.premium {
+    background: radial-gradient(circle, rgba(229, 142, 33, 0.2) 0%, transparent 70%);
+}
+
+@keyframes rotateGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(90deg); }
+}
+
+/* Background Image with Blur */
+.card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15rem;
+    overflow: hidden;
+}
+
+.card-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(0px);
+    transition: all 0.5s ease;
+}
+
+.plan-empresarial-card:hover .card-background img {
+    filter: blur(2px);
+    transform: scale(1.1);
+}
+
+/* .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, 
+        rgba(0, 91, 159, 0.85) 0%, 
+        rgba(0, 91, 159, 0.95) 100%
+    );
+}
+
+.card-overlay.premium {
+    background: linear-gradient(180deg, 
+        rgba(229, 142, 33, 0.85) 0%, 
+        rgba(229, 142, 33, 0.95) 100%
+    );
+} */
+
+/* Premium Badge */
+.premium-badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #333;
+    padding: 0.6rem 1.3rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    z-index: 10;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Card Content */
+.card-content {
+    position: relative;
+    padding: 2.5rem;
+    padding-top: 12rem;
+}
+
+/* Plan Header */
+.plan-header {
+    margin-bottom: 2rem;
+}
+
+.plan-icon {
+    width: 5rem;
+    height: 5rem;
+    margin: -7rem auto 1.5rem;
+    position: relative;
+    z-index: 5;
+}
+
+.icon-wrapper {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #005B9F, #0077CC);
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 40px rgba(0, 91, 159, 0.4);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-icon.premium .icon-wrapper {
+    background: linear-gradient(135deg, #E58E21, #F4A347);
+    box-shadow: 0 15px 40px rgba(229, 142, 33, 0.4);
+}
+
+.icon-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.plan-empresarial-card:hover .icon-wrapper {
+    transform: rotate(360deg) scale(1.1);
+}
+
+.icon-wrapper i {
+    font-size: 2.5rem;
+    color: white;
+    z-index: 1;
+}
+
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.2rem;
+    background: rgba(0, 0, 0, 0.274);
+    border: 2px solid rgba(0, 91, 159, 0.3);
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(10px);
+}
+
+.category-badge.premium {
+    border-color: rgba(229, 142, 33, 0.3);
+}
+
+/* Plan Title & Description */
+.plan-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #005B9F;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.plan-title.premium {
+    background: linear-gradient(135deg, #E58E21, #F4A347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.plan-description {
+    font-size: 1.05rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem;
+    background: rgba(0, 91, 159, 0.03);
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 91, 159, 0.1);
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(0, 91, 159, 0.08);
+    transform: translateX(5px);
+    border-color: rgba(0, 91, 159, 0.2);
+}
+
+.feature-item.premium {
+    background: rgba(229, 142, 33, 0.03);
+    border-color: rgba(229, 142, 33, 0.1);
+}
+
+.feature-item.premium:hover {
+    background: rgba(229, 142, 33, 0.08);
+    border-color: rgba(229, 142, 33, 0.2);
+}
+
+.feature-icon {
+    min-width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, #005B9F, #0077CC);
+    border-radius: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.feature-item.premium .feature-icon {
+    background: linear-gradient(135deg, #E58E21, #F4A347);
+}
+
+.feature-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.feature-text strong {
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.feature-text span {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* Button (inspirado en uiverse.io) */
+.btn-empresarial {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 1.2rem 2rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-empresarial.corporativo {
+    background: linear-gradient(135deg, #005B9F, #0077CC);
+    box-shadow: 0 10px 30px rgba(0, 91, 159, 0.3);
+}
+
+.btn-empresarial.dedicado {
+    background: linear-gradient(135deg, #E58E21, #F4A347);
+    box-shadow: 0 10px 30px rgba(229, 142, 33, 0.4);
+}
+
+.btn-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    color: white;
+}
+
+.btn-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.btn-empresarial:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 45px rgba(0, 91, 159, 0.4);
+}
+
+.btn-empresarial.dedicado:hover {
+    box-shadow: 0 15px 45px rgba(229, 142, 33, 0.5);
+}
+
+.btn-empresarial:hover .btn-glow {
+    opacity: 1;
+    animation: rotateGlow 3s linear infinite;
+}
+
+.btn-empresarial:active {
+    transform: translateY(-1px);
+}
+
+/* Benefits Container */
+.benefits-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(0, 91, 159, 0.1);
+    transition: all 0.4s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 91, 159, 0.15);
+    border-color: rgba(0, 91, 159, 0.3);
+}
+
+.benefit-icon {
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #E58E21, #F4A347);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 25px rgba(229, 142, 33, 0.3);
+    transition: all 0.4s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: rotate(360deg) scale(1.1);
+}
+
+.benefit-card h4 {
+    font-size: 1.3rem;
+    color: #005B9F;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+}
+
+.benefit-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ========================================
+   RESPONSIVE - PLANES EMPRESARIALES
+   ======================================== */
+
+@media screen and (max-width: 64rem) {
+    .gradient-text {
+        font-size: 2.5rem;
+    }
+    
+    .planes-empresariales-container {
+        grid-template-columns: 1fr;
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (max-width: 48rem) {
+    .planes-empresariales-section {
+        padding: 4rem 0;
+    }
+    
+    .gradient-text {
+        font-size: 2rem;
+    }
+    
+    .subtitle-empresas {
+        font-size: 1.05rem;
+    }
+    
+    .section-header {
+        margin-bottom: 3rem;
+    }
+    
+    .card-content {
+        padding: 2rem 1.5rem;
+        padding-top: 10rem;
+    }
+    
+    .plan-icon {
+        width: 4rem;
+        height: 4rem;
+        margin: -6rem auto 1.5rem;
+    }
+    
+    .icon-wrapper i {
+        font-size: 2rem;
+    }
+    
+    .plan-title {
+        font-size: 1.8rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefits-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 36rem) {
+    .gradient-text {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle-empresas {
+        font-size: 1rem;
+    }
+    
+    .premium-badge {
+        top: 1rem;
+        right: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.7rem;
+    }
+    
+    .card-background {
+        height: 12rem;
+    }
+    
+    .card-content {
+        padding: 1.5rem 1.2rem;
+        padding-top: 8rem;
+    }
+    
+    .plan-title {
+        font-size: 1.6rem;
+    }
+    
+    .plan-description {
+        font-size: 0.95rem;
+    }
+    
+    .btn-empresarial {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .benefit-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Animaciones de entrada */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+}
+
+/* Bento Section */
+.bento-section {
+    padding: 5rem 0; /* 80px */
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 15.625rem 15.625rem; /* 250px */
+    gap: 1.25rem; /* 20px */
+}
+
+.bento-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem; /* 20px */
+    background: white;
+    box-shadow: 0 5px 25px rgba(0, 91, 159, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.bento-item:hover {
+    transform: translateY(-0.3125rem); /* -5px */
+}
+
+.item-1 { 
+    grid-row: span 2; 
+}
+
+/* Estilos de las caras */
+.face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-face {
+    padding: 1.875rem; /* 30px */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    z-index: 2;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.text-face i {
+    font-size: 2.5rem; /* 40px */
+    background: linear-gradient(135deg, #005B9F, #0077CC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.text-face h3 {
+    color: #005B9F;
+    font-size: 1.3rem; /* 20.8px */
+    margin-bottom: 0.75rem; /* 12px */
+    font-weight: 700;
+}
+
+.text-face p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem; /* 15.2px */
+}
+
+.image-face {
+    z-index: 1;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.bento-item:hover .image-face img {
+    transform: scale(1.05);
+}
+
+/* Estados para animación */
+.text-face.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.text-face.hidden-left {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.image-face.visible-left {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.image-face.hidden-left {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.text-face.hidden-right {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.image-face.visible-right {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.image-face.hidden-right {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* SLA Section */
+.sla-section {
+    padding: 5rem 0; /* 80px */
+    background: white;
+}
+
+.sla-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.75rem; /* 60px */
+    align-items: center;
+    margin-top: 3.125rem; /* 50px */
+}
+
+.sla-features {
+    background: #f8f9fa;
+    border-radius: 1.25rem; /* 20px */
+    padding: 2.5rem; /* 40px */
+}
+
+.sla-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem; /* 20px */
+    margin-bottom: 1.875rem; /* 30px */
+    padding-bottom: 1.875rem; /* 30px */
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.sla-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.sla-icon {
+    font-size: 2.5rem; /* 40px */
+    color: #E58E21;
+    min-width: 3.125rem; /* 50px */
+}
+
+.sla-text h4 {
+    color: #005B9F;
+    font-size: 1.3rem; /* 20.8px */
+    margin-bottom: 0.5rem; /* 8px */
+}
+
+.sla-text p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.sla-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5625rem; /* 25px */
+}
+
+.stat-box {
+    background: white;
+    border-radius: 0.9375rem; /* 15px */
+    padding: 1.875rem; /* 30px */
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 91, 159, 0.1);
+}
+
+.stat-value {
+    font-size: 3.5rem; /* 56px */
+    font-weight: 700;
+    background: linear-gradient(135deg, #005B9F, #0077CC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.625rem; /* 10px */
+}
+
+.stat-label {
+    color: #666;
+    font-size: 1.1rem; /* 17.6px */
+    font-weight: 500;
+}
+
+/* Beneficios Adicionales */
+.beneficios-adicionales {
+    padding: 5rem 0; /* 80px */
+    background: linear-gradient(135deg, #E58E21 0%, #F4A347 100%);
+    color: white;
+}
+
+.beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr)); /* 250px */
+    gap: 1.875rem; /* 30px */
+    margin-top: 3.125rem; /* 50px */
+}
+
+.beneficio-item {
+    text-align: center;
+    padding: 1.875rem 1.25rem; /* 30px 20px */
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.9375rem; /* 15px */
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.beneficio-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-0.3125rem); /* -5px */
+}
+
+.beneficio-item i {
+    font-size: 3rem; /* 48px */
+    margin-bottom: 1.25rem; /* 20px */
+    color: white;
+}
+
+.beneficio-item h4 {
+    color: white;
+    font-size: 1.3rem; /* 20.8px */
+    margin-bottom: 0.625rem; /* 10px */
+}
+
+.beneficio-item p {
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+/* Casos de Uso */
+.casos-uso-section {
+    padding: 5rem 0; /* 80px */
+}
+
+.casos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr)); /* 280px */
+    gap: 1.875rem; /* 30px */
+    margin-top: 3.125rem; /* 50px */
+}
+
+.caso-card {
+    background: white;
+    border-radius: 0.9375rem; /* 15px */
+    padding: 1.875rem; /* 30px */
+    box-shadow: 0 5px 20px rgba(0, 91, 159, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.caso-card:hover {
+    transform: translateY(-0.3125rem); /* -5px */
+    box-shadow: 0 10px 30px rgba(0, 91, 159, 0.15);
+}
+
+.caso-icon {
+    width: 5rem; /* 80px */
+    height: 5rem; /* 80px */
+    background: linear-gradient(135deg, #005B9F, #0077CC);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem; /* 20px */
+}
+
+.caso-icon i {
+    font-size: 2.5rem; /* 40px */
+    color: white;
+}
+
+.caso-card h4 {
+    color: #005B9F;
+    font-size: 1.3rem; /* 20.8px */
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.caso-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-12.5rem * 5 - 3.125rem * 4)); /* Ancho de 5 slides + gaps */
+    }
+}
+
+/* Animaciones */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-element.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ============================
+   MEDIA QUERIES RESPONSIVE
+   ============================ */
+
+/* Para tablets grandes (1024px) */
+@media screen and (max-width: 64rem) { /* 1024px */
+    .hero-empresas h1 {
+        font-size: 3rem; /* 48px */
+    }
+    
+    .hero-empresas .subtitle {
+        font-size: 1.2rem; /* 19.2px */
+    }
+    
+    .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+    
+    .item-1.tall {
+        grid-column: span 2;
+        grid-row: span 1;
+        height: 18.75rem; /* 300px */
+    }
+    
+    .sla-content {
+        gap: 2.5rem; /* 40px */
+    }
+    
+    .sla-features {
+        padding: 1.875rem; /* 30px */
+    }
+    
+    .sla-icon {
+        font-size: 2rem; /* 32px */
+        min-width: 2.5rem; /* 40px */
+    }
+    
+    .stat-value {
+        font-size: 2.5rem; /* 40px */
+    }
+    
+    .beneficios-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .casos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Para tablets (768px) */
+@media screen and (max-width: 48rem) { /* 768px */
+    .hero-empresas {
+        padding: 6rem 0 4rem; /* 96px 0 64px */
+    }
+    
+    .hero-empresas h1 {
+        font-size: 2.2rem; /* 35.2px */
+    }
+    
+    .hero-empresas .subtitle {
+        font-size: 1.1rem; /* 17.6px */
+        margin-bottom: 1.875rem; /* 30px */
+    }
+    
+    .hero-badges {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.9375rem; /* 15px */
+    }
+    
+    .badge-item {
+        width: 100%;
+        max-width: 18.75rem; /* 300px */
+        justify-content: center;
+    }
+    
+    .bento-section,
+    .sla-section,
+    .beneficios-adicionales,
+    .casos-uso-section,
+    .clientes-section {
+        padding: 3.75rem 0; /* 60px */
+    }
+    
+    .bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1.25rem; /* 20px */
+    }
+    
+    .item-1.tall {
+        grid-column: span 1;
+        height: auto;
+        min-height: 18.75rem; /* 300px */
+    }
+    
+    .sla-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem; /* 40px */
+        margin-top: 2.5rem; /* 40px */
+    }
+    
+    .sla-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem; /* 20px */
+    }
+    
+    .stat-box {
+        padding: 1.25rem 0.9375rem; /* 20px 15px */
+    }
+    
+    .stat-value {
+        font-size: 2.5rem; /* 40px */
+    }
+    
+    .stat-label {
+        font-size: 1rem; /* 16px */
+    }
+    
+    .beneficios-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem; /* 20px */
+        margin-top: 2.5rem; /* 40px */
+    }
+    
+    .beneficio-item {
+        padding: 1.5625rem 0.9375rem; /* 25px 15px */
+    }
+    
+    .casos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem; /* 20px */
+        margin-top: 2.5rem; /* 40px */
+    }
+    
+    .caso-card {
+        padding: 1.5625rem 1.25rem; /* 25px 20px */
+    }
+    
+    .sla-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.9375rem; /* 15px */
+    }
+    
+    .sla-text h4 {
+        font-size: 1.2rem; /* 19.2px */
+    }
+    
+    h2.text-center.mb-4 {
+        font-size: 1.8rem; /* 28.8px */
+    }
+    
+    .cliente-slide {
+        min-width: 10rem; /* 160px */
+    }
+    
+    .carousel-track {
+        gap: 1.5625rem; /* 25px */
+    }
+}
+
+/* Para móviles (576px) */
+@media screen and (max-width: 36rem) { /* 576px */
+    .hero-empresas {
+        padding: 4rem 0 2.5rem; /* 64px 0 40px */
+    }
+    
+    .hero-empresas h1 {
+        font-size: 1.8rem; /* 28.8px */
+        margin-bottom: 1rem; /* 16px */
+        margin-top: 1rem;
+    }
+    
+    .hero-empresas .subtitle {
+        font-size: 1rem; /* 16px */
+        margin-bottom: 1.5rem; /* 24px */
+    }
+    
+    .bento-section,
+    .sla-section,
+    .beneficios-adicionales,
+    .casos-uso-section,
+    .clientes-section {
+        padding: 2.5rem 0; /* 40px */
+    }
+    
+    .container {
+        padding-left: 0.9375rem; /* 15px */
+        padding-right: 0.9375rem; /* 15px */
+    }
+    
+    .sla-content {
+        margin-top: 1.875rem; /* 30px */
+        gap: 1.875rem; /* 30px */
+    }
+    
+    .sla-features {
+        padding: 1.25rem; /* 20px */
+        border-radius: 0.9375rem; /* 15px */
+    }
+    
+    .sla-item {
+        margin-bottom: 1.5625rem; /* 25px */
+        padding-bottom: 1.5625rem; /* 25px */
+    }
+    
+    .sla-icon {
+        font-size: 1.8rem; /* 28.8px */
+    }
+    
+    .sla-stats {
+        grid-template-columns: 1fr;
+        gap: 0.9375rem; /* 15px */
+    }
+    
+    .stat-box {
+        padding: 1.5625rem 1.25rem; /* 25px 20px */
+    }
+    
+    .stat-value {
+        font-size: 2.8rem; /* 44.8px */
+    }
+    
+    .beneficios-grid {
+        margin-top: 1.875rem; /* 30px */
+    }
+    
+    .beneficio-item i {
+        font-size: 2.5rem; /* 40px */
+    }
+    
+    .beneficio-item h4 {
+        font-size: 1.2rem; /* 19.2px */
+    }
+    
+    .casos-grid {
+        margin-top: 1.875rem; /* 30px */
+    }
+    
+    .caso-icon {
+        width: 4.375rem; /* 70px */
+        height: 4.375rem; /* 70px */
+    }
+    
+    .caso-icon i {
+        font-size: 2rem; /* 32px */
+    }
+    
+    .caso-card h4 {
+        font-size: 1.2rem; /* 19.2px */
+    }
+    
+    .text-center.text-secondary {
+        font-size: 1rem; /* 16px */
+        padding: 0 0.625rem; /* 10px */
+    }
+    
+    h2.text-center.mb-4 {
+        font-size: 1.6rem; /* 25.6px */
+        padding: 0 0.625rem; /* 10px */
+    }
+    
+    .cliente-slide {
+        min-width: 8.75rem; /* 140px */
+        padding: 0.9375rem; /* 15px */
+    }
+    
+    .cliente-slide img {
+        max-width: 5rem; /* 80px */
+        max-height: 3rem; /* 48px */
+    }
+}
+
+/* Para móviles pequeños (400px) */
+@media screen and (max-width: 25rem) { /* 400px */
+    .hero-empresas h1 {
+        font-size: 1.6rem; /* 25.6px */
+    }
+    
+    .hero-badges {
+        gap: 0.625rem; /* 10px */
+    }
+    
+    .badge-item {
+        padding: 0.625rem 1rem; /* 10px 16px */
+    }
+    
+    .badge-item span {
+        font-size: 1rem; /* 16px */
+    }
+    
+    .sla-features {
+        padding: 0.9375rem; /* 15px */
+    }
+    
+    .stat-value {
+        font-size: 2.2rem; /* 35.2px */
+    }
+    
+    .beneficio-item {
+        padding: 1.25rem 0.625rem; /* 20px 10px */
+    }
+    
+    .beneficio-item i {
+        font-size: 2rem; /* 32px */
+    }
+    
+    .caso-card {
+        padding: 1.25rem 0.9375rem; /* 20px 15px */
+    }
+    
+    .caso-icon {
+        width: 3.75rem; /* 60px */
+        height: 3.75rem; /* 60px */
+    }
+    
+    .caso-icon i {
+        font-size: 1.8rem; /* 28.8px */
+    }
+    
+    .cliente-slide {
+        min-width: 7.5rem; /* 120px */
+    }
+}
+
+/* Para mejorar la legibilidad en móviles */
+@media screen and (max-width: 48rem) { /* 768px */
+    body {
+        font-size: 14px; /* Base de 14px para móviles */
+    }
+    
+    p {
+        font-size: 0.95rem; /* 13.3px */
+        line-height: 1.5;
+    }
+    
+    .sla-text p, .beneficio-item p, .caso-card p {
+        font-size: 0.9rem; /* 12.6px */
+    }
+    
+    /* Optimizar animaciones para móviles */
+    @media (prefers-reduced-motion: reduce) {
+        .fade-in-element,
+        .slide-in-left,
+        .slide-in-right,
+        .hero-badges {
+            animation: none;
+            transition: none;
+        }
+        
+        .carousel-track {
+            animation-duration: 60s; /* Más lento para mejor rendimiento */
+        }
+    }
+}
+
+/* Para pantallas táctiles */
+@media (hover: none) and (pointer: coarse) {
+    .beneficio-item:hover,
+    .caso-card:hover,
+    .bento-item:hover {
+        transform: none;
+    }
+    
+    .beneficio-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .bento-item:hover .image-face img {
+        transform: none;
+    }
+}

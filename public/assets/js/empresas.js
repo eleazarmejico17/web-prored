@@ -1,36 +1,3 @@
-// Formulario empresarial
-document.getElementById('formEmpresarial').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Aquí se integraría con el backend
-    alert('Gracias por su interés. Un asesor empresarial se contactará con usted en las próximas 24 horas.');
-    this.reset();
-});
-
-// Animaciones de scroll
-const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.fade-in-element, .slide-in-left, .slide-in-right');
-    
-    const scrollObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, index * 50);
-                scrollObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -100px 0px'
-    });
-    
-    elements.forEach(element => {
-        scrollObserver.observe(element);
-    });
-};
-
-
 // Configuración de la secuencia bento
 class BentoSlider {
     constructor() {
@@ -43,9 +10,9 @@ class BentoSlider {
         ];
         
         this.config = {
-            duration: 1500,    // 4 segundos con imagen visible
-            transition: 400,   // 0.8 segundos de transición
-            delay: 3000       // 12 segundos entre cada item
+            duration: 1500,   
+            transition: 400,  
+            delay: 3000      
         };
         
         this.currentIndex = 0;
@@ -174,87 +141,28 @@ class BentoSlider {
     }
 }
 
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    // Iniciar slider bento
-    if (document.querySelector('.bento-item')) {
-        new BentoSlider();
-    }
+// Función para animaciones al hacer scroll
+const animateOnScroll = () => {
+    const elements = document.querySelectorAll('.fade-in-element, .slide-in-left, .slide-in-right');
     
-    // Formulario empresarial
-    const formEmpresarial = document.getElementById('formEmpresarial');
-    if (formEmpresarial) {
-        formEmpresarial.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Gracias por su interés. Un asesor empresarial se contactará con usted en las próximas 24 horas.');
-            this.reset();
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 50);
+                scrollObserver.unobserve(entry.target);
+            }
         });
-    }
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+    });
     
-    // Animaciones de scroll
-    const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.fade-in-element, .slide-in-left, .slide-in-right');
-        
-        const scrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 50);
-                    scrollObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -100px 0px'
-        });
-        
-        elements.forEach(element => {
-            scrollObserver.observe(element);
-        });
-    };
-    
-    // Contador animado para estadísticas SLA
-    const animateCounters = () => {
-        const counters = document.querySelectorAll('.counter');
-        
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = entry.target;
-                    const targetValue = parseFloat(target.getAttribute('data-target'));
-                    let current = 0;
-                    const increment = targetValue / 50;
-                    const isDecimal = targetValue % 1 !== 0;
-                    
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= targetValue) {
-                            target.textContent = isDecimal ? targetValue.toFixed(1) : targetValue;
-                            clearInterval(timer);
-                        } else {
-                            target.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
-                        }
-                    }, 30);
-                    
-                    counterObserver.unobserve(target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        counters.forEach(counter => {
-            counterObserver.observe(counter);
-        });
-    };
-    
-    // Inicializar animaciones
-    animateOnScroll();
-    setTimeout(animateCounters, 500);
-});
-
-
-
-document.addEventListener('DOMContentLoaded', animateOnScroll);
+    elements.forEach(element => {
+        scrollObserver.observe(element);
+    });
+};
 
 // Contador animado para estadísticas SLA
 const animateCounters = () => {
@@ -289,7 +197,16 @@ const animateCounters = () => {
     });
 };
 
-// Inicializar contador cuando el DOM esté listo
+// Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
+    // Iniciar slider bento si existe
+    if (document.querySelector('.bento-item')) {
+        new BentoSlider();
+    }
+    
+    // Inicializar animaciones
+    animateOnScroll();
+    
+    // Inicializar contadores después de un breve retraso
     setTimeout(animateCounters, 100);
 });

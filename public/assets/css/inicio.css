@@ -543,31 +543,72 @@
     background: #d87d1a;
 }
 
-/* Internet Dedicado Section */
 .internet-dedicado {
-    background: linear-gradient(135deg, #E58E21 0%, #F4A347 100%);
-    color: white;
+    padding: 0;
+    position: relative;
 }
 
-.dedicado-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
+.dedicado-bg-container {
+    background-image: url('../img/bg-empresas.png');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    position: relative;
+    min-height: 600px;
+    width: 100%;
+    overflow: hidden;
 }
 
-.dedicado-content h2,
-.dedicado-content h3 {
+.dedicado-bg-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #005a9f96;
+    z-index: 1;
+}
+
+.dedicado-content-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 65%;
+    background-color: rgba(255, 140, 0, 0.644);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    clip-path: polygon(0 0, 92% 0, 100% 100%, 0% 100%);
+    padding: 60px 80px 60px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     color: white;
+    z-index: 2;
+}
+
+.dedicado-content-overlay h2 {
+    color: white;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.dedicado-description {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    margin-bottom: 30px;
+    max-width: 90%;
 }
 
 .dedicado-features {
     list-style: none;
     margin: 30px 0;
+    padding: 0;
 }
 
 .dedicado-features li {
-    padding: 15px 0;
+    padding: 12px 0;
     font-size: 1.1rem;
     display: flex;
     align-items: center;
@@ -575,20 +616,96 @@
 }
 
 .dedicado-features i {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    color: white;
+    filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.3));
+}
+
+.dedicado-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.btn-custom-white {
+    background-color: white;
+    color: #E58E21;
+    font-weight: 600;
+    border: 2px solid white;
+    padding: 12px 30px;
+    transition: all 0.3s ease;
+}
+
+.btn-custom-white:hover {
+    background-color: transparent;
     color: white;
 }
 
-.dedicado-image {
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    text-align: center;
+.btn-custom-blue {
+    background-color: #005B9F;
+    color: white;
+    font-weight: 600;
+    border: 2px solid #005B9F;
+    padding: 12px 30px;
+    transition: all 0.3s ease;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.btn-custom-blue:hover {
+    background-color: #004a80;
+    border-color: #004a80;
+    color: white;
+}
+
+@media (max-width: 992px) {
+    .dedicado-bg-container {
+        min-height: auto;
+    }
+
+    .dedicado-content-overlay {
+        position: relative;
+        width: 100%;
+        clip-path: none;
+        padding: 60px 30px;
+        background-color: rgba(229, 142, 33, 0.85);
+    }
+    
+    .dedicado-description {
+        max-width: 100%;
+    }
+}
+
+/* =========================================
+   Responsive Design (Móviles y Tablets)
+   ========================================= */
+@media (max-width: 992px) {
+    .dedicado-layout {
+        /* En tablets y móviles, pasamos a una sola columna */
+        grid-template-columns: 1fr;
+    }
+    
+    .dedicado-overlay-container {
+        padding: 60px 30px;
+        /* Quitamos el ángulo en pantallas pequeñas para aprovechar el espacio */
+        clip-path: none; 
+        background-color: rgba(229, 142, 33, 0.85); /* Un poco más opaco en móvil */
+        width: 100%;
+    }
+
+    .dedicado-spacer {
+        display: none; /* Ocultamos el espaciador */
+    }
+    
+    .dedicado-description {
+        max-width: 100%;
+    }
+
+    .internet-dedicado {
+        /* En móviles a veces background-attachment: fixed da problemas de rendimiento,
+           puedes quitarlo si lo notas lento en el celular */
+        /* background-attachment: scroll; */ 
+        align-items: flex-start;
+    }
 }
 
 /* Responsive */
