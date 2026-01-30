@@ -1414,3 +1414,120 @@
         transform: none;
     }
 }
+
+/* New Business Sections */
+.business-service-section {
+    padding: 80px 0;
+}
+
+.business-service-section:nth-of-type(even) {
+    background-color: #f8f9fa;
+}
+
+.business-service-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.business-service-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #005B9F;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.business-service-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: #E58E21;
+}
+
+.business-service-content p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.business-service-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.business-service-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+}
+
+.business-service-list i {
+    color: #E58E21;
+    font-size: 1.2rem;
+}
+
+.business-service-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.business-service-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.business-service-image:hover img {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .business-service-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .business-service-content h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .business-service-list li {
+        justify-content: flex-start;
+    }
+    
+    .business-service-container.reverse .business-service-image {
+        order: -1;
+    }
+
+    /* Fix Animation Overflow on Mobile */
+    .slide-in-left,
+    .slide-in-right {
+        transform: translateY(30px) !important;
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .slide-in-left.visible,
+    .slide-in-right.visible {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+    }
+
+    .business-service-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .business-service-content p {
+        font-size: 1rem;
+    }
+}

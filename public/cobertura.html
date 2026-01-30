@@ -30,7 +30,7 @@
                 <li><a href="empresas.html" class="nav-link">Internet Empresas</a></li>
                 <li><a href="cobertura.html" class="nav-link active">Cobertura</a></li>
                 <li><a href="login.html" class="nav-link">Portal</a></li>
-                <li><a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%2C%20deseo%20ser%20un%20cliente%20ProRed" class="btn btn-primary">Contratar</a></li>
+                <li><a href="https://api.whatsapp.com/send?phone=51935444206&text=Hola%2C%20deseo%20ser%20un%20cliente%20ProRed" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Contratar</a></li>
             </ul>
         </div>
     </nav>
@@ -42,184 +42,84 @@
             <p>Descubre si ProRed llega a tu zona en Junín y explora nuestro mapa interactivo</p>
         </div>
     </section>
-
-    <!-- Sección combinada: Verificador + Mapa -->
+    <!-- Sección combinada: Formulario + Mapa -->
     <section class="cobertura-combinada">
         <div class="container">
-            <h2 class="text-center mb-4 fade-in-element">Verifica tu Cobertura</h2>
+            <h2 class="text-center mb-4 fade-in-element">Solicita tu Conexión</h2>
             <p class="text-center text-secondary fade-in-element" style="max-width: 700px; margin: 0 auto 40px;">
-                Ingresa tu dirección para verificar si tenemos cobertura en tu zona y explora nuestro mapa interactivo
+                Completa tus datos y marca tu ubicación en el mapa para verificar cobertura
             </p>
             
             <div class="cobertura-grid">
-                <!-- Verificador -->
-                <div class="verificador-card fade-in-element">
-                    <form id="verificadorForm">
+                <!-- Formulario Simplificado -->
+                <div class="formulario-card fade-in-element">
+                    <form id="solicitudForm">
                         <div class="form-group">
-                            <label for="distrito">Distrito</label>
-                            <select id="distrito" class="form-control" required>
-                                <option value="">Selecciona tu distrito</option>
-                                <option value="huancayo">Huancayo</option>
-                                <option value="el-tambo">El Tambo</option>
-                                <option value="chilca">Chilca</option>
-                                <option value="concepcion">Concepción</option>
-                                <option value="san-jeronimo">San Jerónimo</option>
-                                <option value="pilcomayo">Pilcomayo</option>
-                            </select>
+                            <label for="documento">Documento (DNI o CE) - Opcional</label>
+                            <input type="text" id="documento" class="form-control" 
+                                placeholder="Ej: 12345678 (opcional)">
+                            <small class="form-text">Este campo es opcional</small>
                         </div>
                         
                         <div class="form-group">
-                            <label for="direccion">Dirección</label>
-                            <input type="text" id="direccion" class="form-control" placeholder="Ej: Jr. Real 123, Barrio San Carlos" required>
+                            <label for="celular">Celular *</label>
+                            <div style="display: flex; align-items: center;">
+                                <span style="padding: 0 10px; background: #f0f7ff; border: 1px solid #ddd; border-right: none; border-radius: 5px 0 0 5px; height: 48px; display: flex; align-items: center;">+51</span>
+                                <input type="tel" id="celular" class="form-control" style="border-radius: 0 5px 5px 0;"
+                                    placeholder="Ej: 987654321" required pattern="9[0-9]{8}" maxlength="9">
+                            </div>
+                            <small class="form-text">Debe tener 9 dígitos y comenzar con 9</small>
                         </div>
                         
                         <div class="form-group">
-                            <label for="referencia">Referencia (opcional)</label>
-                            <input type="text" id="referencia" class="form-control" placeholder="Ej: Cerca al Mercado Modelo">
+                            <label for="direccion">Dirección *</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" id="direccion" class="form-control" 
+                                    placeholder="Se autocompletará con tu ubicación" required readonly>
+                                <button type="button" id="btnBuscarDireccion" class="btn-small" style="white-space: nowrap;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <small class="form-text">Haz clic en el mapa para completar automáticamente</small>
                         </div>
                         
-                        <button type="submit" class="btn-verificar">
-                            <i class="fas fa-search"></i> Verificar Cobertura
+                        <!-- Campos ocultos para coordenadas -->
+                        <input type="hidden" id="latitud" value="">
+                        <input type="hidden" id="longitud" value="">
+                        
+                        <div class="form-group">
+                            <div class="ubicacion-info" id="ubicacionInfo" style="display: none;">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                                <span id="coordenadasTexto">Ubicación no marcada</span>
+                                <button type="button" id="btnLimpiarUbicacion" class="btn-small" style="margin-left: auto;">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-verificar" id="btnEnviarWhatsApp">
+                            <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
                         </button>
+                        
+                        <p class="text-small" style="margin-top: 10px; font-size: 0.85rem; color: #666;">
+                            Al enviar, se abrirá WhatsApp con tus datos para que nuestro equipo te contacte
+                        </p>
                     </form>
-                    
-                    <div id="resultado" class="resultado-cobertura"></div>
                 </div>
                 
-                <!-- Mapa -->
+                <!-- Mapa Interactivo -->
                 <div class="fade-in-element">
-                    <div id="map"></div>
+                    <div class="mapa-container">
+                        <div id="map"></div>
+                        <div class="mapa-instructions">
+                            <i class="fas fa-mouse-pointer"></i>
+                            Haz clic en el mapa para marcar tu ubicación exacta
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Zonas de Cobertura Mejoradas -->
-    <section class="zonas-section">
-        <div class="container">
-            <h2 class="text-center mb-4 fade-in-element">Zonas con Cobertura</h2>
-            
-            <div class="zonas-grid">
-                <!-- Tarjeta Concepción -->
-                <div class="zona-card fade-in-element">
-                    <div class="zona-header">
-                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">Concepción</div>
-                    </div>
-                    <ul class="zona-distritos">
-                        <li><i class="fas fa-check-circle"></i> Concepción Centro</li>
-                        <li><i class="fas fa-check-circle"></i> Heroínas Toledo</li>
-                        <li><i class="fas fa-check-circle"></i> Miraflores</li>
-                        <li><i class="fas fa-check-circle"></i> Santa Rosa</li>
-                    </ul>
-                    <div class="zona-consultar">
-                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20servicio%20en%20la%20zona%20de%20Concepción" 
-                        target="_blank" 
-                        class="btn-consultar">
-                            Consultar
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Tarjeta San Jerónimo -->
-                <div class="zona-card fade-in-element">
-                    <div class="zona-header">
-                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">San Jerónimo</div>
-                    </div>
-                    <ul class="zona-distritos">
-                        <li><i class="fas fa-check-circle"></i> San Jerónimo Centro</li>
-                        <li><i class="fas fa-check-circle"></i> Sausa</li>
-                        <li><i class="fas fa-check-circle"></i> Cachicoto</li>
-                    </ul>
-                    <div class="zona-consultar">
-                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20servicio%20en%20la%20zona%20de%20San%20Jerónimo" 
-                        target="_blank" 
-                        class="btn-consultar">
-                            Consultar
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Tarjeta San Pedro de Saños -->
-                <div class="zona-card fade-in-element">
-                    <div class="zona-header">
-                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">San Pedro de Saños</div>
-                    </div>
-                    <ul class="zona-distritos">
-                        <li><i class="fas fa-check-circle"></i> San Jerónimo Centro</li>
-                        <li><i class="fas fa-check-circle"></i> Sausa</li>
-                        <li><i class="fas fa-check-circle"></i> Cachicoto</li>
-                    </ul>
-                    <div class="zona-consultar">
-                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20servicio%20en%20la%20zona%20de%20San%20Pedro%20de%20Saños" 
-                        target="_blank" 
-                        class="btn-consultar">
-                            Consultar
-                        </a>
-                    </div>  
-                </div>
-
-                <!-- Tarjeta San Agustin de Cajas (NUEVA) -->
-                <div class="zona-card fade-in-element nueva">
-                    <div class="zona-header">
-                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">San Agustin de Cajas</div>
-                    </div>
-                    <ul class="zona-distritos">
-                        <li><i class="fas fa-check-circle"></i> San Jerónimo Centro</li>
-                        <li><i class="fas fa-check-circle"></i> Sausa</li>
-                        <li><i class="fas fa-check-circle"></i> Cachicoto</li>
-                    </ul>
-                    <div class="zona-consultar">
-                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20servicio%20en%20la%20zona%20de%20San%20Agustin%20de%20Cajas" 
-                        target="_blank" 
-                        class="btn-consultar">
-                            Consultar
-                        </a>
-                    </div>  
-                </div>
-
-                <!-- Tarjeta Matahuasi (PRÓXIMO) -->
-                <div class="zona-card fade-in-element proximo">
-                    <div class="zona-header">
-                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">Matahuasi</div>
-                    </div>
-                    <ul class="zona-distritos">
-                        <!-- Lista vacía porque es próxima -->
-                    </ul>
-                    <div class="zona-consultar">
-                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20saber%20cuándo%20tendrán%20cobertura%20en%20Matahuasi" 
-                        target="_blank" 
-                        class="btn-consultar">
-                            Consultar
-                        </a>
-                    </div>  
-                </div>
-
-                <!-- Tarjeta Apata (PRÓXIMO) -->
-                <div class="zona-card fade-in-element proximo">
-                    <div class="zona-header">
-                        <div class="zona-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="zona-nombre">Apata</div>
-                    </div>
-                    <ul class="zona-distritos">
-                        <!-- Lista vacía porque es próxima -->
-                    </ul>
-                    <div class="zona-consultar">
-                        <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20saber%20cuándo%20tendrán%20cobertura%20en%20Apata" 
-                        target="_blank" 
-                        class="btn-consultar">
-                            Consultar
-                        </a>
-                    </div>  
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Proceso de Instalación Mejorado -->
     <section class="proceso-section">
         <div class="container">
@@ -288,7 +188,7 @@
                 <a href="tel:991 445 527" class="btn btn-primary" style="background: white; color: #E58E21;">
                     <i class="fas fa-phone"></i> Llamar Ahora
                 </a>
-                <a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%21%20quiero%20saber%20si%20ProRed%20tiene%20cobertura%20en%20mi%20zona" class="btn btn-outline" style="border-color: white; color: white;">
+                <a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%21%20quiero%20saber%20si%20ProRed%20tiene%20cobertura%20en%20mi%20zona" class="btn btn-outline" style="border-color: white; color: white;" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
             </div>

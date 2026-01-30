@@ -140,196 +140,6 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Zonas de Cobertura Mejoradas */
-.zonas-section {
-    padding: 80px 0;
-    background: white;
-}
-
-.zonas-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
-}
-
-.zona-card {
-    background: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 5px 20px rgba(0, 91, 159, 0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border-left: 5px solid #005B9F;
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Tarjeta con etiqueta NUEVO */
-.zona-card.nueva::after {
-    content: 'NUEVO';
-    position: absolute;
-    top: 15px;
-    right: -30px;
-    background: #E58E21;
-    color: white;
-    padding: 5px 35px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    transform: rotate(45deg);
-    box-shadow: 0 2px 10px rgba(229, 142, 33, 0.3);
-}
-
-/* Tarjeta con etiqueta PRÓXIMO */
-.zona-card.proximo::after {
-    content: 'PRÓXIMO';
-    position: absolute;
-    top: 15px;
-    right: -30px;
-    background: #6c757d; /* Un gris más acorde */
-    color: white;
-    padding: 5px 35px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    transform: rotate(45deg);
-    box-shadow: 0 2px 10px rgba(108, 117, 125, 0.3);
-}
-
-/* Estilos para la tarjeta próxima */
-.zona-card.proximo {
-    background: #f8f9fa; /* Fondo gris claro */
-    border-left: 5px solid #6c757d;
-    box-shadow: 0 5px 20px rgba(108, 117, 125, 0.1);
-}
-
-.zona-card.proximo .zona-nombre {
-    color: #6c757d; /* Color gris para el nombre */
-}
-
-.zona-card.proximo .zona-icon {
-    color: #6c757d; /* Color gris para el icono */
-}
-
-.zona-card.proximo:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(108, 117, 125, 0.2);
-    border-left-color: #495057; /* Un gris más oscuro al hover */
-    background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
-}
-
-/* Estilos para el botón de consultar en tarjeta próxima */
-.zona-card.proximo .btn-consultar {
-    background: linear-gradient(135deg, #6c757d, #868e96);
-    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.2);
-}
-
-.zona-card.proximo .btn-consultar:hover {
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
-}
-
-/* Efecto hover para tarjetas normales */
-.zona-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(0, 91, 159, 0.2);
-    border-left-color: #E58E21;
-    background: linear-gradient(135deg, #f8f9fa 0%, white 100%);
-}
-
-.zona-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.zona-icon {
-    font-size: 2.5rem;
-    color: #E58E21;
-    transition: transform 0.3s ease;
-}
-
-.zona-card:hover .zona-icon {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.zona-nombre {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #005B9F;
-    flex: 1;
-}
-
-.zona-distritos {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-    flex: 1;
-}
-
-.zona-distritos li {
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    color: #555;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 1.05rem;
-    transition: all 0.3s ease;
-}
-
-.zona-distritos li:hover {
-    color: #005B9F;
-    transform: translateX(5px);
-    border-bottom-color: rgba(0, 91, 159, 0.2);
-}
-
-.zona-distritos li:last-child {
-    border-bottom: none;
-}
-
-.zona-distritos li i {
-    color: #28a745;
-    font-size: 1rem;
-}
-
-.zona-consultar {
-    height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.4s ease;
-}
-
-.zona-card:hover .zona-consultar {
-    height: 60px;
-    opacity: 1;
-    margin-top: 10px;
-}
-
-.btn-consultar {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #E58E21, #F4A347);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(229, 142, 33, 0.2);
-    text-decoration: none;
-    display: block;
-    text-align: center;
-}
-
-.btn-consultar:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(229, 142, 33, 0.3);
-    color: white;
-}
-
 /* Proceso de Instalación Mejorado */
 .proceso-section {
     padding: 80px 0;
@@ -577,5 +387,122 @@
     
     .step-title {
         font-size: 1.2rem;
+    }
+}
+/* Estilos para el formulario simplificado */
+.formulario-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 91, 159, 0.15);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.form-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.btn-small {
+    padding: 10px 15px;
+    background: #005B9F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-small:hover {
+    background: #0077CC;
+    transform: translateY(-1px);
+}
+
+.ubicacion-info {
+    background: #f0f7ff;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border-left: 4px solid #005B9F;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.ubicacion-info i {
+    color: #005B9F;
+    font-size: 1.2rem;
+}
+
+#coordenadasTexto {
+    font-family: monospace;
+    font-size: 0.9rem;
+    flex-grow: 1;
+}
+
+.mapa-container {
+    position: relative;
+    height: 100%;
+}
+
+.mapa-instructions {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 91, 159, 0.9);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Estilos para el marcador personalizado */
+.custom-marker {
+    background: #E58E21;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Estilos para la búsqueda de direcciones */
+.busqueda-container {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    right: 10px;
+    z-index: 1000;
+}
+
+#searchBox {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 1024px) {
+    .formulario-card {
+        position: static;
+        margin-bottom: 30px;
     }
 }
