@@ -99,3 +99,22 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   animateOnScroll();
 });
+
+// Scroll automático por parámetro ?section=
+const params = new URLSearchParams(window.location.search);
+const section = params.get("section");
+
+if (section) {
+  const target = document.getElementById(section);
+  if (target) {
+    const offsetTop = target.offsetTop - 70;
+    window.scrollTo({
+      top: offsetTop,
+      behavior: "smooth",
+    });
+
+    // Limpia la URL (opcional, recomendado)
+    history.replaceState(null, "", window.location.pathname);
+  }
+}
+
