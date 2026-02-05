@@ -38,6 +38,10 @@
   align-items: center;
 }
 
+.hero-logo {
+  width: 25rem;
+}
+
 .hero-text h1 {
   color: white;
   font-size: 3rem;
@@ -298,137 +302,401 @@
   transform: scale(1);
 }
 
-/* Planes Section */
-.planes-preview {
-  padding: 80px 0;
+
+/* --- GRID 2x2 PARA INTERNET (Escritorio) --- */
+/* Esto permite que los 4 planes se vean ordenados en el lado derecho */
+.internet-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas */
+    gap: 15px;
+    width: 100%;
 }
 
-.planes-preview h3 {
-  margin: 60px 0 30px 0;
+/* --- ESTILOS ESPECÍFICOS DE INTERNET (TEXTO) --- */
+.card-speed-header {
+    margin-bottom: 5px;
+    line-height: 1;
 }
 
-.planes-preview > .container > .mt-12 {
-  margin-top: 80px;
+.speed-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #fff;
+    /* Efecto de degradado sutil en el texto */
+    background: -webkit-linear-gradient(#fff, #cbd5e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 91, 159, 0.5); /* Glow azul */
 }
 
-.planes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 50px;
-  margin-bottom: 30px;
+.speed-unit {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #E58E21; /* Naranja corporativo */
+    letter-spacing: 2px;
 }
 
-.plan-card {
-  background: white;
-  border-radius: 20px;
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 91, 159, 0.1);
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.glass-plan-title {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 5px;
+    font-weight: 500;
 }
 
-.plan-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 30px rgba(0, 91, 159, 0.2);
-  border-color: #005b9f;
+/* Lista de características minimalista para que quepa en la grid */
+.glass-mini-features {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 15px 0;
+    text-align: left;
+    font-size: 0.85rem;
+    color: #ccc;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 10px;
 }
 
-.plan-destacado {
-  background: linear-gradient(135deg, #005b9f 0%, #0077cc 100%);
-  color: white;
-  position: relative;
+.glass-mini-features li {
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.plan-destacado .plan-velocidad,
-.plan-destacado .plan-titulo,
-.plan-destacado .plan-precio {
-  color: white;
+.glass-mini-features i {
+    color: #E58E21;
+    font-size: 0.8rem;
 }
 
-.badge-destacado {
-  position: absolute;
-  top: -15px;
-  right: 20px;
-  background-color: #e58e21;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
+/* --- RESPONSIVE INTERNET --- */
+@media (max-width: 991px) {
+    .internet-grid-2x2 {
+        /* En celular, volvemos a una sola columna para que sean grandes */
+        grid-template-columns: 1fr; 
+        width: 80%; /* Respetamos el 80% de ancho que pediste */
+        margin: 0 auto;
+        gap: 20px;
+    }
+    
+    .speed-number {
+        font-size: 3rem; /* Números más grandes en celular */
+    }
 }
 
-.plan-velocidad {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #005b9f;
-  margin-bottom: 10px;
+/* --- 1. EL CONTENEDOR MAESTRO (ROMPE EL FONDO BLANCO) --- */
+.tv-section-immersive {
+    position: relative;
+    width: 100vw;           /* Ancho de toda la ventana */
+    margin-left: -50vw;     /* Centrado agresivo */
+    left: 50%;
+    min-height: 600px;
+    overflow: hidden;
+    padding: 60px 0;
+    /* Importante: Color de fondo oscuro por si el video tarda en cargar */
+    background-color: #0a0a12; 
 }
 
-.plan-titulo {
-  font-size: 1.3rem;
-  color: #005b9f;
-  margin-bottom: 20px;
+/* --- 2. CAPA DE VIDEO (FONDO) --- */
+.video-background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Al fondo */
 }
 
-.plan-precio {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #e58e21;
-  margin-bottom: 10px;
+.video-background-layer video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubre todo sin deformar */
 }
 
-.plan-periodo {
-  color: #666;
-  margin-bottom: 30px;
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Degradado oscuro para que se lea el texto blanco */
+    background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4) 100%);
+    z-index: 1;
 }
 
-.plan-destacado .plan-periodo {
-  color: rgba(255, 255, 255, 0.9);
+/* --- 3. CAPA DE CONTENIDO (ENCIMA) --- */
+.content-layer {
+    position: relative;
+    z-index: 2; /* Encima del video */
 }
 
-.plan-features {
-  list-style: none;
-  margin-bottom: 30px;
-  text-align: left;
+.tv-layout-split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
 }
 
-.plan-features li {
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* --- LADO IZQUIERDO (TITULO) --- */
+.tv-info-side {
+    width: 45%;
+    text-align: left;
+    color: white;
 }
 
-.plan-destacado .plan-features li {
-  border-bottom-color: rgba(255, 255, 255, 0.2);
+.neon-title {
+    font-size: 5rem;
+    line-height: 0.9;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 20px;
+    /* Efecto Neon Azul Solicitado */
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #335AA6,
+        0 0 40px #335AA6;
 }
 
-.plan-features i {
-  color: #e58e21;
-  font-size: 1.1rem;
+/* Contenedor para los dos bots lado a lado */
+.bots-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
 }
-.plan-features-channels-logos {
-  display: flex;
-  gap: 15px;
+
+.deco-image-container img {
+    max-height: 150px; /* Tamaño de la imagen al lado del titulo */
+    margin-bottom: 0;
+    filter: drop-shadow(0 0 15px rgba(51, 90, 166, 0.6));
 }
-.plan-features-channels-logos img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  border-radius: 8px;
-  padding: 5px;
-  background: white;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+
+
+.tv-slogan {
+    font-size: 1.2rem;
+    color: #ddd;
+    max-width: 400px;
 }
-.plan-features-channels-logos img:hover {
-  rotate: 10deg;
+
+/* --- LADO DERECHO (CARDS) --- */
+.tv-cards-side {
+    width: 50%; /* 50% en escritorio */
+}
+
+.cards-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/* --- CARDS V2 (VISIBLES EN FONDO OSCURO) --- */
+.glass-card-v2 {
+    flex: 1;
+    /* Fondo más oscuro y visible por defecto */
+    background: rgba(30, 30, 40, 0.6); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 20px 10px;
+    text-align: center;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* HOVER: Se oscurece más para resaltar */
+.glass-card-v2:hover {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: #335AA6;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(51, 90, 166, 0.4);
+}
+
+.card-header-glass i {
+    font-size: 2rem;
+    color: #E58E21;
+    display: block;
+    margin-bottom: 5px;
+}
+.card-header-glass span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.card-price-glass {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 10px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.mini-channels-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-bottom: 15px;
+}
+
+.mini-channels-grid img {
+    width: 100%;
+    height: 22px;
+    object-fit: contain;
+    background: #fff; /* Fondo blanco para logos */
+    border-radius: 3px;
+    padding: 2px;
+}
+
+.btn-action {
+    display: block;
+    padding: 6px 0;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+.btn-action.primary, .btn-action:hover {
+    background: #335AA6;
+    border-color: #335AA6;
+    box-shadow: 0 0 10px rgba(51, 90, 166, 0.5);
+}
+
+/* Destacado */
+.featured-glass {
+    border-color: #E58E21;
+    background: rgba(50, 50, 60, 0.7);
+    transform: scale(1.05); /* Un poco más grande por defecto */
+}
+.badge-top {
+    background: #E58E21;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+/* --- ESTILOS EXCLUSIVOS DUO --- */
+
+/* Encabezado especial para Dúo (Velocidad + TV) */
+.duo-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+.duo-card-header .speed-part {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 0 15px rgba(229, 142, 33, 0.4); /* Glow Naranja */
+    line-height: 1;
+}
+
+.duo-card-header .unit {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #ccc;
+}
+
+.duo-card-header .plus-part {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #E58E21; /* Naranja corporativo */
+    background: rgba(229, 142, 33, 0.1);
+    padding: 2px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(229, 142, 33, 0.3);
+}
+
+/* Fila de iconos descriptivos (Wifi / TV) */
+.duo-icons-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: #eee;
+}
+
+.duo-icons-row span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.duo-icons-row i {
+    color: #E58E21;
+}
+
+/* Badge promocional al lado izquierdo */
+.duo-badge-promo {
+    display: inline-block;
+    margin-top: 20px;
+    background: rgba(229, 142, 33, 0.2);
+    border: 1px solid #E58E21;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(229, 142, 33, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(229, 142, 33, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(229, 142, 33, 0); }
+}
+
+/* Ajuste responsive para la grid duo */
+@media (max-width: 991px) {
+    /* Reutiliza la misma lógica que internet */
+    .duo-card-header .speed-part {
+        font-size: 2.5rem;
+    }
+}
+
+/* --- RESPONSIVE (CELULAR) --- */
+@media (max-width: 991px) {
+    .tv-layout-split {
+        flex-direction: column; /* Apilar verticalmente */
+        text-align: center;
+    }
+    
+    .tv-info-side {
+        width: 100%;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    
+    .neon-title { font-size: 3.5rem; }
+    
+    .tv-cards-side {
+        width: 100%; /* Ocupa todo el ancho disponible */
+    }
+    
+    .cards-wrapper {
+        flex-direction: column; /* Cards una debajo de otra */
+        width: 80%;             /* REQUERIMIENTO: 80% ancho en celular */
+        margin: 0 auto;         /* Centradas */
+        gap: 20px;
+    }
+    
+    .glass-card-v2 {
+        width: 100%;
+    }
+    
+    .featured-glass { transform: none; } /* Quitar zoom en móvil */
 }
 /* CTA Section */
 .cta-section {
@@ -768,17 +1036,6 @@
   .hero-image {
     order: -1;
   }
-  .plan-card-iptv {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 30px;
-    max-width: 450px;
-  }
-
-  .plan-iptv-channels {
-    max-height: none;
-    overflow-y: visible;
-  }
   .slide-in-left,
   .slide-in-right {
     transform: translateY(30px) !important;
@@ -813,22 +1070,6 @@
 
   .hero-img {
     max-width: 280px;
-  }
-
-  .plan-card {
-    padding: 25px 15px;
-  }
-
-  .plan-velocidad {
-    font-size: 2rem;
-  }
-
-  .plan-titulo {
-    font-size: 1.1rem;
-  }
-
-  .plan-precio {
-    font-size: 1.8rem;
   }
 }
 

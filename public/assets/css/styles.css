@@ -152,8 +152,7 @@ p { margin-bottom: 1rem; }
 }
 
 .nav-logo {
-  height: 42px;
-  width: auto;
+  width: 3rem;
   display: block;
 }
 
@@ -439,4 +438,30 @@ footer {
   .card {
     padding: 20px;
   }
+}
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-float i {
+  color: #fff;
+  font-size: 32px;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
