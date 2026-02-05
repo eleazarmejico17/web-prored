@@ -153,6 +153,7 @@ p { margin-bottom: 1rem; }
 
 .nav-logo {
   width: 3rem;
+  height: auto;
   display: block;
 }
 
@@ -356,7 +357,8 @@ footer {
   }
   
   .nav-logo {
-    height: 36px;
+    width: 2.5rem;
+    height: auto;
   }
   
   .menu-toggle { 
@@ -422,7 +424,8 @@ footer {
   }
   
   .nav-logo {
-    height: 32px;
+    width: 2.2rem;
+    height: auto;
   }
   
   .nav-menu {
@@ -455,6 +458,25 @@ footer {
   z-index: 1000;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.whatsapp-float {
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0.25);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
 
 .whatsapp-float i {
   color: #fff;
