@@ -1,5 +1,5 @@
 .hero-cobertura {
-    background-image: url('../img/portada-cobertura.png');
+    background-image: url('../img/portada/portada-cobertura.jpg');
     background-size: cover;
     background-position: center;
     color: white;
@@ -363,7 +363,7 @@
     }
     
     .hero-cobertura {
-        background-image: url('../img/responsive/bg-nosotros2.png');
+        background-image: url('../img/portada/portada-res-cobertura.jpg');
         padding: 100px 0 60px;
     }
 }

@@ -1,12 +1,22 @@
 /* Hero Empresas */
 .hero-empresas {
-    background-image: url('../img/portada-nosotros.png');
+    background-image: url('../img/portada/portada-empresas.jpg');
     background-size: cover;
     background-position: center;
     color: white;
     padding: 7.5rem 0 5rem; /* 120px 0 80px */
     text-align: center;
     position: relative;
+}
+.hero-empresas::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 90, 159, 0.5);
+    z-index: 1;
 }
 
 
@@ -1529,5 +1539,9 @@
 
     .business-service-content p {
         font-size: 1rem;
+    }
+    .hero-empresas {
+        background-image: url('../img/portada/portada-res-empresas.jpg');
+        padding: 100px 0 60px;
     }
 }

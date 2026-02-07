@@ -1,6 +1,6 @@
 /* Hero Nosotros */
 .hero-nosotros {
-    background-image: url('../img/portada-nosotros.png');
+    background-image: url('../img/portada/portada-nosotros.jpg');
     background-size: cover;
     background-position: center;
     color: white;
@@ -360,5 +360,9 @@
     .slide-in-right.visible {
         transform: translateY(0) !important;
         opacity: 1 !important;
+    }
+    .hero-nosotros {
+        background-image: url('../img/portada/portada-res-nosotros.jpg');
+        padding: 100px 0 60px;
     }
 }

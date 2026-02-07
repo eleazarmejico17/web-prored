@@ -1,6 +1,6 @@
 /* Hero Portal */
 .hero-portal {
-    background-image: url('../img/portada-portal.png');
+    background-image: url('../img/portada/portada-portal.jpg');
     background-size: cover;
     background-position: center;
     color: white;
@@ -614,6 +614,10 @@
     .slide-in-right.visible {
         transform: translateY(0) !important;
         opacity: 1 !important;
+    }
+    .hero-portal {
+        background-image: url('../img/portada/portada-res-portal.jpg');
+        padding: 100px 0 60px;
     }
     
 
