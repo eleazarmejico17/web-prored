@@ -110,9 +110,8 @@
             class="bg-white shadow-xl flex flex-col w-64 fixed md:relative h-full z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
             <div class="p-6 border-b border-gray-100 flex flex-col items-center justify-center">
                 <div class="flex items-center gap-3">
-                    <div
-                        class="bg-primary text-white p-2.5 rounded-lg shadow-lg shadow-primary/30 flex items-center justify-center">
-                        <img src="assets/img/logo.ico" alt="ProRed Logo" class="w-6 h-6 object-contain">
+                    <div class="bg-primary text-white p-2.5 rounded-lg shadow-lg shadow-primary/30">
+                        <i class="fas fa-tools text-xl"></i>
                     </div>
                     <h1 class="text-2xl font-bold text-primary tracking-tight">Pro<span
                             class="text-secondary">Red</span></h1>
@@ -355,107 +354,98 @@
         }
 
         function loadPageContent(page) {
-            // Contenido temporal - se cargará dinámicamente desde includes/
-            const html = `
-                <div class="card-base p-12 text-center">
-                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-laptop-code text-4xl text-gray-400"></i>
+            let html = '';
+
+            // Helper para Cards de Resumen
+            const renderMetric = (title, val, icon, color, subText) => `
+                <div class="card-base p-6 border-l-4 border-${color}">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">${title}</p>
+                            <h3 class="text-2xl font-bold text-gray-800 mt-2">${val}</h3>
+                        </div>
+                        <div class="p-3 rounded-lg bg-${color}-light text-${color} bg-opacity-50">
+                            <i class="${icon} text-xl"></i>
+                        </div>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-2">${dom.pageTitle.textContent}</h2>
-                    <p class="text-gray-500 mb-8 max-w-md mx-auto">El contenido se cargará dinámicamente desde la carpeta includes.</p>
+                    ${subText ? `<p class="mt-4 text-xs text-gray-500">${subText}</p>` : ''}
                 </div>
             `;
-
-            dom.content.innerHTML = html;
-        }
-        <div class="card-base p-6 border-l-4 border-${color}">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">${title}</p>
-                    <h3 class="text-2xl font-bold text-gray-800 mt-2">${val}</h3>
-                </div>
-                <div class="p-3 rounded-lg bg-${color}-light text-${color} bg-opacity-50">
-                    <i class="${icon} text-xl"></i>
-                </div>
-            </div>
-            ${subText ? `<p class="mt-4 text-xs text-gray-500">${subText}</p>` : ''}
-        </div>
-        `;
 
             switch (page) {
                 case 'home':
                     html = `
-            < div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" >
-                ${ renderMetric('Visitas Hoy', '4', 'fas fa-clipboard-list', 'primary', '2 Completadas') }
-                            ${ renderMetric('Pendientes', '2', 'fas fa-clock', 'warning', 'Próxima a las 14:00') }
-                            ${ renderMetric('Materiales', 'OK', 'fas fa-box', 'success', 'Stock suficiente') }
-                            ${ renderMetric('Rendimiento', '98%', 'fas fa-tachometer-alt', 'secondary', 'Semana actual') }
-                        </div >
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 card-base p-6 border border-primary/20 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10">
-                        <i class="fas fa-map-marker-alt text-9xl text-primary"></i>
-                    </div>
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="bg-primary text-white text-xs px-2 py-1 rounded font-bold animate-pulse">EN CURSO</span>
-                            <span class="text-gray-500 text-sm">Ticket #4921</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-1">Instalación Fibra 100Mb</h3>
-                        <p class="text-lg text-gray-600 mb-4"><i class="fas fa-user mr-2"></i> Cliente: Familia Rodríguez</p>
-
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 mb-6">
-                            <p class="text-sm text-gray-700 mb-1"><i class="fas fa-map-pin text-danger mr-2"></i> Av. Los Álamos 452, Urb. San Felipe</p>
-                            <p class="text-sm text-gray-500"><i class="fas fa-phone mr-2"></i> +51 998 887 776</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            ${renderMetric('Visitas Hoy', '4', 'fas fa-clipboard-list', 'primary', '2 Completadas')}
+                            ${renderMetric('Pendientes', '2', 'fas fa-clock', 'warning', 'Próxima a las 14:00')}
+                            ${renderMetric('Materiales', 'OK', 'fas fa-box', 'success', 'Stock suficiente')}
+                            ${renderMetric('Rendimiento', '98%', 'fas fa-tachometer-alt', 'secondary', 'Semana actual')}
                         </div>
 
-                        <div class="flex flex-wrap gap-3">
-                            <button class="btn-primary" onclick="loadPage('actualizar-estado')">
-                                <i class="fas fa-check-circle mr-2"></i> Llegué al Sitio
-                            </button>
-                            <button class="btn-secondary" onclick="window.open('https://maps.google.com', '_blank')">
-                                <i class="fas fa-directions mr-2"></i> Ver Mapa
-                            </button>
-                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 font-medium">
-                                <i class="fas fa-phone mr-2"></i> Llamar
-                            </button>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <div class="lg:col-span-2 card-base p-6 border border-primary/20 relative overflow-hidden">
+                                <div class="absolute top-0 right-0 p-4 opacity-10">
+                                    <i class="fas fa-map-marker-alt text-9xl text-primary"></i>
+                                </div>
+                                <div class="relative z-10">
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <span class="bg-primary text-white text-xs px-2 py-1 rounded font-bold animate-pulse">EN CURSO</span>
+                                        <span class="text-gray-500 text-sm">Ticket #4921</span>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-gray-800 mb-1">Instalación Fibra 100Mb</h3>
+                                    <p class="text-lg text-gray-600 mb-4"><i class="fas fa-user mr-2"></i> Cliente: Familia Rodríguez</p>
+                                    
+                                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 mb-6">
+                                        <p class="text-sm text-gray-700 mb-1"><i class="fas fa-map-pin text-danger mr-2"></i> Av. Los Álamos 452, Urb. San Felipe</p>
+                                        <p class="text-sm text-gray-500"><i class="fas fa-phone mr-2"></i> +51 998 887 776</p>
+                                    </div>
+
+                                    <div class="flex flex-wrap gap-3">
+                                        <button class="btn-primary" onclick="loadPage('actualizar-estado')">
+                                            <i class="fas fa-check-circle mr-2"></i> Llegué al Sitio
+                                        </button>
+                                        <button class="btn-secondary" onclick="window.open('https://maps.google.com', '_blank')">
+                                            <i class="fas fa-directions mr-2"></i> Ver Mapa
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 font-medium">
+                                            <i class="fas fa-phone mr-2"></i> Llamar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-base p-6">
+                                <h3 class="font-bold text-gray-800 mb-4">Acciones Rápidas</h3>
+                                <div class="grid grid-cols-1 gap-3">
+                                    <button onclick="loadPage('reportar-materiales')" class="p-3 bg-gray-50 hover:bg-orange-50 border border-gray-200 hover:border-orange-200 rounded-lg flex items-center transition group">
+                                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-secondary shadow-sm group-hover:scale-110 transition">
+                                            <i class="fas fa-tools"></i>
+                                        </div>
+                                        <div class="ml-3 text-left">
+                                            <p class="text-sm font-bold text-gray-700 group-hover:text-secondary">Pedir Material</p>
+                                            <p class="text-xs text-gray-500">Router, Cable, Conectores</p>
+                                        </div>
+                                    </button>
+                                    
+                                    <button onclick="loadPage('completar-reporte')" class="p-3 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 rounded-lg flex items-center transition group">
+                                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition">
+                                            <i class="fas fa-file-signature"></i>
+                                        </div>
+                                        <div class="ml-3 text-left">
+                                            <p class="text-sm font-bold text-gray-700 group-hover:text-primary">Cerrar Orden</p>
+                                            <p class="text-xs text-gray-500">Finalizar trabajo actual</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="card-base p-6">
-                    <h3 class="font-bold text-gray-800 mb-4">Acciones Rápidas</h3>
-                    <div class="grid grid-cols-1 gap-3">
-                        <button onclick="loadPage('reportar-materiales')" class="p-3 bg-gray-50 hover:bg-orange-50 border border-gray-200 hover:border-orange-200 rounded-lg flex items-center transition group">
-                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-secondary shadow-sm group-hover:scale-110 transition">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <div class="ml-3 text-left">
-                                <p class="text-sm font-bold text-gray-700 group-hover:text-secondary">Pedir Material</p>
-                                <p class="text-xs text-gray-500">Router, Cable, Conectores</p>
-                            </div>
-                        </button>
-
-                        <button onclick="loadPage('completar-reporte')" class="p-3 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 rounded-lg flex items-center transition group">
-                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition">
-                                <i class="fas fa-file-signature"></i>
-                            </div>
-                            <div class="ml-3 text-left">
-                                <p class="text-sm font-bold text-gray-700 group-hover:text-primary">Cerrar Orden</p>
-                                <p class="text-xs text-gray-500">Finalizar trabajo actual</p>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
+                    `;
                     break;
 
                 case 'visitas':
                 case 'agenda':
                     html = `
-            < div class="card-base p-6" >
+                        <div class="card-base p-6">
                             <div class="flex justify-between items-center mb-6">
                                 <h3 class="font-bold text-gray-800 text-lg">Agenda del Día</h3>
                                 <span class="bg-primary-light text-primary text-xs font-bold px-3 py-1 rounded-full">4 Asignadas</span>
@@ -499,13 +489,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div >
-            `;
+                        </div>
+                    `;
                     break;
 
                 case 'actualizar-estado':
                     html = `
-            < div class="card-base p-6 max-w-2xl mx-auto" >
+                         <div class="card-base p-6 max-w-2xl mx-auto">
                             <h3 class="font-bold text-gray-800 text-lg mb-4 flex items-center">
                                 <i class="fas fa-sync-alt text-secondary mr-2"></i> Actualizar Estado de Visita
                             </h3>
@@ -556,14 +546,14 @@
                                     </div>
                                 </div>
                             </form>
-                        </div >
-            `;
+                        </div>
+                    `;
                     break;
 
                 case 'reportar-materiales':
                 case 'materiales':
                     html = `
-            < div class="card-base p-6" >
+                         <div class="card-base p-6">
                             <h3 class="font-bold text-gray-800 text-lg mb-6">Mis Materiales</h3>
                             
                             <div class="space-y-4 mb-8">
@@ -604,13 +594,13 @@
                                 <p class="text-xs text-gray-600 mb-4">Envía una solicitud al almacén para reponer stock.</p>
                                 <button class="btn-secondary w-full text-sm">Crear Solicitud de Material</button>
                             </div>
-                        </div >
-            `;
+                        </div>
+                    `;
                     break;
 
                 case 'completar-reporte':
                     html = `
-            < div class="card-base p-6 max-w-2xl mx-auto" >
+                         <div class="card-base p-6 max-w-2xl mx-auto">
                             <div class="flex items-center gap-3 mb-6 border-b pb-4">
                                 <div class="w-10 h-10 bg-success rounded-full flex items-center justify-center text-white">
                                     <i class="fas fa-file-signature"></i>
@@ -657,14 +647,14 @@
                                     </button>
                                 </div>
                             </form>
-                        </div >
-            `;
+                        </div>
+                    `;
                     break;
 
                 default:
                     // Plantilla genérica
                     html = `
-            < div class="card-base p-12 text-center" >
+                        <div class="card-base p-12 text-center">
                             <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                                 <i class="fas fa-hard-hat text-4xl text-gray-400"></i>
                             </div>
@@ -673,8 +663,8 @@
                             <button class="btn-primary mx-auto px-6" onclick="loadPage('home')">
                                 Volver al Home
                             </button>
-                        </div >
-            `;
+                        </div>
+                    `;
             }
 
             dom.content.innerHTML = html;
@@ -683,7 +673,7 @@
         // --- UTILIDADES ---
         function updateBreadcrumbs(page) {
             const crumbs = document.getElementById('breadcrumbs');
-            let html = `< li > <button class="hover:text-primary" onclick="loadPage('home')"><i class="fas fa-home"></i></button></li > `;
+            let html = `<li><button class="hover:text-primary" onclick="loadPage('home')"><i class="fas fa-home"></i></button></li>`;
 
             const flatMenu = userData.menu.flatMap(i => {
                 if (i.page === page) return [{ title: i.title }];
@@ -696,7 +686,7 @@
 
             if (flatMenu.length > 0 && page !== 'home') {
                 flatMenu.forEach(item => {
-                    html += `< li > <span class="mx-2 text-gray-300">/</span></li > <li>${item.title}</li>`;
+                    html += `<li><span class="mx-2 text-gray-300">/</span></li><li>${item.title}</li>`;
                 });
             }
             crumbs.innerHTML = html;
@@ -707,7 +697,7 @@
             container.innerHTML = '';
             list.forEach(n => {
                 const item = document.createElement('div');
-                item.className = `p - 4 border - b border - gray - 100 hover: bg - gray - 50 cursor - pointer flex gap - 3 ${ n.read ? 'opacity-60' : '' } `;
+                item.className = `p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer flex gap-3 ${n.read ? 'opacity-60' : ''}`;
 
                 let iconClass = 'text-primary bg-primary-light';
                 let icon = 'info-circle';
@@ -715,13 +705,13 @@
                 if (n.type === 'success') { iconClass = 'text-success bg-green-50'; icon = 'check-circle'; }
 
                 item.innerHTML = `
-            < div class="w-8 h-8 rounded-full ${iconClass} flex items-center justify-center flex-shrink-0" >
-                <i class="fas fa-${icon} text-xs"></i>
-                    </div >
-            <div>
-                <p class="text-sm text-gray-800 ${!n.read ? 'font-semibold' : ''}">${n.text}</p>
-                <p class="text-xs text-gray-400 mt-1">${n.time}</p>
-            </div>
+                    <div class="w-8 h-8 rounded-full ${iconClass} flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-${icon} text-xs"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-800 ${!n.read ? 'font-semibold' : ''}">${n.text}</p>
+                        <p class="text-xs text-gray-400 mt-1">${n.time}</p>
+                    </div>
                 `;
                 container.appendChild(item);
             });
