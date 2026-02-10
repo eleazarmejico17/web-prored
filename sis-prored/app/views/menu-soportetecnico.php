@@ -115,15 +115,6 @@
             'texto' => 'Home',
             'submenu' => []
         ],
-        'tickets' => [
-            'icon' => 'fa-ticket-alt',
-            'texto' => 'Tickets',
-            'submenu' => [
-                'mis-tickets' => 'Mis Asignaciones',
-                'cola-tickets' => 'Cola General',
-                'nuevo-ticket' => 'Crear Ticket'
-            ]
-        ],
         'clientes' => [
             'icon' => 'fa-users',
             'texto' => 'Clientes',

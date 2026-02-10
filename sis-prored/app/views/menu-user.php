@@ -143,16 +143,16 @@
     }
 
     // Determinar la ruta del dashboard
-    $rutaDashboard = "includes/cliente/{$pagina}.php";
+    $rutaDashboard = "includes/user/{$pagina}.php";
     if (!file_exists($rutaDashboard)) {
-        $rutaDashboard = "includes/cliente/home.php";
+        $rutaDashboard = "includes/construccion.php";
     }
 
     // Título e icono de la página actual
     $titulo = $menu[$pagina]['texto'] ?? 'Home';
     $icono = $menu[$pagina]['icon'] ?? 'fa-home';
     ?>
-    
+
     <div class="flex h-screen">
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity"
             onclick="closeSidebar()"></div>
@@ -172,27 +172,29 @@
 
             <nav id="menu" class="flex-grow p-4 overflow-y-auto custom-scrollbar space-y-1">
                 <?php foreach ($menu as $key => $item): ?>
-                        <div class="mb-1">
-                            <a href="?pagina=<?= $key ?>"
-                                class="w-full flex items-center p-3 rounded-l-lg transition-all duration-200 group <?= activo($key, $pagina) ?>"
-                                onclick="closeSidebar()">
-                                <div class="flex items-center">
-                                    <div class="w-6 flex justify-center">
-                                        <i class="fas <?= $item['icon'] ?> text-lg <?= $key === $pagina ? 'text-primary' : 'text-gray-400 group-hover:text-primary' ?> transition-colors"></i>
-                                    </div>
-                                    <span class="ml-3 text-sm"><?= $item['texto'] ?></span>
+                    <div class="mb-1">
+                        <a href="?pagina=<?= $key ?>"
+                            class="w-full flex items-center p-3 rounded-l-lg transition-all duration-200 group <?= activo($key, $pagina) ?>"
+                            onclick="closeSidebar()">
+                            <div class="flex items-center">
+                                <div class="w-6 flex justify-center">
+                                    <i
+                                        class="fas <?= $item['icon'] ?> text-lg <?= $key === $pagina ? 'text-primary' : 'text-gray-400 group-hover:text-primary' ?> transition-colors"></i>
                                 </div>
-                            </a>
-                        </div>
+                                <span class="ml-3 text-sm"><?= $item['texto'] ?></span>
+                            </div>
+                        </a>
+                    </div>
                 <?php endforeach; ?>
-                
+
                 <!-- Botón de Cerrar Sesión separado -->
                 <div class="mt-8 pt-4 border-t border-gray-100">
                     <button onclick="alert('Cerrando sesión...'); window.location.href='logout.php';"
                         class="w-full flex items-center p-3 rounded-l-lg transition-all duration-200 group text-gray-600 hover:bg-red-50 hover:text-red-500">
                         <div class="flex items-center">
                             <div class="w-6 flex justify-center">
-                                <i class="fas fa-sign-out-alt text-lg text-gray-400 group-hover:text-red-500 transition-colors"></i>
+                                <i
+                                    class="fas fa-sign-out-alt text-lg text-gray-400 group-hover:text-red-500 transition-colors"></i>
                             </div>
                             <span class="ml-3 text-sm">Cerrar Sesión</span>
                         </div>
@@ -250,21 +252,27 @@
                                     <p class="text-xs text-gray-500">1 aviso importante</p>
                                 </div>
                                 <div class="max-h-64 overflow-y-auto custom-scrollbar">
-                                    <div class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer flex gap-3">
-                                        <div class="w-8 h-8 rounded-full bg-primary-light text-primary flex items-center justify-center flex-shrink-0">
+                                    <div
+                                        class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer flex gap-3">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-primary-light text-primary flex items-center justify-center flex-shrink-0">
                                             <i class="fas fa-info-circle text-xs"></i>
                                         </div>
                                         <div>
-                                            <p class="text-sm text-gray-800 font-semibold">Tu factura de Febrero ya está disponible</p>
+                                            <p class="text-sm text-gray-800 font-semibold">Tu factura de Febrero ya está
+                                                disponible</p>
                                             <p class="text-xs text-gray-400 mt-1">Hace 2 horas</p>
                                         </div>
                                     </div>
-                                    <div class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer flex gap-3 opacity-60">
-                                        <div class="w-8 h-8 rounded-full bg-orange-50 text-warning flex items-center justify-center flex-shrink-0">
+                                    <div
+                                        class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer flex gap-3 opacity-60">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-orange-50 text-warning flex items-center justify-center flex-shrink-0">
                                             <i class="fas fa-exclamation-circle text-xs"></i>
                                         </div>
                                         <div>
-                                            <p class="text-sm text-gray-800">Mantenimiento programado: 20 Feb, 02:00 AM</p>
+                                            <p class="text-sm text-gray-800">Mantenimiento programado: 20 Feb, 02:00 AM
+                                            </p>
                                             <p class="text-xs text-gray-400 mt-1">Ayer</p>
                                         </div>
                                     </div>
@@ -279,8 +287,8 @@
                         <ol id="breadcrumbs" class="flex items-center space-x-2 text-xs text-gray-500">
                             <li><a href="?pagina=home" class="hover:text-primary"><i class="fas fa-home"></i></a></li>
                             <?php if ($pagina !== 'home'): ?>
-                                    <li><span class="mx-2 text-gray-300">/</span></li>
-                                    <li><?= $titulo ?></li>
+                                <li><span class="mx-2 text-gray-300">/</span></li>
+                                <li><?= $titulo ?></li>
                             <?php endif; ?>
                         </ol>
                     </nav>
@@ -359,4 +367,5 @@
         });
     </script>
 </body>
+
 </html>
