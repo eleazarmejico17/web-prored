@@ -1,5 +1,5 @@
 <?php
-require_once 'models/BaseModel.php';
+require_once __DIR__ . '/BaseModel.php';
 
 class CargoAdicionalModel extends BaseModel
 {
@@ -82,4 +82,3 @@ class CargoAdicionalModel extends BaseModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-?>

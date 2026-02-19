@@ -1,5 +1,5 @@
 <?php
-require_once 'models/BaseModel.php';
+require_once __DIR__ . '/BaseModel.php';
 
 class ClienteModel extends BaseModel
 {
@@ -65,4 +65,3 @@ class ClienteModel extends BaseModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-?>

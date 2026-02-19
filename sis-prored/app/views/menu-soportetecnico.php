@@ -138,6 +138,11 @@
             'texto' => 'Corte',
             'submenu' => []
         ],
+        'reconexion' => [
+            'icon' => 'fa-plug',
+            'texto' => 'Reconexiones',
+            'submenu' => []
+        ],
         'perfil' => [
             'icon' => 'fa-user-circle',
             'texto' => 'Mi Perfil',

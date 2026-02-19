@@ -240,67 +240,218 @@
 </div>
 
 <script>
-    // --- 1. DATOS SIMULADOS (Based on DB) ---
-    const serviciosDB = [
-        {
-            id: 101, dni: "72889102", cliente: "Raúl Mendoza",
-            plan: "Fibra Home 100", id_plan: 1, es_custom: false,
-            direccion: "Av. Los Incas 450", estado: "ACTIVO",
-            precio: 89.90, velocidad: 100, ip: "192.168.10.45"
-        },
-        {
-            id: 102, dni: "20601234567", cliente: "ShopNear S.R.L.",
-            plan: "Plan Corporativo", id_plan: null, es_custom: true, // Custom
-            direccion: "Jr. Comercio 200", estado: "EN_MORA",
-            precio: 250.00, velocidad: 500, ip: "10.20.30.50"
-        },
-        {
-            id: 103, dni: "12345678", cliente: "Elena Torres",
-            plan: "Fibra Gamer 200", id_plan: 2, es_custom: false,
-            direccion: "Calle Real 123", estado: "SUSPENDIDO",
-            precio: 119.90, velocidad: 200, ip: "192.168.10.60"
-        }
-    ];
+    const controllerUrl = '../controllers/VentasController.php';
+    window.servicesData = [];
+    window.plansData = [];
+    window.internetOptions = [];
+    window.tvOptions = [];
 
-    // --- 2. RENDERIZADO DE TABLA ---
-    function renderServices() {
+    // --- 1. CARGA DE DATOS ---
+    document.addEventListener('DOMContentLoaded', () => {
+        loadServices();
+        loadPlans();
+        loadOptions(); // Fetch Internet/TV options
+
+        // Listener para búsqueda
+        const filterInput = document.getElementById('filterInput');
+        filterInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                loadServices(this.value);
+            }
+        });
+    });
+
+    async function loadOptions() {
+        try {
+            const res = await fetch(`${controllerUrl}?op=get_plan_options`);
+            if (res.ok) {
+                const data = await res.json();
+                window.internetOptions = data.internet || [];
+                window.tvOptions = data.tv || [];
+            }
+        } catch (e) { console.error("Error loading options", e); }
+    }
+
+    async function loadPlans() {
+        // Container for plans
+        const container = document.querySelector('.flex.overflow-x-auto'); // Adjust selector if needed
+        // Keep the "New Plan" button
+        const newPlanBtn = container.querySelector('div:last-child');
+
+        // Show loading state? Or just append after fetch
+
+        try {
+            const response = await fetch(`${controllerUrl}?op=get_plans`);
+            if (!response.ok) throw new Error('Error cargando planes');
+            const data = await response.json();
+            window.plansData = data;
+
+            // Clear existing plans (except the "New Plan" button)
+            // Strategy: Rebuild the container content
+            let html = '';
+
+            data.forEach(p => {
+                const isDuo = p.id_internet && p.id_tv;
+                const isTvOnly = !p.id_internet && p.id_tv;
+                const isInternetOnly = p.id_internet && !p.id_tv;
+
+                let cardClasses = 'bg-white border-gray-200 hover:border-gray-300';
+                let icon = 'fa-wifi';
+                let iconColor = 'text-primary';
+                let priceColor = 'text-primary';
+                let typeLabel = '';
+
+                if (isDuo) {
+                    cardClasses = 'bg-gradient-to-br from-white to-purple-50/50 border-purple-200 hover:border-purple-300 shadow-sm';
+                    icon = 'fa-layer-group'; // Or fa-star
+                    iconColor = 'text-purple-600';
+                    priceColor = 'text-purple-700';
+                    typeLabel = '<span class="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold ml-2">DUO</span>';
+                } else if (isTvOnly) {
+                    cardClasses = 'bg-gradient-to-br from-white to-pink-50/50 border-pink-200 hover:border-pink-300';
+                    icon = 'fa-tv';
+                    iconColor = 'text-pink-500';
+                    priceColor = 'text-pink-600';
+                    typeLabel = '<span class="text-[10px] bg-pink-100 text-pink-700 px-2 py-0.5 rounded font-bold ml-2">TV</span>';
+                } else {
+                    // Internet Only (Default)
+                    cardClasses = 'bg-gradient-to-br from-white to-blue-50/50 border-blue-200 hover:border-blue-300';
+                    icon = 'fa-wifi';
+                    iconColor = 'text-blue-500';
+                    priceColor = 'text-blue-600';
+                    typeLabel = '<span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold ml-2">NET</span>';
+                }
+
+                const isPopular = p.descripcion && p.descripcion.includes('Popular'); 
+                const tag = isPopular ? '<span class="text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded font-bold">POPULAR</span>' : '';
+
+                html += `
+                <div class="min-w-[260px] ${cardClasses} rounded-xl border p-5 hover:shadow-lg transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-3 opacity-5 group-hover:opacity-10 transform translate-x-1/4 -translate-y-1/4 transition-transform">
+                        <i class="fas ${icon} text-9xl ${iconColor}"></i>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="p-2 rounded-lg bg-white/80 shadow-sm inline-flex">
+                                <i class="fas ${icon} text-2xl ${iconColor}"></i>
+                            </div>
+                            <div class="flex flex-col items-end gap-1">
+                                ${tag}
+                                ${typeLabel}
+                            </div>
+                        </div>
+
+                        <h3 class="font-bold text-gray-800 text-lg leading-tight mb-4 min-h-[3rem] line-clamp-2" title="${p.nombre}">${p.nombre}</h3>
+                        
+                        <div class="flex items-baseline gap-1 mb-4">
+                            <span class="text-sm text-gray-400 font-medium">S/</span>
+                            <span class="text-3xl font-extrabold ${priceColor}">${parseFloat(p.precio).toFixed(2)}</span>
+                        </div>
+
+                        <ul class="text-xs text-gray-500 space-y-2 mb-2">
+                            ${p.velocidad_bajada ? `<li><i class="fas fa-download text-green-500 mr-2 w-4"></i> ${p.velocidad_bajada} Descarga</li>` : ''}
+                            ${p.velocidad_subida ? `<li><i class="fas fa-upload text-blue-400 mr-2 w-4"></i> ${p.velocidad_subida} Subida</li>` : ''}
+                            ${(isDuo || isTvOnly) ? `<li><i class="fas fa-tv text-pink-500 mr-2 w-4"></i> TV Incluida</li>` : ''}
+                        </ul>
+                    </div>
+                </div>`;
+            });
+
+            // Re-add the "New Plan" button
+            html += `
+            <div onclick="openAddPlanModal()"
+                class="min-w-[240px] bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 p-4 flex flex-col items-center justify-center text-gray-400 hover:border-primary hover:text-primary cursor-pointer transition-colors">
+                <i class="fas fa-plus-circle text-3xl mb-2"></i>
+                <span class="text-sm font-medium">Nuevo Plan Base</span>
+            </div>`;
+
+            container.innerHTML = html;
+
+            // Also update the Select in Edit Modal
+            updatePlanSelect(data);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function updatePlanSelect(plans) {
+        const select = document.getElementById('selectPlanBase');
+        let opts = '';
+        plans.forEach(p => {
+            opts += `<option value="${p.id_plan}">${p.nombre} (S/ ${parseFloat(p.precio).toFixed(2)})</option>`;
+        });
+        opts += '<option value="custom">-- PERSONALIZADO --</option>';
+        select.innerHTML = opts;
+    }
+
+    async function loadServices(searchTerm = '') {
+        const tbody = document.getElementById('servicesTableBody');
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4"><i class="fas fa-spinner fa-spin text-primary"></i> Cargando servicios...</td></tr>';
+
+        try {
+            const response = await fetch(`${controllerUrl}?op=search&search=${encodeURIComponent(searchTerm)}`);
+            if (!response.ok) throw new Error('Error en respuesta del servidor');
+            const data = await response.json();
+            if (data.error) throw new Error(data.error);
+
+            window.servicesData = data;
+            renderServices(data);
+
+        } catch (error) {
+            console.error('Error:', error);
+            tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-red-500"><i class="fas fa-exclamation-circle"></i> Error: ${error.message}</td></tr>`;
+        }
+    }
+
+    function renderServices(datos) {
         const tbody = document.getElementById('servicesTableBody');
         tbody.innerHTML = '';
 
-        serviciosDB.forEach(s => {
-            // Lógica Etiqueta Plan
-            let planTag = `<span class="font-medium text-gray-800">${s.plan}</span>`;
-            if (s.es_custom) {
-                planTag = `<div class="flex flex-col">
-                                <span class="font-bold text-primary">PERSONALIZADO</span>
-                                <span class="text-[10px] text-gray-400">S/ ${s.precio.toFixed(2)} - ${s.velocidad}Mb</span>
-                           </div>`;
-            }
+        if (datos.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-gray-500">No se encontraron servicios.</td></tr>';
+            return;
+        }
 
-            // Lógica Estado
+        datos.forEach(s => {
+            const id = s.id_servicio;
+            const cliente = s.nombre_cliente;
+            const dni = s.dni;
+            const plan = s.nombre_plan || 'Sin Plan';
+            const precio = parseFloat(s.precio_plan || 0);
+            const velocidad = s.velocidad_bajada;
+            const direccion = s.direccion;
+            const estado = s.estado;
+
+            // Logic for Plan Tag
+            let planTag = `<span class="font-medium text-gray-800">${plan}</span>
+                           <div class="text-[10px] text-gray-400">S/ ${precio.toFixed(2)} - ${velocidad}Mb</div>`;
+
+            // Logic Status Class
             let estadoClass = '';
-            if (s.estado === 'ACTIVO') estadoClass = 'bg-green-100 text-green-700';
-            else if (s.estado === 'EN_MORA') estadoClass = 'bg-orange-100 text-orange-700';
+            if (estado === 'ACTIVO') estadoClass = 'bg-green-100 text-green-700';
+            else if (estado === 'EN_MORA') estadoClass = 'bg-orange-100 text-orange-700';
             else estadoClass = 'bg-red-100 text-red-700';
 
             const row = `
                 <tr class="hover:bg-gray-50 transition-colors border-b border-gray-50">
-                    <td class="px-6 py-4 font-mono text-xs text-gray-500">#${s.id}</td>
+                    <td class="px-6 py-4 font-mono text-xs text-gray-500">#${id}</td>
                     <td class="px-6 py-4">
-                        <p class="font-bold text-gray-800 text-sm">${s.cliente}</p>
-                        <p class="text-xs text-gray-400">${s.dni}</p>
+                        <p class="font-bold text-gray-800 text-sm">${cliente}</p>
+                        <p class="text-xs text-gray-400">${dni}</p>
                     </td>
                     <td class="px-6 py-4 text-sm">${planTag}</td>
-                    <td class="px-6 py-4 text-xs text-gray-500 truncate max-w-xs">${s.direccion}</td>
+                    <td class="px-6 py-4 text-xs text-gray-500 truncate max-w-xs">${direccion}</td>
                     <td class="px-6 py-4 text-center">
-                        <span class="px-2 py-1 rounded text-[10px] font-bold ${estadoClass}">${s.estado}</span>
+                        <span class="px-2 py-1 rounded text-[10px] font-bold ${estadoClass}">${estado}</span>
                     </td>
                     <td class="px-6 py-4 text-right">
                         <div class="flex justify-end gap-2">
-                            <button class="w-8 h-8 rounded border border-gray-200 text-gray-500 hover:text-primary hover:border-primary transition-colors" title="Ver Detalles">
+                            <button onclick="openViewModal(${id})" class="w-8 h-8 rounded border border-gray-200 text-gray-500 hover:text-primary hover:border-primary transition-colors" title="Ver Detalles">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button onclick="openEditModal(${s.id})" class="w-8 h-8 rounded bg-primary text-white hover:bg-primary-dark shadow-sm transition-colors" title="Editar / Migrar">
+                            <button onclick="openEditModal(${id})" class="w-8 h-8 rounded bg-primary text-white hover:bg-primary-dark shadow-sm transition-colors" title="Editar / Migrar">
                                 <i class="fas fa-pen"></i>
                             </button>
                         </div>
@@ -311,41 +462,236 @@
         });
     }
 
-    renderServices(); // Init
+    // --- 3. MODALES ---
 
-    // --- 3. GESTIÓN DEL MODAL ---
+    // EDIT MODAL
+    async function openEditModal(id) {
+        // Fetch fresh details
+        try {
+            const res = await fetch(`${controllerUrl}?op=get_service_details&id=${id}`);
+            if (!res.ok) throw new Error("Err");
+            const servicio = await res.json();
 
-    // Abrir Modal
-    function openEditModal(id) {
-        const servicio = serviciosDB.find(s => s.id === id);
+            document.getElementById('modal_id_servicio').textContent = id;
+            document.getElementById('modal_titular_actual').textContent = `${servicio.nombres} ${servicio.apellidos} (${servicio.dni})`;
 
-        // Llenar Header
-        document.getElementById('modal_id_servicio').textContent = servicio.id;
-        document.getElementById('modal_titular_actual').textContent = `${servicio.cliente} (${servicio.dni})`;
+            // Set Form Values
+            document.getElementById('selectPlanBase').value = servicio.id_plan || 'custom';
 
-        // Llenar Tab Plan
-        const select = document.getElementById('selectPlanBase');
-        if (servicio.es_custom) {
-            select.value = 'custom';
-            document.getElementById('checkCustom').checked = true;
-            toggleCustomInputs(true);
-        } else {
-            select.value = servicio.id_plan;
             document.getElementById('checkCustom').checked = false;
             toggleCustomInputs(false);
+
+            document.getElementById('inputSpeed').value = servicio.velocidad_bajada;
+            document.getElementById('inputPrice').value = servicio.precio_plan;
+            document.getElementById('inputIp').value = servicio.ip_asignada;
+
+            switchTab('tabPlan');
+
+            // Store current Editing ID on the modal for saving
+            document.getElementById('editServiceModal').dataset.id = id;
+
+            showModal('editServiceModal', 'modalPanelEdit');
+
+        } catch (e) {
+            alert("Error cargando detalles del servicio");
+            console.error(e);
+        }
+    }
+
+    async function saveChanges() {
+        const modal = document.getElementById('editServiceModal');
+        const id = modal.dataset.id;
+        const id_plan = document.getElementById('selectPlanBase').value;
+        const ip = document.getElementById('inputIp').value;
+
+        // Basic validation
+        if (!id || !id_plan) return;
+
+        try {
+            const res = await fetch(`${controllerUrl}?op=update_service`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id_servicio: id,
+                    id_plan: id_plan,
+                    ip: ip
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert("Servicio actualizado correctamente");
+                closeModal('editServiceModal');
+                loadServices(); // Reload table
+            } else {
+                throw new Error(data.error || "Error al actualizar");
+            }
+        } catch (e) {
+            alert(e.message);
+        }
+    }
+
+    // VIEW MODAL (To be implemented fully, reuse Edit structure or create new)
+    function openViewModal(id) {
+        // For now same as edit but maybe read-only? 
+        // User asked for "Ver" functionality. 
+        // We can reuse openEditModal but disable inputs or just show them.
+        openEditModal(id);
+    }
+
+    // ADD PLAN MODAL
+    function openAddPlanModal() {
+        // Assuming we have a modal for adding plans. 
+        // Since the HTML for Add Plan Modal is not in the original file, 
+        // I will dynamically create it or reuse/alert if not requested to add HTML.
+        // The user asked to "agregar modales faltantes para agregas planes nuebos".
+        // I will inject the HTML for this modal.
+
+        let modal = document.getElementById('addPlanModal');
+        if (!modal) {
+            createAddPlanModalHtml();
+            modal = document.getElementById('addPlanModal');
+        }
+        showModal('addPlanModal', 'modalPanelPlan');
+    }
+
+    function createAddPlanModalHtml() {
+        // Generate Options for Selects
+        let intOpts = '<option value="">-- Sin Internet --</option>';
+        window.internetOptions.forEach(opt => {
+            intOpts += `<option value="${opt.id_internet}" data-price="${opt.precio}" data-speed="${opt.velocidad}">${opt.velocidad} - S/ ${opt.precio}</option>`;
+        });
+
+        let tvOpts = '<option value="">-- Sin TV --</option>';
+        window.tvOptions.forEach(opt => {
+            tvOpts += `<option value="${opt.id_tv}" data-price="${opt.precio}">${opt.nombre} - S/ ${opt.precio}</option>`;
+        });
+
+        const html = `
+        <div id="addPlanModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity opacity-0">
+            <div class="bg-white rounded-xl shadow-2xl w-full max-w-md transform transition-all scale-95" id="modalPanelPlan">
+                <div class="bg-primary p-4 rounded-t-xl text-white flex justify-between items-center">
+                    <h3 class="font-bold">Nuevo Plan Comercial</h3>
+                    <button onclick="closeModal('addPlanModal')"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div>
+                        <label class="label-prored">Nombre del Plan</label>
+                        <input type="text" id="newPlanName" class="input-prored" placeholder="Ej. Combo Fibra + TV">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="label-prored">Servicio Internet</label>
+                            <select id="selectInternetNew" class="input-prored" onchange="calculateNewPlanPrice()">
+                                ${intOpts}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="label-prored">Servicio TV</label>
+                            <select id="selectTvNew" class="input-prored" onchange="calculateNewPlanPrice()">
+                                ${tvOpts}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                        <div>
+                            <label class="label-prored text-xs">Velocidad (Bajada/Subida)</label>
+                            <input type="text" id="newPlanSpeed" class="input-prored bg-white" placeholder="Ej. 100 Mbps" readonly>
+                        </div>
+                        <div>
+                            <label class="label-prored text-xs">Precio Total (S/)</label>
+                            <input type="number" id="newPlanPrice" class="input-prored bg-white font-bold text-primary" placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-b-xl flex justify-end gap-2">
+                    <button onclick="closeModal('addPlanModal')" class="btn-outline">Cancelar</button>
+                    <button onclick="saveNewPlan()" class="btn-primary">Guardar Plan</button>
+                </div>
+            </div>
+        </div>`;
+        document.body.insertAdjacentHTML('beforeend', html);
+    }
+
+    function calculateNewPlanPrice() {
+        const intSelect = document.getElementById('selectInternetNew');
+        const tvSelect = document.getElementById('selectTvNew');
+
+        const intOpt = intSelect.options[intSelect.selectedIndex];
+        const tvOpt = tvSelect.options[tvSelect.selectedIndex];
+
+        let price = 0;
+        let speed = '';
+
+        if (intSelect.value) {
+            price += parseFloat(intOpt.dataset.price || 0);
+            speed = intOpt.dataset.speed || '';
+        }
+        if (tvSelect.value) {
+            price += parseFloat(tvOpt.dataset.price || 0);
         }
 
-        // Llenar Inputs Custom
-        document.getElementById('inputSpeed').value = servicio.velocidad;
-        document.getElementById('inputPrice').value = servicio.precio;
-        document.getElementById('inputIp').value = servicio.ip;
+        document.getElementById('newPlanPrice').value = price.toFixed(2);
 
-        // Reset Tabs
-        switchTab('tabPlan');
+        // Auto-fill speed if not custom
+        if (speed) document.getElementById('newPlanSpeed').value = speed;
 
-        // Mostrar
-        const modal = document.getElementById('editServiceModal');
-        const panel = document.getElementById('modalPanelEdit');
+        // Auto-suggest name if empty
+        const nameInput = document.getElementById('newPlanName');
+        if (!nameInput.value && (intSelect.value || tvSelect.value)) {
+            let name = '';
+            if (intSelect.value) name += `Internet ${speed.replace(' Mbps', '')}`;
+            if (tvSelect.value) name += (name ? ' + ' : '') + tvOpt.text.split(' - ')[0];
+            nameInput.placeholder = name; // Just hint
+        }
+    }
+
+    async function saveNewPlan() {
+        const nombre = document.getElementById('newPlanName').value;
+        const speed = document.getElementById('newPlanSpeed').value; // This is a string now (e.g. "20 Mbps"), need to be careful if backend expects int. 
+        // Backend expects 'velocidad_bajada' varchar, so string is fine.
+        const price = document.getElementById('newPlanPrice').value;
+
+        const id_internet = document.getElementById('selectInternetNew').value;
+        const id_tv = document.getElementById('selectTvNew').value;
+
+        if (!nombre || (!id_internet && !id_tv) || !price) {
+            alert("Seleccione al menos un servicio y complete el nombre");
+            return;
+        }
+
+        try {
+            const res = await fetch(`${controllerUrl}?op=create_plan`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nombre: nombre,
+                    velocidad_bajada: speed, // sending full string
+                    velocidad_subida: speed, // assuming symmetric for now or same string
+                    precio: price,
+                    id_internet: id_internet,
+                    id_tv: id_tv
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert("Plan creado exitosamente");
+                closeModal('addPlanModal');
+                loadPlans(); // Refresh catalogue
+            } else {
+                alert("Error al crear el plan");
+            }
+        } catch (e) {
+            console.error(e);
+            alert("Error de conexión");
+        }
+    }
+
+    // UTILS
+    function showModal(id, panelId) {
+        const modal = document.getElementById(id);
+        const panel = document.getElementById(panelId);
         modal.classList.remove('hidden');
         setTimeout(() => {
             modal.classList.remove('opacity-0');
@@ -354,32 +700,29 @@
         }, 10);
     }
 
-    // Tabs Logic
-    function switchTab(tabId) {
-        // Ocultar todos
-        document.getElementById('tabPlan').classList.add('hidden');
-        document.getElementById('tabTitular').classList.add('hidden');
-
-        // Reset estilos botones
-        const btnPlan = document.getElementById('btnTabPlan');
-        const btnTitular = document.getElementById('btnTabTitular');
-
-        btnPlan.className = "flex-1 py-3 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition-colors border-b-2 border-transparent";
-        btnTitular.className = "flex-1 py-3 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition-colors border-b-2 border-transparent";
-
-        // Mostrar seleccionado
-        document.getElementById(tabId).classList.remove('hidden');
-
-        // Activar estilo botón
-        const activeClass = "text-primary border-b-2 border-primary bg-white";
-        if (tabId === 'tabPlan') {
-            btnPlan.className = `flex-1 py-3 text-sm font-medium focus:outline-none transition-colors ${activeClass}`;
-        } else {
-            btnTitular.className = `flex-1 py-3 text-sm font-medium focus:outline-none transition-colors ${activeClass}`;
-        }
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        const panel = modal.querySelector('div[id^="modalPanel"]');
+        modal.classList.add('opacity-0');
+        panel.classList.remove('scale-100');
+        panel.classList.add('scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 300);
     }
 
-    // Custom Plan Logic
+    // Reuse existing Tab/Toggle functions...
+    function switchTab(tabId) {
+        document.getElementById('tabPlan').classList.add('hidden');
+        document.getElementById('tabTitular').classList.add('hidden');
+        document.getElementById('btnTabPlan').className = "flex-1 py-3 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition-colors border-b-2 border-transparent";
+        document.getElementById('btnTabTitular').className = "flex-1 py-3 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition-colors border-b-2 border-transparent";
+
+        document.getElementById(tabId).classList.remove('hidden');
+        const activeClass = "flex-1 py-3 text-sm font-medium focus:outline-none transition-colors text-primary border-b-2 border-primary bg-white";
+
+        if (tabId === 'tabPlan') document.getElementById('btnTabPlan').className = activeClass;
+        else document.getElementById('btnTitular').className = activeClass;
+    }
+
     function checkCustomPlan() {
         const val = document.getElementById('selectPlanBase').value;
         if (val === 'custom') {
@@ -392,18 +735,11 @@
         const check = document.getElementById('checkCustom');
         const inputs = document.getElementById('customInputs');
         const isChecked = forceState !== null ? forceState : check.checked;
-
-        check.checked = isChecked; // Sync UI
-
-        if (isChecked) {
-            inputs.classList.remove('opacity-50', 'pointer-events-none');
-        } else {
-            inputs.classList.add('opacity-50', 'pointer-events-none');
-            // Reset to standard values logic would go here
-        }
+        check.checked = isChecked;
+        if (isChecked) inputs.classList.remove('opacity-50', 'pointer-events-none');
+        else inputs.classList.add('opacity-50', 'pointer-events-none');
     }
 
-    // Toggle Titular Mode (Existente vs Nuevo)
     function toggleTitularMode() {
         const mode = document.querySelector('input[name="titularMode"]:checked').value;
         if (mode === 'existente') {
@@ -415,29 +751,10 @@
         }
     }
 
-    // Acciones Finales
-    function saveChanges() {
-        alert("Cambios guardados correctamente (Simulación).\n- Plan Actualizado\n- Titular Verificado");
-        closeModal('editServiceModal');
-    }
-
     function confirmarBaja() {
-        if (confirm("¿ESTÁ SEGURO? Esta acción cortará el servicio y generará una orden de retiro de equipos.")) {
-            alert("Servicio dado de baja.");
+        if (confirm("¿ESTÁ SEGURO?")) {
+            alert("Solicitud procesada");
             closeModal('editServiceModal');
         }
-    }
-
-    function closeModal(id) {
-        const modal = document.getElementById(id);
-        const panel = modal.querySelector('div[class*="transform"]');
-
-        modal.classList.add('opacity-0');
-        panel.classList.remove('scale-100');
-        panel.classList.add('scale-95');
-
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 300);
     }
 </script>
