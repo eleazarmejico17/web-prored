@@ -12,7 +12,9 @@ USE prored;
 
 CREATE TABLE distrito (
     id_distrito INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL
+    nombre VARCHAR(100) NOT NULL,
+    id_provincia INT,
+    FOREIGN KEY (id_provincia) REFERENCES provincia(id_provincia)
 ) ENGINE=InnoDB;
 
 CREATE TABLE winbox (
@@ -49,6 +51,19 @@ CREATE TABLE plan (
     FOREIGN KEY (id_internet) REFERENCES internet(id_internet),
     FOREIGN KEY (id_tv) REFERENCES tv(id_tv)
 ) ENGINE=InnoDB;
+
+-- =====================================================
+-- ESCALAR DISTRITOS A JERARQUÍA PROVINCIA -> DISTRITO
+-- =====================================================
+
+CREATE TABLE provincia (
+    id_provincia INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
+
+ALTER TABLE distrito
+ADD COLUMN id_provincia INT,
+ADD FOREIGN KEY (id_provincia) REFERENCES provincia(id_provincia);
 
 -- =====================================================
 -- CLIENTES Y SERVICIOS
@@ -310,3 +325,250 @@ CREATE TABLE auditoria_log (
 
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 ) ENGINE=InnoDB;
+
+-- =====================================================
+-- GESTIÓN DE HERRAMIENTAS Y EPPs
+-- =====================================================
+
+CREATE TABLE herramienta (
+    id_herramienta INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    cantidad_total INT NOT NULL,
+    cantidad_disponible INT NOT NULL,
+    activo BOOLEAN DEFAULT TRUE
+) ENGINE=InnoDB;
+
+CREATE TABLE prestamo_herramienta (
+    id_prestamo INT AUTO_INCREMENT PRIMARY KEY,
+    id_herramienta INT NOT NULL,
+    id_tecnico INT NOT NULL,
+    cantidad INT NOT NULL,
+    fecha_prestamo DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_devolucion DATETIME,
+    estado ENUM('PRESTADO','DEVUELTO') DEFAULT 'PRESTADO',
+
+    FOREIGN KEY (id_herramienta) REFERENCES herramienta(id_herramienta),
+    FOREIGN KEY (id_tecnico) REFERENCES usuario(id_usuario)
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- MODELO DE CUADRILLAS Y CONDUCTORES DESIGNADOS
+-- =====================================================
+
+CREATE TABLE cuadrilla (
+    id_cuadrilla INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    activo BOOLEAN DEFAULT TRUE
+) ENGINE=InnoDB;
+
+CREATE TABLE cuadrilla_tecnico (
+    id_cuadrilla_tecnico INT AUTO_INCREMENT PRIMARY KEY,
+    id_cuadrilla INT NOT NULL,
+    id_tecnico INT NOT NULL,
+    es_conductor BOOLEAN DEFAULT FALSE,
+
+    FOREIGN KEY (id_cuadrilla) REFERENCES cuadrilla(id_cuadrilla),
+    FOREIGN KEY (id_tecnico) REFERENCES usuario(id_usuario)
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- MODELO DE VEHÍCULOS Y REVISIONES
+-- =====================================================
+
+CREATE TABLE vehiculo (
+    id_vehiculo INT AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(20) NOT NULL UNIQUE,
+    marca VARCHAR(50),
+    modelo VARCHAR(50),
+    anio INT,
+    id_conductor INT NOT NULL,
+
+    FOREIGN KEY (id_conductor) REFERENCES usuario(id_usuario)
+) ENGINE=InnoDB;
+
+CREATE TABLE revision_vehiculo (
+    id_revision INT AUTO_INCREMENT PRIMARY KEY,
+    id_vehiculo INT NOT NULL,
+    fecha_revision DATETIME NOT NULL,
+    descripcion TEXT,
+    imagenes JSON,
+
+    FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id_vehiculo)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- GESTIÓN DE DOCUMENTOS DE VEHÍCULOS
+-- =====================================================
+
+CREATE TABLE documento_vehiculo (
+    id_documento INT AUTO_INCREMENT PRIMARY KEY,
+    id_vehiculo INT NOT NULL,
+    tipo_documento ENUM('TARJETA_CIRCULACION', 'SOAT') NOT NULL,
+    fecha_vencimiento DATE NOT NULL,
+    ruta_documento VARCHAR(255),
+
+    FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id_vehiculo)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- ALERTAS PARA VENCIMIENTO DE SOAT
+-- =====================================================
+
+CREATE TABLE alerta_soat (
+    id_alerta INT AUTO_INCREMENT PRIMARY KEY,
+    id_documento INT NOT NULL,
+    id_supervisor INT NOT NULL,
+    estado ENUM('PENDIENTE','ENVIADA') DEFAULT 'PENDIENTE',
+    fecha_alerta DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_documento) REFERENCES documento_vehiculo(id_documento)
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_supervisor) REFERENCES usuario(id_usuario)
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- MODELO DE EQUIPOS PARA INSTALACIONES
+-- =====================================================
+
+CREATE TABLE equipo (
+    id_equipo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    tipo ENUM('TRIPLEXOR', 'PATCHCORD', 'ROSETA', 'ROUTER') NOT NULL,
+    numero_serie VARCHAR(50) UNIQUE,
+    mac VARCHAR(50) UNIQUE NOT NULL,
+    sn VARCHAR(50) UNIQUE NOT NULL,
+    estado ENUM('ALMACEN', 'VEHICULO', 'INSTALADO') DEFAULT 'ALMACEN',
+    activo BOOLEAN DEFAULT TRUE
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- SEGUIMIENTO DE EQUIPOS EN ALMACÉN, VEHÍCULOS Y HOGARES
+-- =====================================================
+
+CREATE TABLE equipo_movimiento (
+    id_movimiento INT AUTO_INCREMENT PRIMARY KEY,
+    id_equipo INT NOT NULL,
+    origen ENUM('ALMACEN', 'VEHICULO', 'INSTALADO') NOT NULL,
+    destino ENUM('ALMACEN', 'VEHICULO', 'INSTALADO') NOT NULL,
+    id_vehiculo INT NULL,
+    id_servicio INT NULL,
+    fecha_movimiento DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_equipo) REFERENCES equipo(id_equipo),
+    FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id_vehiculo),
+    FOREIGN KEY (id_servicio) REFERENCES servicio(id_servicio)
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- GESTIÓN DE RETIRO DE EQUIPOS AL CANCELAR SERVICIO
+-- =====================================================
+
+CREATE TABLE retiro_equipo (
+    id_retiro INT AUTO_INCREMENT PRIMARY KEY,
+    id_equipo INT NOT NULL,
+    id_servicio INT NOT NULL,
+    fecha_retiro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    estado ENUM('PENDIENTE', 'RETIRADO') DEFAULT 'PENDIENTE',
+    observaciones TEXT,
+
+    FOREIGN KEY (id_equipo) REFERENCES equipo(id_equipo),
+    FOREIGN KEY (id_servicio) REFERENCES servicio(id_servicio)
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- GESTIÓN DE CAMBIOS DE EQUIPOS DEFECTUOSOS U OBSOLETOS
+-- =====================================================
+
+CREATE TABLE cambio_equipo (
+    id_cambio INT AUTO_INCREMENT PRIMARY KEY,
+    id_equipo_viejo INT NOT NULL,
+    id_equipo_nuevo INT NOT NULL,
+    id_servicio INT NOT NULL,
+    motivo ENUM('DEFECTUOSO', 'OBSOLETO') NOT NULL,
+    fecha_cambio DATETIME DEFAULT CURRENT_TIMESTAMP,
+    observaciones TEXT,
+
+    FOREIGN KEY (id_equipo_viejo) REFERENCES equipo(id_equipo),
+    FOREIGN KEY (id_equipo_nuevo) REFERENCES equipo(id_equipo),
+    FOREIGN KEY (id_servicio) REFERENCES servicio(id_servicio)
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- REGISTRAR USUARIOS Y ASIGNAR SERVICIOS SEGÚN PLAN
+-- =====================================================
+
+-- La tabla 'cliente' ya existe para registrar usuarios.
+-- La tabla 'servicio' ya existe para asignar servicios según el plan.
+
+-- No se requieren cambios adicionales en esta sección, ya que las tablas existentes cumplen con los requisitos.
+
+-- =====================================================
+-- CREAR TICKETS DE INSTALACIÓN PARA TÉCNICOS
+-- =====================================================
+
+-- La tabla 'ticket' ya existe para gestionar tickets.
+
+ALTER TABLE ticket
+ADD COLUMN tipo_ticket ENUM('INSTALACION', 'REPARACION') DEFAULT 'INSTALACION';
+
+-- =====================================================
+-- GESTIONAR RUTAS DE TÉCNICOS CON TICKETS
+-- =====================================================
+
+CREATE TABLE ruta_tecnico (
+    id_ruta INT AUTO_INCREMENT PRIMARY KEY,
+    id_tecnico INT NOT NULL,
+    fecha DATE NOT NULL,
+    estado ENUM('PENDIENTE', 'EN_PROGRESO', 'COMPLETADA') DEFAULT 'PENDIENTE',
+
+    FOREIGN KEY (id_tecnico) REFERENCES usuario(id_usuario)
+) ENGINE=InnoDB;
+
+CREATE TABLE ruta_ticket (
+    id_ruta_ticket INT AUTO_INCREMENT PRIMARY KEY,
+    id_ruta INT NOT NULL,
+    id_ticket INT NOT NULL,
+
+    FOREIGN KEY (id_ruta) REFERENCES ruta_tecnico(id_ruta),
+    FOREIGN KEY (id_ticket) REFERENCES ticket(id_ticket)
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- SOLICITAR MATERIALES AL ENCARGADO DE ALMACÉN
+-- =====================================================
+
+CREATE TABLE solicitud_material (
+    id_solicitud INT AUTO_INCREMENT PRIMARY KEY,
+    id_ticket INT NOT NULL,
+    id_tecnico INT NOT NULL,
+    fecha_solicitud DATETIME DEFAULT CURRENT_TIMESTAMP,
+    estado ENUM('PENDIENTE', 'APROBADA', 'RECHAZADA') DEFAULT 'PENDIENTE',
+
+    FOREIGN KEY (id_ticket) REFERENCES ticket(id_ticket),
+    FOREIGN KEY (id_tecnico) REFERENCES usuario(id_usuario)
+) ENGINE=InnoDB;
+
+CREATE TABLE detalle_solicitud_material (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_solicitud INT NOT NULL,
+    id_material INT NOT NULL,
+    cantidad INT NOT NULL,
+
+    FOREIGN KEY (id_solicitud) REFERENCES solicitud_material(id_solicitud),
+    FOREIGN KEY (id_material) REFERENCES material(id_material)
+) ENGINE=InnoDB;
+
+-- =====================================================
+-- ADJUNTAR IMÁGENES Y DETALLES AL CERRAR TICKETS
+-- =====================================================
+
+ALTER TABLE ticket
+ADD COLUMN imagen_instalacion VARCHAR(255),
+ADD COLUMN imagen_fachada VARCHAR(255),
+ADD COLUMN descripcion_problema TEXT,
+ADD COLUMN material_usado JSON;
