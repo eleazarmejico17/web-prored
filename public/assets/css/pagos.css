@@ -1,0 +1,710 @@
+/* ==========================================
+   ProRed - Estilos Exclusivos - Página de Pagos
+   ========================================== */
+
+/* Hero Pagos */
+.hero-pagos {
+    background-image: url('../img/portada/portada-portal.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 120px 0 80px;
+    text-align: center;
+    position: relative;
+}
+
+.hero-pagos::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 90, 159, 0.5);
+    z-index: 1;
+}
+
+.hero-pagos .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-pagos h1 {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.8s ease-out;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.hero-pagos p {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.95;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.hero-pagos .btn {
+    margin-top: 20px;
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sección de Descripción */
+.pagos-descripcion {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.descripcion-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.descripcion-texto h2 {
+    font-size: 3rem;
+    color: #E58E21;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.descripcion-texto p {
+    color: #666;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.descripcion-lista {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.descripcion-lista li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    color: #555;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(0, 91, 159, 0.1);
+}
+
+.descripcion-lista li:last-child {
+    border-bottom: none;
+}
+
+.descripcion-lista i {
+    color: #27AE60;
+    font-size: 1.4rem;
+    min-width: 24px;
+}
+
+.descripcion-cta {
+    background-color: #f0f5fa;
+    padding: 20px;
+    border-left: 4px solid #E58E21;
+    border-radius: 6px;
+    color: #005B9F;
+    font-weight: 500;
+    margin-top: 30px !important;
+}
+
+.descripcion-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.img-persona {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0, 91, 159, 0.15));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Sección de Pasos */
+.pagos-steps {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.pagos-steps h2 {
+    color: #E58E21;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 3rem;
+}
+
+.step-card {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 91, 159, 0.1);
+    transition: all 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 91, 159, 0.15);
+}
+
+.step-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.step-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 200px;
+}
+
+.img-paso {
+    max-width: 100%;
+    max-height: 180px;
+    display: block;
+}
+
+.step-contenido h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: #005B9F;
+}
+
+.step-contenido p {
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.btn-whatsapp {
+    background-color: #27AE60 !important;
+    color: white !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-whatsapp:hover {
+    background-color: #229954 !important;
+}
+
+/* Sección de Cuentas Bancarias */
+.pagos-cuentas {
+    padding: 80px 0;
+}
+
+.pagos-cuentas h2 {
+    color: #E58E21;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 3rem;
+}
+
+.cuentas-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* QR Panel */
+.qr-panel {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 91, 159, 0.1);
+    text-align: center;
+    position: sticky;
+    top: 120px;
+}
+
+.qr-panel h3 {
+    color: #005B9F;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.qr-placeholder {
+    background-color: #f0f5fa;
+    border: 2px dashed #005B9F;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.qr-image {
+    max-width: 100%;
+    max-height: 380px;
+    border-radius: 10px;
+}
+
+.qr-subtitle {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+/* Cuentas Grid */
+.cuentas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.cuenta-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 91, 159, 0.1);
+    transition: all 0.3s ease;
+    border-left: 5px solid #005B9F;
+    position: relative;
+    overflow: hidden;
+}
+
+.cuenta-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(to left, var(--banco-color, #005B9F));
+}
+
+.cuenta-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 91, 159, 0.15);
+}
+
+.cuenta-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cuenta-card h3 i {
+    font-size: 1.5rem;
+}
+
+/* Estilos por Banco */
+.cuenta-card.banco-nacion {
+    --banco-color: #DC143C;
+    border-left-color: #DC143C;
+}
+
+.cuenta-card.banco-nacion h3 {
+    color: #DC143C;
+}
+
+.cuenta-card.banco-nacion .cuenta-info-valor {
+    border-left-color: #DC143C;
+    background-color: #fff5f5;
+}
+
+.cuenta-card.banco-nacion .btn-copy {
+    background-color: #DC143C;
+}
+
+.cuenta-card.banco-nacion .btn-copy:hover {
+    background-color: #b01030;
+}
+
+/* BCP - Azul */
+.cuenta-card.banco-bcp {
+    --banco-color: #1F4A7F;
+    border-left-color: #1F4A7F;
+}
+
+.cuenta-card.banco-bcp h3 {
+    color: #1F4A7F;
+}
+
+.cuenta-card.banco-bcp .cuenta-info-valor {
+    border-left-color: #1F4A7F;
+    background-color: #f0f4f9;
+}
+
+.cuenta-card.banco-bcp .btn-copy {
+    background-color: #1F4A7F;
+}
+
+.cuenta-card.banco-bcp .btn-copy:hover {
+    background-color: #163656;
+}
+
+/* Yape - Morado */
+.cuenta-card.yape {
+    --banco-color: #8B1A8B;
+    border-left-color: #8B1A8B;
+}
+
+.cuenta-card.yape h3 {
+    color: #8B1A8B;
+}
+
+.cuenta-card.yape .cuenta-info-valor {
+    border-left-color: #8B1A8B;
+    background-color: #faf5fa;
+}
+
+.cuenta-card.yape .btn-copy {
+    background-color: #8B1A8B;
+}
+
+.cuenta-card.yape .btn-copy:hover {
+    background-color: #6d1570;
+}
+
+/* Plin - Cian/Turquesa */
+.cuenta-card.plin {
+    --banco-color: #17A2B8;
+    border-left-color: #17A2B8;
+}
+
+.cuenta-card.plin h3 {
+    color: #17A2B8;
+}
+
+.cuenta-card.plin .cuenta-info-valor {
+    border-left-color: #17A2B8;
+    background-color: #f0f8fa;
+}
+
+.cuenta-card.plin .btn-copy {
+    background-color: #17A2B8;
+}
+
+.cuenta-card.plin .btn-copy:hover {
+    background-color: #138496;
+}
+
+.cuenta-info {
+    margin-bottom: 12px;
+}
+
+.cuenta-info-label {
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.cuenta-info-valor-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cuenta-info-valor {
+    color: #333;
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-family: 'Courier New', monospace;
+    word-break: break-all;
+    padding: 8px;
+    background-color: #f0f5fa;
+    border-radius: 6px;
+    border-left: 3px solid #E58E21;
+    flex: 1;
+}
+
+/* Botón Copiar */
+.btn-copy {
+    background-color: #005B9F;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+}
+
+.btn-copy:hover {
+    background-color: #004A7F;
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 91, 159, 0.3);
+}
+
+.btn-copy i {
+    font-size: 0.9rem;
+}
+
+/* QR Section */
+.pagos-qr {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.pagos-qr h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.qr-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.qr-item h4 {
+    margin-top: 15px;
+    color: #005B9F;
+}
+
+.qr-item img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 91, 159, 0.1);
+}
+
+/* Grid responsivo */
+@media (max-width: 1200px) {
+    .cuentas-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .descripcion-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .cuentas-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .qr-panel {
+        position: static;
+    }
+
+    .cuentas-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .pagos-descripcion {
+        padding: 60px 0;
+    }
+
+    .descripcion-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .descripcion-texto h2 {
+        font-size: 2rem;
+    }
+
+    .descripcion-texto p {
+        font-size: 1rem;
+    }
+
+    .img-persona {
+        max-height: 300px;
+    }
+
+    .hero-pagos h1 {
+        font-size: 2.3rem;
+    }
+
+    .pagos-steps,
+    .pagos-cuentas {
+        padding: 60px 0;
+    }
+
+    .step-card {
+        padding: 30px;
+    }
+
+    .step-layout {
+        grid-template-columns: 150px 1fr;
+        gap: 20px;
+    }
+
+    .step-imagen {
+        min-height: 150px;
+    }
+
+    .img-paso {
+        max-height: 140px;
+    }
+
+    .step-contenido h3 {
+        font-size: 1.3rem;
+    }
+
+    .cuenta-card {
+        padding: 20px;
+    }
+
+    .cuenta-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .cuentas-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cuentas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .qr-panel {
+        padding: 25px;
+    }
+
+    .qr-placeholder {
+        min-height: 360px;
+        padding: 20px;
+    }
+
+    .btn-copy {
+        padding: 5px 8px;
+        min-width: 32px;
+        height: 32px;
+    }
+
+    .btn-copy i {
+        font-size: 0.8rem;
+    }
+    .pagos-cuentas h2 {
+    font-size: 2rem;
+    
+    }
+    .pagos-steps h2 {
+    font-size: 2rem;
+    }
+    .qr-panel h3 {
+    font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .descripcion-texto h2 {
+        font-size: 1.8rem;
+    }
+    .pagos-cuentas h2 {
+    font-size: 1.8rem;
+    }
+    .pagos-steps h2 {
+    font-size: 1.8rem;
+    }
+    .qr-panel h3 {
+    font-size: 1.5rem;
+    }
+
+    .descripcion-layout {
+        gap: 20px;
+    }
+
+    .img-persona {
+        max-height: 250px;
+    }
+
+    .step-card {
+        padding: 20px;
+    }
+
+    .step-layout {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .step-imagen {
+        min-height: 180px;
+        padding: 15px;
+    }
+
+    .img-paso {
+        max-height: 160px;
+    }
+
+    .step-contenido h3 {
+        font-size: 1.2rem;
+    }
+
+    .cuentas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cuenta-card {
+        padding: 18px;
+    }
+
+    .cuenta-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .qr-panel {
+        padding: 20px;
+    }
+
+    .qr-placeholder {
+        min-height: auto;
+        padding: 15px;
+    }
+
+    .qr-image {
+        max-height: 280px;
+        width: 100%;
+        object-fit: contain;
+    }
+}
