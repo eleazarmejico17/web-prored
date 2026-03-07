@@ -708,3 +708,53 @@
         object-fit: contain;
     }
 }
+
+/* Ayuda Section de login.css */
+.ayuda-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.ayuda-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.ayuda-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 91, 159, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.ayuda-card:hover {
+    transform: translateY(-5px);
+}
+
+.ayuda-icon {
+    font-size: 3rem;
+    color: #E58E21;
+    margin-bottom: 20px;
+}
+
+.ayuda-title {
+    font-size: 1.3rem;
+    color: #005B9F;
+    margin-bottom: 15px;
+}
+
+/* Animaciones */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-element.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
