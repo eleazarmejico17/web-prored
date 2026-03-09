@@ -39,12 +39,13 @@ document.addEventListener('DOMContentLoaded', function () {
             attribution: '© OpenStreetMap contributors'
         }).addTo(mapa);
         
-        // Crear icono personalizado
+        // Crear icono personalizado interactivo
         markerIcon = L.divIcon({
             className: 'custom-div-icon',
-            html: '<div class="custom-marker"><i class="fas fa-map-pin"></i></div>',
-            iconSize: [30, 30],
-            iconAnchor: [15, 30]
+            html: '<div class="marker-wrapper"><div class="marker-pulse"></div><div class="marker-pin"></div><div class="marker-dot"></div></div>',
+            iconSize: [30, 42],
+            iconAnchor: [15, 42],
+            popupAnchor: [0, -38]
         });
         
         // Evento para marcar ubicación en el mapa
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
-    // ===== FUNCIONES AUXILIARES =====
+    // ===== FUNCIONES AUXILIARES ===== 
     
     function mostrarInformacionUbicacion(lat, lng) {
         const ubicacionInfo = document.getElementById('ubicacionInfo');
@@ -117,8 +118,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Agregar nuevo marcador
         marcadorMapa = L.marker([lat, lng], { icon: markerIcon })
             .addTo(mapa)
-            .bindPopup('Tu ubicación seleccionada')
-            .openPopup();
+            .bindPopup('Tu Dirección')
+            .openPopup('');
         
         // Centrar mapa en la ubicación seleccionada
         mapa.setView([lat, lng], 16);
