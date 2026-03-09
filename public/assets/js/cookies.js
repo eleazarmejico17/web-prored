@@ -5,11 +5,16 @@
     // Obtener la ruta correcta a politica-de-privacidad según la ubicación actual
     function getPoliciesLink() {
         const currentPath = window.location.pathname;
-        // Si está en /public/ o contiene /public/, el enlace es relativo
-        if (currentPath.includes('/public/')) {
+        // Si estamos en uno de los nuevos subdirectorios
+        if (currentPath.includes('/cobertura') || 
+            currentPath.includes('/internet-empresas') || 
+            currentPath.includes('/nosotros') || 
+            currentPath.includes('/realizar-pagos') || 
+            currentPath.includes('/politica-de-privacidad') ||
+            currentPath.includes('/public/')) {
             return '../politica-de-privacidad/';
         }
-        // Si está en la raíz, necesita acceder a politica-de-privacidad/
+        // Si estamos en la raíz
         return 'politica-de-privacidad/';
     }
 
