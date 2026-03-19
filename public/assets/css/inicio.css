@@ -48,6 +48,7 @@
   opacity: 0.95;
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
   color: #e58e21;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .hero-buttons {
