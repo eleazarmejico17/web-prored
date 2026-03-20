@@ -253,36 +253,131 @@
 }
 
 /* Equipo Section */
+/* Equipo Section (Dark Cards on White Background) */
 .equipo-section {
-    padding: 80px 0;
+    padding: 100px 0 80px;
+    background: #ffffff;
 }
 
-.equipo-stats {
+.equipo-cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
-    margin-top: 50px;
-    text-align: center;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 120px 30px; /* 120px row gap prevents heads from overlapping cards above */
+    margin-top: 130px;
+    padding: 0 15px;
 }
 
-.stat-item {
-    padding: 30px;
+.equipo-card {
+    background-color: #005B9F;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    position: relative;
+    padding: 0 0 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.stat-number {
-    font-size: 4rem;
+.equipo-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.team-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 160px; /* Slightly taller base */
+    display: flex;
+    justify-content: center;
+}
+
+.team-person {
+    position: absolute;
+    bottom: 0;
+    height: 280px; /* Agrandar la imagen */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    /* Desvanecido en la parte inferior */
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+.equipo-card:hover .team-person {
+    transform: scale(1.05);
+}
+
+.team-badge {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.team-badge::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    background: #ffb800;
+    border-radius: 50%;
+    color: #000;
+    font-size: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #1a202c;
+}
+
+.badge-blue { background: #2563eb; }
+.badge-green { background: #10b981; }
+.badge-red { background: #ef4444; }
+.badge-orange { background: #f59e0b; }
+
+.equipo-card-content {
+    padding: 0 30px;
+    margin-top: 20px;
+}
+
+
+
+.equipo-card-content h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #005B9F, #0077CC);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    line-height: 1.2;
 }
 
-.stat-label {
-    color: #666;
-    font-size: 1.1rem;
-    font-weight: 500;
+.equipo-card-content p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .team-person {
+        height: 240px;
+    }
+    .equipo-cards-container {
+        margin-top: 100px;
+        gap: 100px 30px;
+    }
 }
 
 /* Animaciones de scroll */

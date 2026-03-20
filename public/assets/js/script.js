@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (menuToggle && navMenu) {
     menuToggle.addEventListener("click", function () {
+      menuToggle.classList.toggle("active");
       const isActive = navMenu.classList.toggle("active");
       if (navOverlay) {
         if (isActive) {
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (navOverlay) {
     navOverlay.addEventListener("click", () => {
+      menuToggle.classList.remove("active");
       navMenu.classList.remove("active");
       navOverlay.classList.remove("active");
       document.body.classList.remove("no-scroll");
@@ -32,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".nav-link");
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
+      if (menuToggle) menuToggle.classList.remove("active");
       navMenu.classList.remove("active");
       if (navOverlay) navOverlay.classList.remove("active");
       document.body.classList.remove("no-scroll");

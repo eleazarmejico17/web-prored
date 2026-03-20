@@ -206,6 +206,19 @@ p { margin-bottom: 1rem; }
   background-color: #ffffff;
   transition: var(--transicion);
   border-radius: 2px;
+  transform-origin: center;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* Overlay that appears when mobile nav is open */
@@ -357,7 +370,7 @@ footer {
   }
   
   .nav-logo {
-    width: 2.5rem;
+    width: 6rem;
     height: auto;
   }
   
@@ -370,7 +383,7 @@ footer {
     margin-top: 1rem;
     position: fixed;
     top: 60px;
-    left: -120%;
+    right: -120%;
     flex-direction: column;
     background-color: #0367A6;
     width: 70%;
@@ -378,13 +391,13 @@ footer {
     border-radius: 0.75rem;
     padding: 10px;
     box-shadow: 0 8px 30px rgba(3,103,166,0.15);
-    transition: left 0.3s ease;
+    transition: right 0.3s ease;
     overflow-y: auto;
     z-index: 1080;
   }
   
   .nav-menu.active {
-    left: 1rem;
+    right: 1rem;
     align-items: normal;
   }
   
@@ -424,7 +437,7 @@ footer {
   }
   
   .nav-logo {
-    width: 2.2rem;
+    width: 5.5rem;
     height: auto;
   }
   
