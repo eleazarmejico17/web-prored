@@ -387,12 +387,12 @@ footer {
     flex-direction: column;
     background-color: #0367A6;
     width: 70%;
-    height: 58vh;
+    height: max-content;
     border-radius: 0.75rem;
     padding: 10px;
     box-shadow: 0 8px 30px rgba(3,103,166,0.15);
     transition: right 0.3s ease;
-    overflow-y: auto;
+    overflow: hidden;
     z-index: 1080;
   }
   
