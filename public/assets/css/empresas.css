@@ -944,7 +944,7 @@
 .business-service-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; font-size: 1.05rem; }
 .business-service-list i  { color: #E58E21; font-size: 1.2rem; }
 
-.business-service-image { border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+.business-service-image { border-radius: 20px; overflow: hidden;}
 .business-service-image img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
 .business-service-image:hover img { transform: scale(1.05); }
 
