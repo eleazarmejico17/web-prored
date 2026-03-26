@@ -120,4 +120,3 @@ if (section) {
     history.replaceState(null, "", window.location.pathname);
   }
 }
-

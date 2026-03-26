@@ -42,7 +42,7 @@
   animation: fadeInUp 0.8s ease-out;
 }
 
-.hero-text p {
+.hero-text h2 {
   font-size: 1.2rem;
   margin-bottom: 30px;
   opacity: 0.95;
@@ -643,10 +643,10 @@
     color: white;
     font-weight: bold;
     font-size: 1.1rem;
-    animation: pulse 2s infinite;
+    animation: pulse-promo 2s infinite;
 }
 
-@keyframes pulse {
+@keyframes pulse-promo {
     0% { box-shadow: 0 0 0 0 rgba(229, 142, 33, 0.4); }
     70% { box-shadow: 0 0 0 10px rgba(229, 142, 33, 0); }
     100% { box-shadow: 0 0 0 0 rgba(229, 142, 33, 0); }
