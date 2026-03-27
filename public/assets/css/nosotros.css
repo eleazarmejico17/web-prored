@@ -1,43 +1,6 @@
-/* Hero Nosotros */
+/* Hero Nosotros — solo la imagen de fondo (el resto lo maneja .hero-page) */
 .hero-nosotros {
     background-image: url('../img/portada/portada-nosotros.jpg');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 120px 0 80px;
-    text-align: center;
-    position: relative;
-}
-.hero-nosotros::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 90, 159, 0.5);
-    z-index: 1;
-}
-.hero-nosotros .container {
-    position: relative;
-    z-index: 2;
-}
-
-.hero-nosotros h1 {
-    color: white;
-    font-size: 3rem;
-    margin-bottom: 20px;
-    animation: fadeInUp 0.8s ease-out;
-    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-}
-
-.hero-nosotros p {
-    font-size: 1.3rem;
-    max-width: 800px;
-    margin: 0 auto;
-    opacity: 0.95;
-    animation: fadeInUp 0.8s ease-out 0.2s backwards;
-    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 @keyframes fadeInUp {
@@ -416,9 +379,7 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hero-nosotros h1 {
-        font-size: 2rem;
-    }
+
     
     .historia-content {
         grid-template-columns: 1fr;
@@ -458,6 +419,5 @@
     }
     .hero-nosotros {
         background-image: url('../img/portada/portada-res-nosotros.jpg');
-        padding: 100px 0 60px;
     }
 }

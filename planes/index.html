@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Planes - ProRed Internet Fibra Óptica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../public/assets/css/styles.css?v=2.5">
+    <link rel="stylesheet" href="../public/assets/css/planes.css?v=2.5">
+    <link rel="stylesheet" href="../public/assets/css/cookies.css?v=2.5">
+    <link rel="icon" type="image/x-icon" href="../public/assets/img/logo.ico">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../" class="logo flex items-center" aria-label="ProRed - Inicio">
+                <img src="../public/assets/img/logo-ProRed.png" alt="ProRed" class="nav-logo" />
+            </a>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../" class="nav-link">Inicio</a></li>
+                <li><a href="../nosotros/" class="nav-link">Nosotros</a></li>
+                <li><a href="../planes/" class="nav-link active">Planes</a></li>
+                <li><a href="../internet-empresas/" class="nav-link">Internet Empresas</a></li>
+                <li><a href="../cobertura/" class="nav-link">Cobertura</a></li>
+                <li><a href="../realizar-pagos/" class="nav-link">Pagos</a></li>
+                <li><a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%2C%20deseo%20ser%20un%20cliente%20ProRed" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Contratar</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="navOverlay" class="nav-overlay" aria-hidden="true"></div>
+
+    <!-- Hero Planes -->
+    <header class="hero-page hero-planes">
+        <div class="container">
+            <h1>DISFRUTA DEL MEJOR INTERNET</h1>
+            <p>Planes diseñados para tu hogar, oficina y entretenimiento sin límites.</p>
+            <div class="hero-badges">
+                <span><i class="fas fa-bolt"></i> 100% Fibra Óptica</span>
+                <span><i class="fas fa-tools"></i> Instalación gratuita</span>
+                <span><i class="fas fa-tv"></i> Canales en HD</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Promociones Section -->
+    <section class="promociones-section">
+        <div class="container">
+            <div class="promo-banner fade-in-element">
+                <div class="promo-icon-side">
+                    <div class="promo-icon-circle">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                </div>
+                <div class="promo-text">
+                    <span class="badge-promo"><i class="fas fa-fire"></i> OFERTA LIMITADA</span>
+                    <h3>¡Instalación <span class="text-gradient">GRATIS</span> este mes!</h3>
+                    <p>Cámbiate a ProRed hoy y no pagues costo de instalación en cualquiera de nuestros planes de Internet.</p>
+                </div>
+                <div class="promo-cta">
+                    <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Quiero%20la%20promoción%20de%20Instalación%20Gratis" target="_blank" class="btn-promo-action"><i class="fab fa-whatsapp"></i> Reclamar Oferta</a>
+                    <span class="promo-urgency"><i class="fas fa-clock"></i> Válido hasta agotar stock</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="planes-preview" id="planes-prev">
+        <div class="container">
+            <br>
+            <div class="section-header text-center mb-5 fade-in-element">
+                <h2 class="mb-3">Descubre los planes que tenemos para ti</h2>
+            </div>
+
+            <div class="tabs-container fade-in-element">
+                <button class="tab-btn active" data-tab="internet">
+                    <i class="fas fa-wifi"></i> Planes Internet
+                </button>
+                <button class="tab-btn" data-tab="iptv">
+                    <i class="fas fa-tv"></i> Planes IPTV
+                </button>
+                <button class="tab-btn" data-tab="duo">
+                    <i class="fas fa-wifi"></i> + <i class="fas fa-tv"></i> Planes Dúos
+                </button>
+            </div>
+
+            <div class="tabs-content">
+                <!-- Tab Internet -->
+                <div id="tabInternet" class="tab-pane active">
+                    <div class="tv-section-immersive">
+                        <div class="video-background-layer">
+                            <video autoplay muted loop playsinline>
+                                <source src="../public/assets/video/internet-background1.webm" type="video/webm">
+                            </video>
+                            <div class="video-overlay"></div>
+                        </div>
+
+                        <div class="container content-layer">
+                            <div class="tv-layout-split">
+                                <div class="tv-info-side fade-in-element">
+                                    <h2 class="neon-title">PLANES<br>FIBRA<br>ÓPTICA</h2>
+                                    <div class="deco-image-container">
+                                        <img src="../public/assets/img/bot-prored.png" alt="Velocidad" class="img-fluid floating-deco">
+                                    </div>
+                                    <p class="tv-slogan">
+                                        Navega a la velocidad de la luz. <br>
+                                        Sin cortes, simetría real y soporte 24/7.
+                                    </p>
+                                </div>
+
+                                <div class="tv-cards-side">
+                                    <div class="internet-grid-2x2">
+                                        <div class="glass-card-v2 fade-in-element">
+                                            <div class="card-speed-header">
+                                                <span class="speed-number">150</span>
+                                                <span class="speed-unit">MBPS</span>
+                                            </div>
+                                            <h3 class="glass-plan-title">Plan Inicial</h3>
+                                            <div class="card-price-glass">S/ 50</div>
+                                            <ul class="glass-mini-features">
+                                                <li><i class="fas fa-check"></i> Instalación gratis</li>
+                                                <li><i class="fas fa-check"></i> 100% Fibra óptica</li>
+                                                <li><i class="fas fa-check"></i> Internet Simétrico</li>
+                                                <li><i class="fas fa-check"></i> Soporte 24/7</li>
+                                            </ul>
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20Plan%20Inicial%20de%20150%20MBPS%20por%20S/%2050%20mensuales" target="_blank" class="btn-action">Contratar</a>
+                                        </div>
+
+                                        <div class="glass-card-v2 featured-glass fade-in-element">
+                                            <div class="badge-top">POPULAR</div>
+                                            <div class="card-speed-header">
+                                                <span class="speed-number">250</span>
+                                                <span class="speed-unit">MBPS</span>
+                                            </div>
+                                            <h3 class="glass-plan-title">Plan Hogar</h3>
+                                            <div class="card-price-glass">S/ 70</div>
+                                            <ul class="glass-mini-features">
+                                                <li><i class="fas fa-check"></i> Instalación gratis</li>
+                                                <li><i class="fas fa-check"></i> 100% Fibra óptica</li>
+                                                <li><i class="fas fa-check"></i> Internet Simétrico</li>
+                                                <li><i class="fas fa-check"></i> Soporte 24/7</li>
+                                            </ul>
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20Plan%20Hogar%20de%20250%20MBPS%20por%20S/%2070%20mensuales" target="_blank" class="btn-action primary">Contratar</a>
+                                        </div>
+
+                                        <div class="glass-card-v2 fade-in-element">
+                                            <div class="card-speed-header">
+                                                <span class="speed-number">450</span>
+                                                <span class="speed-unit">MBPS</span>
+                                            </div>
+                                            <h3 class="glass-plan-title">Plan Premium</h3>
+                                            <div class="card-price-glass">S/ 90</div>
+                                            <ul class="glass-mini-features">
+                                                <li><i class="fas fa-check"></i> Instalación gratis</li>
+                                                <li><i class="fas fa-check"></i> 100% Fibra óptica</li>
+                                                <li><i class="fas fa-check"></i> Internet Simétrico</li>
+                                                <li><i class="fas fa-check"></i> Soporte 24/7</li>
+                                            </ul>
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20Plan%20Premium%20de%20450%20MBPS%20por%20S/%2090%20mensuales" target="_blank" class="btn-action">Contratar</a>
+                                        </div>
+
+                                        <div class="glass-card-v2 fade-in-element">
+                                            <div class="card-speed-header">
+                                                <span class="speed-number">650</span>
+                                                <span class="speed-unit">MBPS</span>
+                                            </div>
+                                            <h3 class="glass-plan-title">Plan Máximo</h3>
+                                            <div class="card-price-glass">S/ 100</div>
+                                            <ul class="glass-mini-features">
+                                                <li><i class="fas fa-check"></i> 100% Fibra óptica</li>
+                                                <li><i class="fas fa-check"></i> Internet Simétrico</li>
+                                                <li><i class="fas fa-check"></i> Instalación gratis</li>
+                                                <li><i class="fas fa-check"></i> Soporte 24/7</li>
+                                            </ul>
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20Plan%20Máximo%20de%20650%20MBPS%20por%20S/%20100%20mensuales" target="_blank" class="btn-action">Contratar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab IPTV -->
+                <div id="tabIptv" class="tab-pane">
+    
+                    <div class="tv-section-immersive">
+                        
+                        <div class="video-background-layer">
+                            <video autoplay muted loop playsinline>
+                                <source src="../public/assets/video/tv-background1.webm" type="video/webm">
+                            </video>
+                            <div class="video-overlay"></div>
+                        </div>
+
+                        <div class="container content-layer">
+                            <div class="tv-layout-split">
+                                
+                                <div class="tv-info-side fade-in-element">
+                                    <h2 class="neon-title">PLANES<br>IPTV<br>NUPLIN</h2>
+                                    <div class="deco-image-container">
+                                        <img src="../public/assets/img/bot-nuplin.png" alt="Deco" class="img-fluid floating-deco">
+                                    </div>
+                                    <p class="tv-slogan">Televisión en Alta Definición para todos tus dispositivos.</p>
+                                </div>
+
+                                <div class="tv-cards-side fade-in-element">
+                                    <div class="cards-wrapper">
+                                        
+                                        <div class="glass-card-v2">
+                                            <div class="card-header-glass">
+                                                <i class="fas fa-tv"></i>
+                                                <span>FLEX</span>
+                                            </div>
+                                            <div class="card-price-glass">
+                                                <!-- S/ 30 -->
+                                            </div>
+                                            <div class="mini-channels-grid">
+                                                <img src="../public/assets/img/tv/flex/flex (1).jpg">
+                                                <img src="../public/assets/img/tv/flex/flex (2).png">
+                                                <img src="../public/assets/img/tv/flex/flex (3).png">
+                                                <img src="../public/assets/img/tv/flex/flex (4).png">
+                                                <img src="../public/assets/img/tv/flex/flex (5).png">
+                                                <img src="../public/assets/img/tv/flex/flex (6).png">
+                                                <img src="../public/assets/img/tv/flex/flex (7).png">
+                                                <img src="../public/assets/img/tv/flex/flex (8).png">
+                                                <img src="../public/assets/img/tv/flex/flex (9).png">
+                                                <img src="../public/assets/img/tv/flex/flex (10).png">
+                                                <img src="../public/assets/img/tv/flex/flex (11).png">
+                                                <img src="../public/assets/img/tv/flex/flex (12).png">
+                                            </div>
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%20me%20interesa%20el%20plan%20IPTV" class="btn-action" target="_blank">Conseguir</a>
+                                        </div>
+
+                                        <div class="glass-card-v2 featured-glass">
+                                            <div class="badge-top">TOP</div>
+                                            <div class="card-header-glass">
+                                                <i class="fas fa-satellite-dish"></i>
+                                                <span>BÁSICO</span>
+                                            </div>
+                                            <div class="card-price-glass">
+                                                <!-- S/ 45 -->
+                                            </div>
+                                            <div class="mini-channels-grid">
+                                                <img src="../public/assets/img/tv/flex/flex (1).jpg">
+                                                <img src="../public/assets/img/tv/flex/flex (2).png">
+                                                <img src="../public/assets/img/tv/flex/flex (3).png">
+                                                <img src="../public/assets/img/tv/flex/flex (4).png">
+                                                <img src="../public/assets/img/tv/flex/flex (5).png">
+                                                <img src="../public/assets/img/tv/flex/flex (6).png">
+                                                <img src="../public/assets/img/tv/basico/basico (1).png">
+                                                <img src="../public/assets/img/tv/basico/basico (2).png">
+                                                <img src="../public/assets/img/tv/basico/basico (3).png">
+                                                <img src="../public/assets/img/tv/basico/basico (4).png">
+                                                <img src="../public/assets/img/tv/basico/basico (5).png">
+                                                <img src="../public/assets/img/tv/basico/basico (6).png">
+                                            </div>
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%20me%20interesa%20el%20plan%20IPTV" class="btn-action primary" target="_blank">Conseguir</a>
+                                        </div>
+
+                                        <div class="glass-card-v2">
+                                            <div class="card-header-glass">
+                                                <i class="fas fa-star"></i>
+                                                <span>BÁSICO +</span>
+                                            </div>
+                                            <div class="card-price-glass">
+                                                <!-- S/ 60 -->
+                                            </div>
+                                            <div class="mini-channels-grid">
+                                                <img src="../public/assets/img/tv/flex/flex (1).jpg">
+                                                <img src="../public/assets/img/tv/flex/flex (2).png">
+                                                <img src="../public/assets/img/tv/flex/flex (3).png">
+                                                <img src="../public/assets/img/tv/flex/flex (4).png">
+                                                <img src="../public/assets/img/tv/flex/flex (5).png">
+                                                <img src="../public/assets/img/tv/flex/flex (6).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (1).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (2).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (3).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (4).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (5).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (6).png">
+                                            </div>
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%20me%20interesa%20el%20plan%20IPTV" class="btn-action" target="_blank">Conseguir</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tabDuo" class="tab-pane">
+    
+                    <div class="tv-section-immersive">
+                        
+                        <div class="video-background-layer">
+                            <video autoplay muted loop playsinline>
+                                <source src="../public/assets/video/duo-background1.webm" type="video/webm">
+                            </video>
+                            <div class="video-overlay"></div>
+                        </div>
+
+                        <div class="container content-layer">
+                            <div class="tv-layout-split">
+                                
+                                <div class="tv-info-side fade-in-element">
+                                    <h2 class="neon-title">PLANES<br>DUO<br>POWER</h2>
+                                    <div class="bots-container">
+                                        <div class="deco-image-container">
+                                            <img src="../public/assets/img/bot-prored.png" alt="Duo Pack" class="img-fluid floating-deco">
+                                        </div>
+                                        <div class="deco-image-container">
+                                            <img src="../public/assets/img/bot-nuplin.png" alt="Duo Pack" class="img-fluid floating-deco">
+                                        </div>
+                                    </div>
+                                    <p class="tv-slogan">
+                                        La combinación perfecta.<br>
+                                        Internet Fibra Óptica + TV Digital HD en una sola factura.
+                                    </p>
+                                    <div class="duo-badge-promo">
+                                        <i class="fas fa-piggy-bank"></i> Ahorras hasta S/ 15
+                                    </div>
+                                </div>
+
+                                <div class="tv-cards-side fade-in-element">
+                                    <div class="internet-grid-2x2">
+                                        
+                                        <div class="glass-card-v2">
+                                            <div class="duo-card-header">
+                                                <div class="speed-part">150 <span class="unit">MB</span></div>
+                                                <div class="plus-part">+ TV</div>
+                                            </div>
+                                            <div class="card-price-glass">S/ 75</div>
+                                            
+                                            <div class="duo-icons-row">
+                                                <span title="Internet"><i class="fas fa-wifi"></i>Fibra óptica</span>
+                                                <span title="TV"><i class="fas fa-tv"></i>Canales HD</span>
+                                            </div>
+
+                                            <div class="mini-channels-grid">
+                                                <img src="../public/assets/img/tv/flex/flex (1).jpg">
+                                                <img src="../public/assets/img/tv/flex/flex (2).png">
+                                                <img src="../public/assets/img/tv/flex/flex (3).png">
+                                            </div>
+
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20plan%20Dúo%20150%20MB%20%2B%20IPTV%20por%20S/%2075%20mensuales" target="_blank" class="btn-action">
+                                                Lo quiero
+                                            </a>
+                                        </div>
+
+                                        <div class="glass-card-v2 featured-glass">
+                                            <div class="badge-top">BEST SELLER</div>
+                                            <div class="duo-card-header">
+                                                <div class="speed-part">250 <span class="unit">MB</span></div>
+                                                <div class="plus-part">+ TV</div>
+                                            </div>
+                                            <div class="card-price-glass">S/ 95</div>
+                                            
+                                            <div class="duo-icons-row">
+                                                <span title="Internet"><i class="fas fa-wifi"></i>Fibra óptica</span>
+                                                <span><i class="fas fa-tv"></i>Canales HD</span>
+                                            </div>
+
+                                            <div class="mini-channels-grid">
+                                                <img src="../public/assets/img/tv/basico/basico (1).png">
+                                                <img src="../public/assets/img/tv/basico/basico (2).png">
+                                                <img src="../public/assets/img/tv/basico/basico (3).png">
+                                            </div>
+
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20plan%20Dúo%20250%20MB%20%2B%20IPTV%20por%20S/%2095%20mensuales" target="_blank" class="btn-action primary">
+                                                Lo quiero
+                                            </a>
+                                        </div>
+
+                                        <div class="glass-card-v2">
+                                            <div class="duo-card-header">
+                                                <div class="speed-part">450 <span class="unit">MB</span></div>
+                                                <div class="plus-part">+ TV</div>
+                                            </div>
+                                            <div class="card-price-glass">S/ 115</div>
+                                            
+                                            <div class="duo-icons-row">
+                                                <span title="Internet"><i class="fas fa-wifi"></i>Fibra óptica</span>
+                                                <span><i class="fas fa-tv"></i>Canales HD</span>
+                                            </div>
+
+                                            <div class="mini-channels-grid">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (1).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (2).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (3).png">
+                                            </div>
+
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20plan%20Dúo%20450%20MB%20%2B%20IPTV%20por%20S/%20115%20mensuales" target="_blank" class="btn-action">
+                                                Lo quiero
+                                            </a>
+                                        </div>
+
+                                        <div class="glass-card-v2">
+                                            <div class="duo-card-header">
+                                                <div class="speed-part">650 <span class="unit">MB</span></div>
+                                                <div class="plus-part">+ TV</div>
+                                            </div>
+                                            <div class="card-price-glass">S/ 125</div>
+                                            
+                                            <div class="duo-icons-row">
+                                                <span title="Internet"><i class="fas fa-wifi"></i>Fibra óptica</span>
+                                                <span><i class="fas fa-tv"></i>Canales HD</span>
+                                            </div>
+
+                                            <div class="mini-channels-grid">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (1).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (2).png">
+                                                <img src="../public/assets/img/tv/basico+/basico+ (3).png">
+                                            </div>
+
+                                            <a href="https://api.whatsapp.com/send?phone=51991445527&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20plan%20Dúo%20650%20MB%20%2B%20IPTV%20por%20S/%20125%20mensuales" target="_blank" class="btn-action">
+                                                Lo quiero
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios Extra -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header text-center fade-in-element">
+                <span class="section-label">VENTAJAS</span>
+                <h2>¿Por qué elegir la Fibra de <span class="text-gradient">ProRed</span>?</h2>
+                <p class="section-subtitle">Tecnología de punta que marca la diferencia en tu día a día.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in-element">
+                    <div class="benefit-icon-wrapper">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h4>Navegación Ilimitada</h4>
+                    <p>Sin topes de consumo ni reducción de velocidad a fin de mes. Descarga y sube sin restricciones.</p>
+                    <div class="benefit-line"></div>
+                </div>
+                <div class="benefit-card fade-in-element">
+                    <div class="benefit-icon-wrapper">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h4>Baja Latencia (Ping)</h4>
+                    <p>Ideal para gamers y videollamadas fluidas sin lag. Experiencia en tiempo real garantizada.</p>
+                    <div class="benefit-line"></div>
+                </div>
+                <div class="benefit-card fade-in-element">
+                    <div class="benefit-icon-wrapper">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Estabilidad Total</h4>
+                    <p>La fibra óptica no se ve afectada por interferencias climáticas ni electromagnéticas.</p>
+                    <div class="benefit-line"></div>
+                </div>
+                <div class="benefit-card fade-in-element">
+                    <div class="benefit-icon-wrapper">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h4>Internet Simétrico</h4>
+                    <p>Misma velocidad de subida y bajada. Perfecto para streaming, trabajo remoto y la nube.</p>
+                    <div class="benefit-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-layout">
+                <div class="faq-info-side fade-in-element">
+                    <span class="section-label">FAQ</span>
+                    <h2>Preguntas <span class="text-gradient">Frecuentes</span></h2>
+                    <p>¿Tienes dudas? Aquí respondemos las consultas más comunes de nuestros clientes.</p>
+                    <a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%2C%20tengo%20una%20consulta" target="_blank" class="btn-faq-contact"><i class="fab fa-whatsapp"></i> Hablar con un asesor</a>
+                </div>
+                <div class="faq-accordion-side">
+                    <div class="faq-item fade-in-element">
+                        <div class="faq-question"><span>¿Qué incluye la instalación?</span> <i class="fas fa-plus"></i></div>
+                        <div class="faq-answer">
+                            <p>La instalación incluye el tendido de fibra hasta tu domicilio, la configuración del router ONT de última generación y la verificación de velocidad en tus dispositivos.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item fade-in-element">
+                        <div class="faq-question"><span>¿Cómo puedo pagar mi recibo?</span> <i class="fas fa-plus"></i></div>
+                        <div class="faq-answer">
+                            <p>Puedes pagar a través de nuestra web en la sección "Pagos", mediante transferencia bancaria (BCP, BBVA, Banco de la Nación), mediante aplicativos como (Yape, Plin) o en nuestra oficina física en Concepción.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item fade-in-element">
+                        <div class="faq-question"><span>¿Puedo cambiar de plan?</span> <i class="fas fa-plus"></i></div>
+                        <div class="faq-answer">
+                            <p>Sí, puedes solicitar un cambio de plan en cualquier momento . El cambio se aplica en tu próximo ciclo de facturación.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header text-center fade-in-element">
+                <span class="section-label">TESTIMONIOS</span>
+                <h2>Lo que dicen nuestros <span class="text-gradient">clientes</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in-element">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p>"Llevo 6 meses con ProRed y la estabilidad es increíble. Trabajo desde casa y nunca he tenido caídas."</p>
+                    <div class="testimonial-footer">
+                        <div class="client-avatar"><i class="fas fa-user"></i></div>
+                        <div class="client-info">
+                            <strong>Juan Pérez</strong>
+                            <span>Concepción</span>
+                        </div>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in-element">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p>"El soporte técnico es muy rápido. Tuve una duda con mi Wi-Fi y me ayudaron por WhatsApp al instante."</p>
+                    <div class="testimonial-footer">
+                        <div class="client-avatar"><i class="fas fa-user"></i></div>
+                        <div class="client-info">
+                            <strong>María García</strong>
+                            <span>San Jerónimo</span>
+                        </div>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in-element">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p>"Excelente relación calidad-precio. Mis hijos juegan online y mi esposa hace videollamadas sin ningún problema."</p>
+                    <div class="testimonial-footer">
+                        <div class="client-avatar"><i class="fas fa-user"></i></div>
+                        <div class="client-info">
+                            <strong>Carlos Rojas</strong>
+                            <span>Concepción</span>
+                        </div>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage Check CTA -->
+    <section class="coverage-cta">
+        <div class="cta-wave-top"></div>
+        <div class="container">
+            <div class="cta-content text-center fade-in-element">
+                <div class="cta-icon-pulse"><i class="fas fa-map-marker-alt"></i></div>
+                <h2>¿Aún no tienes ProRed?</h2>
+                <p>Consulta disponibilidad en tu zona y obtén el mejor internet de Concepción.</p>
+                <div class="cta-buttons">
+                    <a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%2C%20quiero%20consultar%20cobertura%20en%20mi%20zona" class="btn-cta-primary" target="_blank"><i class="fab fa-whatsapp"></i> Consultar Cobertura</a>
+                    <a href="../cobertura/" class="btn-cta-outline"><i class="fas fa-map"></i> Ver Mapa</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../public/assets/img/logo-ProRed.png" alt="ProRed Logo" style="width: 14rem;" />
+                    <p>Internet 100% fibra óptica en Concepción. Conectando tu futuro.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="../nosotros/">Nosotros</a></li>
+                        <li><a href="../planes/">Planes</a></li>
+                        <li><a href="../cobertura/">Cobertura</a></li>
+                        <li><a href="../realizar-pagos/">Pagos</a></li>
+                        <li><a href="../politica-de-privacidad/">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> AV.Ramòn Castilla Nº 631 - Concepcion</li>
+                        <li><i class="fas fa-phone"></i> 064 624 507</li>
+                        <li><i class="fab fa-whatsapp"></i> 991445527</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ProRed. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Flotante WhatsApp -->
+    <a href="https://api.whatsapp.com/send?phone=51991445527&text=Hola%2C%20deseo%20ser%20un%20cliente%20ProRed" class="whatsapp-float" target="_blank"aria-label="Chatea por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="../public/assets/js/script.js?v=2.5"></script>
+    <script src="../public/assets/js/cookies.js?v=2.5"></script>
+    <script src="../public/assets/js/planes.js?v=2.5"></script>
+</body>
+</html>

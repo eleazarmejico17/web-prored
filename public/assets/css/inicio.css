@@ -1,7 +1,10 @@
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #005b9f 0%, #0077cc 100%);
+  background-image: url("../img/portada/temporadas/portada-semana.jpg");
+  background-size: cover;
+  background-position: center;
+  /* background: linear-gradient(135deg, #005b9f 0%, #0077cc 100%); */
   color: white;
   padding: 100px 0 0;
   position: relative;
@@ -1045,6 +1048,9 @@
 }
 
 @media (max-width: 480px) {
+  .hero {
+    background-image: url("../img/portada/temporadas/portada-res-semana.jpg");
+  }
   .hero-text h1 {
     font-size: 1.5rem;
   }

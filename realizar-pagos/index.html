@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagos - ProRed Internet Fibra Óptica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../public/assets/css/styles.css?v=2.0">
-    <link rel="stylesheet" href="../public/assets/css/pagos.css?v=2.0">
-    <link rel="stylesheet" href="../public/assets/css/cookies.css?v=2.0">
+    <link rel="stylesheet" href="../public/assets/css/styles.css?v=2.5">
+    <link rel="stylesheet" href="../public/assets/css/pagos.css?v=2.5">
+    <link rel="stylesheet" href="../public/assets/css/cookies.css?v=2.5">
     <link rel="icon" type="image/x-icon" href="../public/assets/img/logo.ico">
 </head>
 <body>
@@ -27,7 +27,7 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="../" class="nav-link">Inicio</a></li>
                 <li><a href="../nosotros/" class="nav-link">Nosotros</a></li>
-                <li><a href="../#planes" class="nav-link">Planes</a></li>
+                <li><a href="../planes/" class="nav-link">Planes</a></li>
                 <li><a href="../internet-empresas/" class="nav-link">Internet Empresas</a></li>
                 <li><a href="../cobertura/" class="nav-link">Cobertura</a></li>
                 <li><a href="../realizar-pagos/" class="nav-link active">Pagos</a></li>
@@ -38,11 +38,15 @@
     <div id="navOverlay" class="nav-overlay" aria-hidden="true"></div>
 
     <!-- Hero Pagos -->
-    <section class="hero-pagos">
+    <section class="hero-page hero-pagos">
         <div class="container">
-            <h1>Realiza tu pago en tres simples pasos</h1>
+            <h1>REALIZA TU PAGO</h1>
             <p>Sigue las instrucciones para realizar tu pago de manera rápida y reportarlo correctamente.</p>
-            <a href="#cuentas" class="btn btn-primary">Ver métodos de pago</a>
+            <div class="hero-badges">
+                <span><i class="fas fa-user-shield"></i> Pago seguro</span>
+                <span><i class="fas fa-receipt"></i> Reporte de pago inmediato</span>
+                <span><i class="fas fa-wallet"></i> Múltiples métodos</span>
+            </div>
         </div>
     </section>
 
@@ -125,7 +129,7 @@
             <div class="cuentas-layout">
                 <!-- QR Panel -->
                 <div class="qr-panel">
-                    <h3>SYNERIX SAC</h3>
+                    <h3>SYNERIX</h3>
                     <div class="qr-placeholder">
                         <img src="../public/assets/img/pagos/QR-prored.png" alt="QR Pagos" class="qr-image">
                     </div>
@@ -186,38 +190,11 @@
                         </div>
                         <div class="cuenta-info">
                             <div class="cuenta-info-label">A nombre de</div>
-                            <div class="cuenta-info-valor">SHOPNEAR SCRL</div>
+                            <div class="cuenta-info-valor">SHOPNEAR</div>
                         </div>
                     </div>
 
-                    <!-- BBVA 1 -->
-                    <div class="cuenta-card banco-bbva">
-                        <h3><i class="fas fa-building"></i> BBVA</h3>
-                        <div class="cuenta-info">
-                            <div class="cuenta-info-label">Número de cuenta</div>
-                            <div class="cuenta-info-valor-container">
-                                <div class="cuenta-info-valor">0011-0237-0200568795</div>
-                                <button class="btn-copy" onclick="copiarAlPortapapeles('0011-0237-0200568795')" title="Copiar número">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="cuenta-info">
-                            <div class="cuenta-info-label">CCI</div>
-                            <div class="cuenta-info-valor-container">
-                                <div class="cuenta-info-valor">011-237-000200568795-55</div>
-                                <button class="btn-copy" onclick="copiarAlPortapapeles('011-237-000200568795-55')" title="Copiar CCI">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="cuenta-info">
-                            <div class="cuenta-info-label">A nombre de</div>
-                            <div class="cuenta-info-valor">PAUL DAYVI CARDENAS PARADO</div>
-                        </div>
-                    </div>
-
-                    <!-- BBVA 2 -->
+                    <!-- BBVA -->
                     <div class="cuenta-card banco-bbva">
                         <h3><i class="fas fa-building"></i> BBVA</h3>     
                         <div class="cuenta-info">
@@ -231,8 +208,51 @@
                         </div>
                         <div class="cuenta-info">
                             <div class="cuenta-info-label">A nombre de</div>
-                            <div class="cuenta-info-valor">SYNERIX SAC</div>
+                            <div class="cuenta-info-valor">SYNERIX</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGO PRESENCIAL -->
+    <section class="pago-presencial" id="presencial">
+        <div class="container">
+            <div class="presencial-layout">
+                <div class="presencial-info fade-in-element">
+                    <span class="badge-presencial">PAGO EN OFICINA</span>
+                    <h2>Visítanos en nuestra oficina principal</h2>
+                    <p>Si prefieres pagar en efectivo o necesitas atención personalizada, puedes acudir a nuestro local central en Concepción.</p>
+                    
+                    <div class="info-items">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p>Av. Ramón Castilla Nº 631 - Concepción (Huancayo, Junín)</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Horario de Atención</h4>
+                                <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+                                <p>Sábados: 8:00 AM - 3:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <h4>Medios Aceptados</h4>
+                                <p>Efectivo y Transferencias.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="presencial-map slide-in-right">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d975.9509876449217!2d-75.3179317!3d-11.9187279!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x910eb969c6beb19d%3A0xfb1e2c142ff626ad!2sPRORED%20INTERNET%20POR%20FIBRA%20OPTICA%20CONCEPCION!5e0!3m2!1ses!2spe!4v1774641029988!5m2!1ses!2spe" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
@@ -282,7 +302,7 @@
             <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.95;">
                 Únete a miles de clientes satisfechos y disfruta del mejor internet
             </p>
-            <a href="../#planes" class="btn btn-secondary">Ver Planes</a>
+            <a href="../planes/" class="btn btn-secondary">Ver Planes</a>
         </div>
     </section>
 
@@ -310,7 +330,7 @@
                     <h4>Enlaces Rápidos</h4>
                     <ul>
                         <li><a href="../nosotros/">Nosotros</a></li>
-                        <li><a href="../#planes">Planes</a></li>
+                        <li><a href="../planes/">Planes</a></li>
                         <li><a href="../cobertura/">Cobertura</a></li>
                         <li><a href="../realizar-pagos/">Pagos</a></li>
                         <li><a href="../politica-de-privacidad/">Política de Privacidad</a></li>
@@ -351,8 +371,8 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script src="../public/assets/js/script.js"></script>
-    <script src="../public/assets/js/cookies.js"></script>
+    <script src="../public/assets/js/script.js?v=2.5"></script>
+    <script src="../public/assets/js/cookies.js?v=2.5"></script>
 
     <script>
         function copiarAlPortapapeles(texto) {

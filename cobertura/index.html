@@ -6,9 +6,9 @@
     <title>Cobertura - ProRed Internet Fibra Óptica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="../public/assets/css/styles.css?v=2.0">
-    <link rel="stylesheet" href="../public/assets/css/cobertura.css?v=2.0">
-    <link rel="stylesheet" href="../public/assets/css/cookies.css?v=2.0">
+    <link rel="stylesheet" href="../public/assets/css/styles.css?v=2.5">
+    <link rel="stylesheet" href="../public/assets/css/cobertura.css?v=2.5">
+    <link rel="stylesheet" href="../public/assets/css/cookies.css?v=2.5">
     <link rel="icon" type="image/x-icon" href="../public/assets/img/logo.ico">
 </head>
 <body>
@@ -28,7 +28,7 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="../" class="nav-link">Inicio</a></li>
                 <li><a href="../nosotros/" class="nav-link">Nosotros</a></li>
-                <li><a href="../#planes" class="nav-link">Planes</a></li>
+                <li><a href="../planes/" class="nav-link">Planes</a></li>
                 <li><a href="../internet-empresas/" class="nav-link">Internet Empresas</a></li>
                 <li><a href="../cobertura/" class="nav-link active">Cobertura</a></li>
                 <li><a href="../realizar-pagos/" class="nav-link">Pagos</a></li>
@@ -38,10 +38,15 @@
     </nav>
     <div id="navOverlay" class="nav-overlay" aria-hidden="true"></div>
     <!-- Hero Cobertura -->
-    <section class="hero-cobertura">
+    <section class="hero-page hero-cobertura">
         <div class="container">
-            <h1>Cobertura ProRed</h1>
-            <p>Descubre si ProRed llega a tu zona en Junín y explora nuestro mapa interactivo</p>
+            <h1>COBERTURA PRORED</h1>
+            <p>Descubre si ProRed llega a tu zona en Junín y explora nuestro mapa interactivo.</p>
+            <div class="hero-badges">
+                <span><i class="fas fa-map-marked-alt"></i> Cobertura en zonas aledañas</span>
+                <span><i class="fas fa-headset"></i> Soporte Local 24/7</span>
+                <span><i class="fas fa-stopwatch"></i> Verifica cobertura en 1 minuto</span>
+            </div>
         </div>
     </section>
     <!-- Sección combinada: Formulario + Mapa -->
@@ -56,32 +61,32 @@
                 <!-- Formulario Simplificado -->
                 <div class="formulario-card fade-in-element">
                     <form id="solicitudForm">
-                        <h3 class="text-center mb-4">Dejanos tus datos</h3>
+                        <h3 class="text-center mb-4"><i class="fas fa-paper-plane text-primary mr-2"></i> Déjanos tus datos</h3>
                         <div class="form-group">
-                            <label for="documento">Documento (DNI o CE) - Opcional</label>
+                            <label for="documento"><i class="fas fa-id-card"></i> Documento (DNI o CE) - Opcional</label>
                             <input type="text" id="documento" class="form-control" 
                                 placeholder="Ej: 12345678 (opcional)">
                         </div>
                         
                         <div class="form-group">
-                            <label for="celular">Celular </label>
+                            <label for="celular"><i class="fas fa-mobile-alt"></i> Celular</label>
                             <div style="display: flex; align-items: center;">
-                                <span style="padding: 0 10px; background: #f0f7ff; border: 1px solid #ddd; border-right: none; border-radius: 5px 0 0 5px; height: 48px; display: flex; align-items: center;">+51</span>
-                                <input type="tel" id="celular" class="form-control" style="border-radius: 0 5px 5px 0;"
-                                    placeholder="Ej: 987654321" required pattern="9[0-9]{8}" maxlength="9">
+                                <span style="padding: 0 10px; background: #f0f7ff; border: 1px solid #ddd; border-right: none; border-radius: 5px 0 0 5px; height: 50px; display: flex; align-items: center;">+51</span>
+                                <input type="tel" id="celular" class="form-control" style="border-radius: 0 10px 10px 0; height: 50px;"
+                                    placeholder="987 654 321" required pattern="9[0-9]{8}" maxlength="9">
                             </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="direccion">Dirección </label>
+                            <label for="direccion"><i class="fas fa-map-marker-alt"></i> Dirección</label>
                             <div style="display: flex; gap: 10px;">
                                 <input type="text" id="direccion" class="form-control" 
-                                    placeholder="Se autocompletará con tu ubicación" required readonly>
-                                <button type="button" id="btnBuscarDireccion" class="btn-small" style="white-space: nowrap;">
-                                    <i class="fas fa-search"></i>
+                                    placeholder="Selecciona en el mapa..." required readonly>
+                                <button type="button" id="btnBuscarDireccion" class="btn-small" style="height: 50px;" title="Buscar manualmente">
+                                    <i class="fas fa-keyboard"></i>
                                 </button>
                             </div>
-                            <small class="form-text">Haz clic en el mapa para completar automáticamente</small>
+                            <small class="form-text"><i class="fas fa-info-circle"></i> Haz clic en el mapa para completar automáticamente</small>
                         </div>
                         
                         <!-- Campos ocultos para coordenadas -->
@@ -220,7 +225,7 @@
                     <h4>Enlaces Rápidos</h4>
                     <ul>
                         <li><a href="../nosotros/">Nosotros</a></li>
-                        <li><a href="../#planes">Planes</a></li>
+                        <li><a href="../planes/">Planes</a></li>
                         <li><a href="../cobertura/">Cobertura</a></li>
                         <li><a href="../realizar-pagos/">Pagos</a></li>
                         <li><a href="../politica-de-privacidad/">Política de Privacidad</a></li>
@@ -262,9 +267,9 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="../public/assets/js/script.js"></script>
-    <script src="../public/assets/js/cookies.js"></script>
-    <script src="../public/assets/js/cobertura.js"></script>
+    <script src="../public/assets/js/script.js?v=2.5"></script>
+    <script src="../public/assets/js/cookies.js?v=2.5"></script>
+    <script src="../public/assets/js/cobertura.js?v=2.5"></script>
 </body>
 </html>
 

@@ -1,23 +1,4 @@
-/* Hero Section - Política de Privacidad */
-.policy-hero {
-    background: linear-gradient(135deg, #005B9F 0%, #003d6b 100%);
-    color: white;
-    padding: 60px 20px;
-    text-align: center;
-}
-
-.policy-hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    animation: fadeInDown 0.8s ease-out;
-    margin-top: 3rem;
-    color: #ffffff;
-}
-
-.policy-hero p {
-    font-size: 1.2rem;
-    animation: fadeInUp 0.8s ease-out 0.2s backwards;
-}
+/* Policy-hero background — lo maneja .hero-page en styles.css */
 
 /* Policy Content */
 .policy-content {

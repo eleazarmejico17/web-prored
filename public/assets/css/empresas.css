@@ -1,72 +1,6 @@
-/* Estilos para empresas Empresas */
+/* Hero Empresas — solo la imagen de fondo (el resto lo maneja .hero-page) */
 .hero-empresas {
     background-image: url('../img/portada/portada-empresas.jpg');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 7.5rem 0 5rem;
-    text-align: center;
-    position: relative;
-}
-.hero-empresas::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 90, 159, 0.5);
-    z-index: 1;
-}
-
-.hero-content-empresas {
-    position: relative;
-    z-index: 1;
-    max-width: 56.25rem;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.hero-empresas h1 {
-    color: white;
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    animation: fadeInUp 0.8s ease-out;
-}
-
-.hero-empresas .subtitle {
-    font-size: 1.4rem;
-    margin-bottom: 2.1875rem;
-    opacity: 0.95;
-    animation: fadeInUp 0.8s ease-out 0.2s backwards;
-}
-
-.hero-badges {
-    display: flex;
-    justify-content: center;
-    gap: 1.875rem;
-    flex-wrap: wrap;
-    animation: fadeInUp 0.8s ease-out 0.4s backwards;
-}
-
-.badge-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 0.9375rem 1.5625rem;
-    border-radius: 3.125rem;
-    backdrop-filter: blur(10px);
-}
-
-.badge-item i {
-    font-size: 1.8rem;
-    color: #E58E21;
-}
-
-.badge-item span {
-    font-weight: 600;
-    font-size: 1.1rem;
 }
 
 @keyframes fadeInUp {
@@ -955,8 +889,7 @@
 
 /* Tablets grandes (1024px) */
 @media screen and (max-width: 64rem) {
-    .hero-empresas h1  { font-size: 3rem; }
-    .hero-empresas .subtitle { font-size: 1.2rem; }
+
 
     .bento-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
     .item-1.tall { grid-column: span 2; grid-row: span 1; height: 18.75rem; }
@@ -972,12 +905,7 @@
 
 /* Tablets (768px) */
 @media screen and (max-width: 48rem) {
-    .hero-empresas      { padding: 6rem 0 4rem; }
-    .hero-empresas h1   { font-size: 2.2rem; }
-    .hero-empresas .subtitle { font-size: 1.1rem; margin-bottom: 1.875rem; }
 
-    .hero-badges { flex-direction: column; align-items: center; gap: 0.9375rem; }
-    .badge-item  { width: 100%; max-width: 18.75rem; justify-content: center; }
 
     .bento-section,
     .sla-section,

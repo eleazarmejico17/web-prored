@@ -1,44 +1,6 @@
+/* Hero Cobertura — solo la imagen de fondo (el resto lo maneja .hero-page) */
 .hero-cobertura {
     background-image: url('../img/portada/portada-cobertura.jpg');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 120px 0 80px;
-    text-align: center;
-    position: relative;
-}
-
-.hero-cobertura::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 90, 159, 0.5);
-    z-index: 1;
-}
-
-.hero-cobertura .container {
-    position: relative;
-    z-index: 2;
-}
-
-.hero-cobertura h1 {
-    color: white;
-    font-size: 3rem;
-    margin-bottom: 20px;
-    animation: fadeInUp 0.8s ease-out;
-    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-}
-
-.hero-cobertura p {
-    font-size: 1.3rem;
-    max-width: 800px;
-    margin: 0 auto;
-    opacity: 0.95;
-    animation: fadeInUp 0.8s ease-out 0.2s backwards;
-    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 /* Sección combinada Verificador + Mapa */
@@ -47,11 +9,16 @@
     background: #f8f9fa;
 }
 
+.cobertura-combinada .container {
+    max-width: 90%;
+    width: 90%;
+}
+
 .cobertura-grid {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1fr 2fr;
     gap: 40px;
-    align-items: start;
+    align-items: stretch;
 }
 
 .verificador-card {
@@ -65,9 +32,10 @@
 }
 
 #map {
-    height: 500px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 91, 159, 0.2);
+    height: 700px;
+    border-radius: 24px;
+    box-shadow: 0 15px 50px rgba(0, 91, 159, 0.25);
+    border: 3px solid white;
 }
 
 .form-group {
@@ -94,25 +62,36 @@
 .form-control:focus {
     outline: none;
     border-color: #005B9F;
-    box-shadow: 0 0 0 3px rgba(0, 91, 159, 0.1);
+    box-shadow: 0 0 15px rgba(0, 91, 159, 0.15);
+    background: white;
 }
 
 .btn-verificar {
     width: 100%;
-    padding: 15px;
-    background: linear-gradient(135deg, #005B9F, #0077CC);
+    padding: 18px;
+    background: linear-gradient(135deg, #28a745, #218838);
     color: white;
     border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
 }
 
 .btn-verificar:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0, 91, 159, 0.3);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+    background: linear-gradient(135deg, #2ebd4e, #28a745);
+}
+
+.btn-verificar i {
+    font-size: 1.3rem;
 }
 
 .resultado-cobertura {
@@ -138,6 +117,16 @@
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(40, 167, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+}
+
+.btn-verificar {
+    animation: pulse-green 2s infinite;
 }
 
 /* Proceso de Instalación Mejorado */
@@ -325,14 +314,7 @@
 }
 
 @media (max-width: 768px) {
-    .hero-cobertura h1 {
-        font-size: 2.2rem;
-    }
-    
-    .hero-cobertura p {
-        font-size: 1.1rem;
-        padding: 0 20px;
-    }
+
     
     #map {
         height: 400px;
@@ -364,14 +346,11 @@
     
     .hero-cobertura {
         background-image: url('../img/portada/portada-res-cobertura.jpg');
-        padding: 100px 0 60px;
     }
 }
 
 @media (max-width: 480px) {
-    .hero-cobertura h1 {
-        font-size: 1.8rem;
-    }
+
     
     .zona-card {
         padding: 20px;
@@ -391,13 +370,16 @@
 }
 /* Estilos para el formulario simplificado */
 .formulario-card {
-    background: white;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 40px rgba(0, 91, 159, 0.15);
-    height: fit-content;
-    position: sticky;
-    top: 100px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 20px 60px rgba(0, 91, 159, 0.12);
+    height: 100%;
+    border: 1px solid rgba(0, 91, 159, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .form-text {
@@ -424,14 +406,15 @@
 }
 
 .ubicacion-info {
-    background: #f0f7ff;
-    padding: 12px 15px;
-    border-radius: 10px;
-    border-left: 4px solid #005B9F;
+    background: #eef7ff;
+    padding: 15px 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 91, 159, 0.1);
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 12px;
+    margin-top: 15px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .ubicacion-info > i.fa-map-marker-alt {
@@ -448,6 +431,8 @@
 .mapa-container {
     position: relative;
     height: 100%;
+    overflow: hidden;
+    border-radius: 24px;
 }
 
 .mapa-instructions {
@@ -548,10 +533,19 @@
 
 #searchBox {
     width: 100%;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    padding: 12px 20px;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#searchBox:focus {
+    outline: none;
+    border-color: #005B9F;
+    box-shadow: 0 10px 30px rgba(0, 91, 159, 0.2);
+    width: 105%;
 }
 
 @media (max-width: 1024px) {
