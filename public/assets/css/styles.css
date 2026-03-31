@@ -407,7 +407,17 @@ footer {
   text-align: center;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+  color: var(--color-fondo);
   opacity: 0.8;
+  margin-bottom: 5px;
+}
+
+.footer-bottom p:nth-child(2) {
+  color: var(--color-principal);
+  opacity: 1;
 }
 
 /* ==========================================

@@ -107,6 +107,47 @@
     }
 }
 
+@keyframes pulse-location {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes move-cursor-indicator {
+    0% {
+        transform: translate(40px, 40px);
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    30% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    45% {
+        transform: translate(0, 0) scale(0.8);
+        opacity: 1;
+    }
+    60% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+}
+
 /* Sección de Pasos */
 .pagos-steps {
     padding: 80px 0;
@@ -243,6 +284,36 @@
     font-size: 0.9rem;
     margin-top: 10px;
     line-height: 1.4;
+}
+
+/* Botón Descargar QR */
+.btn-download-qr {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--color-secundario);
+    color: white !important;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    margin-top: 15px;
+    width: 100%;
+    transition: var(--transicion);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(229, 142, 33, 0.2);
+}
+
+.btn-download-qr:hover {
+    background-color: var(--color-hover-secundario);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 142, 33, 0.3);
+}
+
+.btn-download-qr i {
+    font-size: 1.1rem;
 }
 
 /* Cuentas Grid */
@@ -815,5 +886,230 @@
     
     .presencial-info h2 {
         font-size: 2rem;
+    }
+}
+
+/* Puntos de Pago Autorizados */
+.puntos-pago {
+    padding-bottom: 80px;
+    background-color: white;
+}
+
+.otros-puntos-header h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 2rem;
+}
+
+.text-primary {
+    color: #005B9F;
+}
+
+.badge-distrito {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #E58E21;
+    color: white;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.puntos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.punto-card {
+    background: #005B9F;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 91, 159, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.punto-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0, 91, 159, 0.35);
+}
+
+.punto-info {
+    padding: 30px 35px 30px 100px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    min-height: 140px;
+}
+
+.punto-info > i.fas:not(.fa-map-marked-alt) {
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 6rem;
+    color: white;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.punto-text {
+    flex-grow: 1;
+}
+
+.punto-text h3 {
+    font-size: 1.4rem;
+    color: white;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.punto-detalles {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.punto-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 !important;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.punto-item i {
+    margin-top: 3px;
+    font-size: 0.9rem;
+    color: var(--color-secundario);
+    width: 20px;
+    text-align: center;
+    opacity: 1 !important;
+}
+
+.btn-location {
+    width: 55px;
+    height: 55px;
+    background: white;
+    color: #005B9F;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+    position: relative;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    animation: pulse-location 2s infinite;
+}
+
+.btn-location i {
+    font-size: 1.4rem;
+}
+
+.btn-location:hover {
+    background: #E58E21;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(229, 142, 33, 0.4);
+}
+
+.tooltip-text {
+    position: absolute;
+    bottom: 120%;
+    right: 0;
+    background: #1a202c;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 18px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #1a202c transparent transparent transparent;
+}
+
+.btn-location:hover .tooltip-text {
+    opacity: 1;
+    visibility: visible;
+    bottom: 130%;
+}
+
+.cursor-indicator {
+    position: absolute;
+    right: 48px;
+    bottom: 35px;
+    color: #E58E21;
+    font-size: 1.4rem;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+    animation: move-cursor-indicator 3s infinite;
+}
+
+@media (max-width: 992px) {
+    .puntos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .punto-info {
+        padding: 30px 25px 30px 80px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .punto-info > i.fas:not(.fa-map-marked-alt) {
+        font-size: 4rem;
+        left: -5px;
+    }
+    
+    .btn-location {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 576px) {
+    .punto-info {
+        padding: 25px 15px 25px 70px;
+    }
+    
+    .punto-text h3 {
+        font-size: 1.2rem;
+    }
+    
+    .punto-item {
+        font-size: 0.85rem;
     }
 }
