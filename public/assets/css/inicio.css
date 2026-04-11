@@ -1,10 +1,10 @@
 
 /* Hero Section */
 .hero {
-  background-image: url("../img/portada/temporadas/portada-semana.jpg");
+/*   background-image: url("../img/portada/temporadas/portada-semana.jpg"); */
   background-size: cover;
   background-position: center;
-  /* background: linear-gradient(135deg, #005b9f 0%, #0077cc 100%); */
+  background: linear-gradient(135deg, #005b9f 0%, #0077cc 100%);
   color: white;
   padding: 100px 0 0;
   position: relative;
@@ -59,6 +59,7 @@
   gap: 15px;
   flex-wrap: wrap;
   animation: fadeInUp 0.8s ease-out 0.4s backwards;
+  margin-bottom: 1.5rem;
 }
 
 @keyframes fadeInUp {
@@ -1048,9 +1049,9 @@
 }
 
 @media (max-width: 480px) {
-  .hero {
+/*   .hero {
     background-image: url("../img/portada/temporadas/portada-res-semana.jpg");
-  }
+  } */
   .hero-text h1 {
     font-size: 1.5rem;
   }
