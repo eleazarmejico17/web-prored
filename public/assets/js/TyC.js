@@ -136,7 +136,7 @@ function openTyCModal() {
 function closeTyCModal() {
     const modal = document.getElementById('tycModal');
     modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
 }
 
 // Cerrar modal con tecla ESC
