@@ -41,6 +41,7 @@ BASE_URL=https://proredperu.com
 MAIL_ENABLED=true
 MAIL_FROM=libro-reclamaciones@proredperu.com
 MAIL_FROM_NAME=ProRed - Libro de Reclamaciones
+MAIL_ADMIN=prored.adm@gmail.com
 '@
 [System.IO.File]::WriteAllText("$stage\web\.env", $envProd, (New-Object System.Text.UTF8Encoding($false)))
 

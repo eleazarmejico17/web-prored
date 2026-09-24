@@ -312,6 +312,9 @@ try {
         $emailEnviado = true;
         lr_historial($id, 'ACUSE_ENVIADO', 'Acuse de recibo enviado a ' . $email . ' con PDF adjunto.');
     }
+    if ($fila) {
+        lr_email_admin_nueva($fila); // copia de aviso a MAIL_ADMIN (nunca falla el registro)
+    }
 } catch (Throwable $e) {
     error_log('Libro reclamaciones (correo): ' . $e->getMessage());
 }

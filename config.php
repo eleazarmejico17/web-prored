@@ -46,6 +46,7 @@ return [
         'from' => env('MAIL_FROM', ''),
         'from_name' => env('MAIL_FROM_NAME', 'ProRed - Libro de Reclamaciones'),
         'enabled' => filter_var(env('MAIL_ENABLED', 'false'), FILTER_VALIDATE_BOOLEAN),
+        'admin' => env('MAIL_ADMIN', ''),
     ],
 
     'admin' => [
