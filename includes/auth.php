@@ -47,6 +47,13 @@ function lr_admin_login(string $username, string $password): bool
     $stmt->execute([$username]);
     $row = $stmt->fetch();
     if (!$row || !(int)$row['activo']) {
+        // Verificación simulada: mismo coste que un usuario real (evita
+        // enumerar usuarios midiendo el tiempo de respuesta)
+        static $dummy = null;
+        if ($dummy === null) {
+            $dummy = password_hash('timing-equalization-not-a-real-password', PASSWORD_DEFAULT);
+        }
+        password_verify($password, $dummy);
         return false;
     }
     if (!password_verify($password, $row['password_hash'])) {

@@ -1,0 +1,25 @@
+# ============================================================
+# web/.htaccess — interno de la carpeta del sitio
+# (la raíz ya enruta aquí; esto es defensa en profundidad)
+# ============================================================
+DirectoryIndex index.html index.php
+RewriteEngine On
+
+# Acceso directo del navegador a /web/... → prohibido
+# (THE_REQUEST conserva la URL original: los enrutados internos no lo disparan)
+RewriteCond %{THE_REQUEST} \s/web/
+RewriteRule ^ - [F,L]
+
+# Secretos nunca accesibles
+RewriteRule ^\.env - [F,L]
+RewriteRule ^config\.php$ - [F,L]
+RewriteRule ^(sql|src|node_modules|\.git)(/|$) - [F,L]
+RewriteRule ^[^/]+\.(zip|tar|tgz)$ - [F,L]
+
+# Cabeceras de seguridad (respuestas estáticas y PHP)
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "same-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+</IfModule>

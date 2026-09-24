@@ -96,28 +96,62 @@ function e(?string $s): string
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Reclamaciones — Admin</title>
+<link rel="icon" href="../public/assets/img/logo.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="assets/admin.css">
 </head>
 <body>
 <header class="top">
   <div class="top-inner">
-    <strong>Libro de Reclamaciones</strong>
+    <a class="brand" href="index.php">
+      <img class="brand-logo" src="../public/assets/img/logo-ProRed.png" alt="ProRed">
+      <span class="brand-divider"></span>
+      <span class="brand-name">Libro de Reclamaciones</span>
+    </a>
     <nav>
       <a href="index.php" class="active">Listado</a>
-      <span class="user"><?= e($admin['nombre'] ?: $admin['username']) ?></span>
+      <span class="user">
+        <span class="avatar"><?= e(strtoupper(mb_substr($admin['nombre'] ?: $admin['username'], 0, 1))) ?></span>
+        <span class="user-name"><?= e($admin['nombre'] ?: $admin['username']) ?></span>
+      </span>
       <a href="logout.php" class="logout">Salir</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
+  <div class="page-head">
+    <div>
+      <h1>Reclamaciones</h1>
+      <p class="sub">Registro, seguimiento y respuesta de Hojas de Reclamación</p>
+    </div>
+  </div>
+
   <section class="kpis">
-    <div class="kpi"><span class="n"><?= (int)$kpi['total'] ?></span><span class="l">Total</span></div>
-    <div class="kpi"><span class="n"><?= (int)$kpi['recibidos'] ?></span><span class="l">Recibidos</span></div>
-    <div class="kpi"><span class="n"><?= (int)$kpi['en_proceso'] ?></span><span class="l">En proceso</span></div>
-    <div class="kpi"><span class="n"><?= (int)$kpi['respondidos'] ?></span><span class="l">Respondidos</span></div>
-    <div class="kpi"><span class="n"><?= (int)$kpi['cerrados'] ?></span><span class="l">Cerrados</span></div>
-    <div class="kpi warn"><span class="n"><?= (int)$kpi['vencidos'] ?></span><span class="l">Vencidos</span></div>
+    <div class="kpi k-blue">
+      <div class="kpi-head"><span class="kpi-icon"><i class="fas fa-inbox"></i></span></div>
+      <span class="n"><?= (int)$kpi['total'] ?></span><span class="l">Total</span>
+    </div>
+    <div class="kpi k-sky">
+      <div class="kpi-head"><span class="kpi-icon"><i class="fas fa-envelope-open-text"></i></span></div>
+      <span class="n"><?= (int)$kpi['recibidos'] ?></span><span class="l">Recibidos</span>
+    </div>
+    <div class="kpi k-orange">
+      <div class="kpi-head"><span class="kpi-icon"><i class="fas fa-spinner"></i></span></div>
+      <span class="n"><?= (int)$kpi['en_proceso'] ?></span><span class="l">En proceso</span>
+    </div>
+    <div class="kpi k-green">
+      <div class="kpi-head"><span class="kpi-icon"><i class="fas fa-check-double"></i></span></div>
+      <span class="n"><?= (int)$kpi['respondidos'] ?></span><span class="l">Respondidos</span>
+    </div>
+    <div class="kpi k-gray">
+      <div class="kpi-head"><span class="kpi-icon"><i class="fas fa-lock"></i></span></div>
+      <span class="n"><?= (int)$kpi['cerrados'] ?></span><span class="l">Cerrados</span>
+    </div>
+    <div class="kpi k-red">
+      <div class="kpi-head"><span class="kpi-icon"><i class="fas fa-triangle-exclamation"></i></span></div>
+      <span class="n"><?= (int)$kpi['vencidos'] ?></span><span class="l">Vencidos</span>
+    </div>
   </section>
 
   <form class="filters" method="get" action="index.php">
@@ -171,7 +205,7 @@ function e(?string $s): string
           <td><?= e($r['servicio']) ?></td>
           <td><span class="tag st-<?= e(strtolower($r['estado'])) ?>"><?= e($estadoLabel[$r['estado']] ?? $r['estado']) ?></span></td>
           <td class="<?= $vencido ? 'vencido' : '' ?>"><?= e(date('d/m/Y', strtotime($r['fecha_limite_respuesta']))) ?></td>
-          <td><a class="btn-sm" href="reclamacion.php?id=<?= (int)$r['id'] ?>">Ver</a></td>
+          <td><a class="btn-sm" href="reclamacion.php?id=<?= (int)$r['id'] ?>"><i class="fas fa-eye"></i> Ver</a></td>
         </tr>
         <?php endforeach; ?>
       </tbody>

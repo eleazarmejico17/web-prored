@@ -58,25 +58,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Setup — Libro de Reclamaciones</title>
+<link rel="icon" href="../public/assets/img/logo.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="assets/admin.css">
 </head>
 <body class="auth-body">
-<div class="auth-card">
-  <h1>Primer administrador</h1>
-  <p>Cree el usuario admin y luego elimine o proteja este archivo <code>setup.php</code>.</p>
-  <?php if ($error): ?><div class="error"><?= lr_h($error) ?></div><?php endif; ?>
-  <form method="post">
-    <input type="hidden" name="csrf" value="<?= lr_csrf_token() ?>">
-    <label>Usuario</label>
-    <input name="username" required maxlength="50" autofocus>
-    <label>Nombre visible</label>
-    <input name="nombre" maxlength="100">
-    <label>Contraseña (mín. 10)</label>
-    <input name="password" type="password" required minlength="10">
-    <label>Repetir contraseña</label>
-    <input name="password2" type="password" required minlength="10">
-    <button type="submit" class="btn-secondary">Crear usuario</button>
-  </form>
+<aside class="auth-brand">
+  <img class="brand-logo" src="../public/assets/img/logo-ProRed.png" alt="ProRed">
+  <h1>Libro de Reclamaciones</h1>
+  <p class="brand-lead">Instalación inicial del panel administrativo de ProRed.</p>
+  <ul class="brand-points">
+    <li><i class="fas fa-check-circle"></i> Cree el primer usuario administrador</li>
+    <li><i class="fas fa-check-circle"></i> Proteja o elimine <code>setup.php</code> después de crearlo</li>
+  </ul>
+  <p class="brand-legal">Conforme al Decreto Supremo N.º 011-2011-PCM — Libro de Reclamaciones ProRed.</p>
+  <img class="brand-watermark" src="../public/assets/img/logo.png" alt="">
+</aside>
+<div class="auth-side">
+  <div class="auth-card">
+    <img class="auth-logo" src="../public/assets/img/logo-ProRed-color.png" alt="ProRed">
+    <h1>Primer administrador</h1>
+    <p>Cree el usuario admin y luego elimine o proteja este archivo <code>setup.php</code>.</p>
+    <?php if ($error): ?><div class="error"><?= lr_h($error) ?></div><?php endif; ?>
+    <form method="post">
+      <input type="hidden" name="csrf" value="<?= lr_csrf_token() ?>">
+      <label>Usuario</label>
+      <input name="username" required maxlength="50" autofocus>
+      <label>Nombre visible</label>
+      <input name="nombre" maxlength="100">
+      <label>Contraseña (mín. 10)</label>
+      <input name="password" type="password" required minlength="10">
+      <label>Repetir contraseña</label>
+      <input name="password2" type="password" required minlength="10">
+      <button type="submit" class="btn-secondary">Crear usuario</button>
+    </form>
+  </div>
 </div>
 </body>
 </html>

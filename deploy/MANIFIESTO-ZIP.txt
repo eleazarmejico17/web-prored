@@ -1,0 +1,169 @@
+.htaccess
+web/  (carpeta)
+web/.env
+web/.env.example
+web/.htaccess
+web/admin/  (carpeta)
+web/admin/assets/  (carpeta)
+web/admin/assets/admin.css
+web/admin/index.php
+web/admin/login.php
+web/admin/logout.php
+web/admin/reclamacion.php
+web/admin/setup.php
+web/api/  (carpeta)
+web/api/crear-reclamacion.php
+web/api/pdf.php
+web/api/session.php
+web/cobertura/  (carpeta)
+web/cobertura/index.html
+web/config.php
+web/includes/  (carpeta)
+web/includes/.htaccess
+web/includes/auth.php
+web/includes/bootstrap.php
+web/includes/env.php
+web/includes/pdf.php
+web/index.html
+web/internet-empresas/  (carpeta)
+web/internet-empresas/index.html
+web/libro-reclamaciones/  (carpeta)
+web/libro-reclamaciones/index.html
+web/nosotros/  (carpeta)
+web/nosotros/index.html
+web/planes/  (carpeta)
+web/planes/index.html
+web/politica-de-privacidad/  (carpeta)
+web/politica-de-privacidad/index.html
+web/public/  (carpeta)
+web/public/assets/  (carpeta)
+web/public/assets/css/  (carpeta)
+web/public/assets/css/cobertura.css
+web/public/assets/css/cookies.css
+web/public/assets/css/empresas.css
+web/public/assets/css/inicio.css
+web/public/assets/css/libro.css
+web/public/assets/css/nosotros.css
+web/public/assets/css/pagos.css
+web/public/assets/css/planes.css
+web/public/assets/css/politicas.css
+web/public/assets/css/sliderclient.css
+web/public/assets/css/styles.css
+web/public/assets/img/  (carpeta)
+web/public/assets/img/antena.png
+web/public/assets/img/bg-empresas.png
+web/public/assets/img/bot-nuplin.png
+web/public/assets/img/bot-prored.png
+web/public/assets/img/client/  (carpeta)
+web/public/assets/img/client/logo-dircetur-junin.png
+web/public/assets/img/client/logo-iestp.png
+web/public/assets/img/client/logo-mrtc-ancash.png
+web/public/assets/img/client/logo-municipalidad-chilca.png
+web/public/assets/img/client/logo-red-salud-valle.png
+web/public/assets/img/client/logo-san-agustin-cajas.png
+web/public/assets/img/client/logo-sima-marina.png
+web/public/assets/img/client/logo-ugel-concepcion.png
+web/public/assets/img/empresas/  (carpeta)
+web/public/assets/img/empresas/corporativo.png
+web/public/assets/img/empresas/dedicado.png
+web/public/assets/img/empresas/interconexion.png
+web/public/assets/img/indicaciones.png
+web/public/assets/img/libro_de_reclamaciones.png
+web/public/assets/img/logo.ico
+web/public/assets/img/logo.png
+web/public/assets/img/logo-nuplin.png
+web/public/assets/img/logo-ProRed.png
+web/public/assets/img/logo-ProRed-color.png
+web/public/assets/img/logotipo-ProRed.png
+web/public/assets/img/logo-trazo.png
+web/public/assets/img/modelos/  (carpeta)
+web/public/assets/img/modelos/modelo-prored.png
+web/public/assets/img/modelos/modelo-prored-madre.png
+web/public/assets/img/mtc.png
+web/public/assets/img/nosotros/  (carpeta)
+web/public/assets/img/nosotros/atcliente.png
+web/public/assets/img/nosotros/jefe.png
+web/public/assets/img/nosotros/n1.jpg
+web/public/assets/img/nosotros/n2.jpg
+web/public/assets/img/nosotros/n3.jpg
+web/public/assets/img/nosotros/n4.jpg
+web/public/assets/img/nosotros/n5.jpg
+web/public/assets/img/nosotros/soporte.png
+web/public/assets/img/nosotros/tecnico.png
+web/public/assets/img/nuplinm.png
+web/public/assets/img/opsitel.png
+web/public/assets/img/pagos/  (carpeta)
+web/public/assets/img/pagos/pagos-p.png
+web/public/assets/img/pagos/paso1.png
+web/public/assets/img/pagos/paso2.png
+web/public/assets/img/pagos/paso3.png
+web/public/assets/img/pagos/qr-prored.jpg
+web/public/assets/img/pagos/QR-prored.png
+web/public/assets/img/portada/  (carpeta)
+web/public/assets/img/portada/portada-cobertura.jpg
+web/public/assets/img/portada/portada-empresas.jpg
+web/public/assets/img/portada/portada-nosotros.jpg
+web/public/assets/img/portada/portada-portal.jpg
+web/public/assets/img/portada/portada-res-cobertura.jpg
+web/public/assets/img/portada/portada-res-empresas.jpg
+web/public/assets/img/portada/portada-res-nosotros.jpg
+web/public/assets/img/portada/portada-res-portal.jpg
+web/public/assets/img/portada/temporadas/  (carpeta)
+web/public/assets/img/portada/temporadas/portada-res-semana.jpg
+web/public/assets/img/portada/temporadas/portada-semana.jpg
+web/public/assets/img/probot.png
+web/public/assets/img/pronatel.webp
+web/public/assets/img/tv/  (carpeta)
+web/public/assets/img/tv/basico/  (carpeta)
+web/public/assets/img/tv/basico/basico (1).png
+web/public/assets/img/tv/basico/basico (2).png
+web/public/assets/img/tv/basico/basico (3).png
+web/public/assets/img/tv/basico/basico (4).png
+web/public/assets/img/tv/basico/basico (5).png
+web/public/assets/img/tv/basico/basico (6).png
+web/public/assets/img/tv/basico+/  (carpeta)
+web/public/assets/img/tv/basico+/basico+ (1).png
+web/public/assets/img/tv/basico+/basico+ (2).png
+web/public/assets/img/tv/basico+/basico+ (3).png
+web/public/assets/img/tv/basico+/basico+ (4).png
+web/public/assets/img/tv/basico+/basico+ (5).png
+web/public/assets/img/tv/basico+/basico+ (6).png
+web/public/assets/img/tv/flex/  (carpeta)
+web/public/assets/img/tv/flex/flex (1).jpg
+web/public/assets/img/tv/flex/flex (1).png
+web/public/assets/img/tv/flex/flex (10).png
+web/public/assets/img/tv/flex/flex (11).png
+web/public/assets/img/tv/flex/flex (12).png
+web/public/assets/img/tv/flex/flex (2).png
+web/public/assets/img/tv/flex/flex (3).png
+web/public/assets/img/tv/flex/flex (4).png
+web/public/assets/img/tv/flex/flex (5).png
+web/public/assets/img/tv/flex/flex (6).png
+web/public/assets/img/tv/flex/flex (7).png
+web/public/assets/img/tv/flex/flex (8).png
+web/public/assets/img/tv/flex/flex (9).png
+web/public/assets/img/tv/robored.af
+web/public/assets/js/  (carpeta)
+web/public/assets/js/cobertura.js
+web/public/assets/js/cookies.js
+web/public/assets/js/empresas.js
+web/public/assets/js/inicio.js
+web/public/assets/js/libro.js
+web/public/assets/js/network-particles.js
+web/public/assets/js/nosotros.js
+web/public/assets/js/pagos.js
+web/public/assets/js/planes.js
+web/public/assets/js/script.js
+web/public/assets/js/tabs.js
+web/public/assets/js/TyC.js
+web/public/assets/video/  (carpeta)
+web/public/assets/video/duo-background1.webm
+web/public/assets/video/internet-background1.webm
+web/public/assets/video/tv-background1.webm
+web/public/pdfview/  (carpeta)
+web/realizar-pagos/  (carpeta)
+web/realizar-pagos/index.html
+web/robots.txt
+web/sitemap.xml
+web/sql/  (carpeta)
+web/sql/schema.sql

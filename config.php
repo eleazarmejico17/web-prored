@@ -1,23 +1,24 @@
 <?php
 /**
  * Configuración del Libro de Reclamaciones.
- * Copiar config.php.example → config.php en el servidor y completar los datos.
- * config.php NO debe subirse a un repositorio público con credenciales reales.
+ *
+ * Este archivo NO contiene secretos: credenciales de BD, URL base y correo
+ * se leen del archivo ".env" en la raíz (ver .env.example) o del entorno
+ * real del servidor (variables de entorno / SetEnv).
  */
+require_once __DIR__ . '/includes/env.php';
+
 return [
-    // MySQL (phpMyAdmin / cPanel → “Bases de datos MySQL”)
     'db' => [
-        'host' => 'localhost',
-        'name' => 'cpaneluser_prored_libro',
-        'user' => 'cpaneluser_prored',
-        'pass' => 'CAMBIAR_PASSWORD',
+        'host' => env('DB_HOST', '127.0.0.1'),
+        'name' => env('DB_NAME', 'prored_libro'),
+        'user' => env('DB_USER', 'root'),
+        'pass' => env('DB_PASS', ''),
         'charset' => 'utf8mb4',
     ],
 
-    // URL base del sitio (sin barra final) — para links de constancia/correo
-    'base_url' => 'https://proredperu.com',
+    'base_url' => rtrim((string)env('BASE_URL', 'http://localhost/web-prored'), '/'),
 
-    // Datos del proveedor (mostrados en constancia / admin)
     'proveedor' => [
         'razon_social' => 'INVERSIONES STARNET PERU SAC',
         'nombre_comercial' => 'ProRed',
@@ -26,10 +27,8 @@ return [
         'email' => 'admin@proredperu.com',
     ],
 
-    // Días hábiles de respuesta (Indecopi: máx. 15 hábiles)
     'dias_habiles_respuesta' => 15,
 
-    // Feriados Perú (YYYY-MM-DD) — ampliar cada año
     'feriados' => [
         '2026-01-01', '2026-04-03', '2026-04-09', '2026-05-01',
         '2026-06-29', '2026-07-28', '2026-07-29', '2026-08-30',
@@ -39,19 +38,16 @@ return [
         '2027-10-08', '2027-11-01', '2027-12-08', '2027-12-25',
     ],
 
-    // Anti-abuso
     'rate_limit' => [
         'max_por_hora' => 5,
     ],
 
-    // Correo (opcional). Si from vacío, no se envía copia automática.
     'mail' => [
-        'from' => '',            // ej. libro@proredperu.com
-        'from_name' => 'ProRed - Libro de Reclamaciones',
-        'enabled' => false,
+        'from' => env('MAIL_FROM', ''),
+        'from_name' => env('MAIL_FROM_NAME', 'ProRed - Libro de Reclamaciones'),
+        'enabled' => filter_var(env('MAIL_ENABLED', 'false'), FILTER_VALIDATE_BOOLEAN),
     ],
 
-    // Sesión del panel admin
     'admin' => [
         'session_name' => 'prored_libro_admin',
         'duracion_minutos' => 60,

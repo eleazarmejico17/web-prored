@@ -434,6 +434,16 @@
   justify-content: center;
 }
 
+/* Acción única del paso 5 — naranja con contraste garantizado */
+.exito-acciones .btn-a {
+  background-color: var(--color-secundario, #E58E21);
+  color: #ffffff;
+}
+.exito-acciones .btn-a:hover {
+  background-color: var(--color-hover-secundario, #CC7A1D);
+  color: #ffffff;
+}
+
 /* Éxito — variantes .btn del sitio */
 .btn-a {
   display: inline-block;

@@ -4,6 +4,7 @@ title: Libro de Reclamaciones Online | ProRed Huancayo
 description: Registra tu Reclamo o Queja ante el Libro de Reclamaciones de ProRed. Recibe un código de seguimiento y constancia de registro.
 pathPrefix: "../"
 navId: "libro-reclamaciones"
+csp: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
 extraCss:
   - libro.css
 extraJs:
@@ -46,7 +47,7 @@ extraJs:
         <form id="libroForm" class="libro-form" novalidate
               data-api="{{ pathPrefix }}api/crear-reclamacion.php"
               data-session="{{ pathPrefix }}api/session.php"
-              data-constancia-base="{{ pathPrefix }}api/constancia.php">
+              data-pdf-base="{{ pathPrefix }}api/pdf.php">
 
             <!-- Honeypot -->
             <div class="hp" aria-hidden="true">
@@ -89,6 +90,7 @@ extraJs:
                         <label for="numero_documento">N.° de documento *</label>
                         <input type="text" id="numero_documento" name="numero_documento" maxlength="20" required
                                inputmode="numeric" placeholder="DNI / CE / RUC">
+                        <div class="hint" id="numero_documento_hint">DNI: 8 dígitos · CE: 6–12 caracteres</div>
                     </div>
                     <div class="field">
                         <label for="telefono">Teléfono *</label>
@@ -256,7 +258,7 @@ extraJs:
                 <div class="exito">
                     <div class="exito-icon"><i class="fas fa-check-circle"></i></div>
                     <h2>Hoja de Reclamación registrada</h2>
-                    <p>Guarda tu código de seguimiento. También puedes imprimir la constancia.</p>
+                    <p>Guarda tu código de seguimiento y revisa el PDF de tu reclamo.</p>
 
                     <div class="codigo-box">
                         <span class="codigo" id="codigoOut">—</span>
@@ -272,15 +274,9 @@ extraJs:
                     </dl>
 
                     <div class="exito-acciones">
-                        <a class="btn btn-primary btn-a" id="btnConstancia" href="#" target="_blank" rel="noopener">
-                            <i class="fas fa-file-alt"></i> Ver constancia
+                        <a class="btn btn-a alt" id="btnVerPdf" href="#" target="_blank" rel="noopener">
+                            <i class="fas fa-file-pdf"></i> Ver
                         </a>
-                        <button type="button" class="btn btn-secondary btn-a alt" id="btnImprimir">
-                            <i class="fas fa-print"></i> Imprimir
-                        </button>
-                        <button type="button" class="btn btn-outline btn-a ghost" id="btnNuevo">
-                            <i class="fas fa-plus"></i> Nueva reclamación
-                        </button>
                     </div>
                 </div>
             </fieldset>

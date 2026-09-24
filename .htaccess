@@ -1,0 +1,22 @@
+# Local dev (Laragon): sirve las páginas desde dist/ manteniendo
+# la URL http://localhost/web-prored/ (o http://web-prored.test/).
+# En producción esto NO se sube: public_html/ ya es el contenido de dist/.
+RewriteEngine On
+
+# No exponer código fuente / dependencias / config / secretos
+RewriteRule ^(src|node_modules|\.git)(/|$) - [F,L]
+RewriteRule ^(config\.php|\.env) - [F,L]
+
+# Portada → dist/index.html (ANTES del chequeo -d: la raíz del proyecto "existe")
+RewriteRule ^$ dist/index.html [L]
+
+# Archivos o carpetas reales en la raíz del proyecto (api/, admin/, public/, etc.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Páginas (planes/, libro-reclamaciones/, …) → dist/<pagina>/index.html
+RewriteRule ^([^/]+)/?$ dist/$1/index.html [L]
+
+# Cualquier otro archivo generado en dist/
+RewriteRule ^(.+)$ dist/$1 [L]

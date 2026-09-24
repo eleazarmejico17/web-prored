@@ -30,6 +30,8 @@ $estados = [
     'CERRADO' => 'Cerrado',
 ];
 
+$medios = ['Correo electrónico', 'WhatsApp', 'Teléfono', 'Presencial', 'Otro'];
+
 $mensaje = '';
 $error = '';
 
@@ -38,67 +40,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!lr_csrf_check($_POST['csrf'] ?? null)) {
         $error = 'Sesión expirada.';
     } else {
-        $accion = $_POST['accion'] ?? '';
-        $nuevoEstado = $_POST['estado'] ?? '';
+        $accion = (string)($_POST['accion'] ?? '');
+        $nuevoEstado = (string)($_POST['estado'] ?? '');
         $respuesta = trim((string)($_POST['respuesta'] ?? ''));
         $acciones = trim((string)($_POST['acciones_adoptadas'] ?? ''));
         $medio = trim((string)($_POST['medio_envio_respuesta'] ?? ''));
 
-        if ($accion === 'actualizar') {
-            if (!isset($estados[$nuevoEstado])) {
-                $error = 'Estado inválido.';
-            } else {
-                $fechaRespuesta = null;
-                if (in_array($nuevoEstado, ['RESPONDIDO', 'CERRADO'], true) && $respuesta !== '') {
-                    $fechaRespuesta = date('Y-m-d H:i:s');
-                }
-                // Solo pisa respuesta/acciones/medio si el admin envió valor (no anula lo previo al vaciar)
-                $sets = ['estado = ?', 'usuario_responsable = ?'];
-                $updParams = [
-                    $nuevoEstado,
-                    $admin['username'],
-                ];
-                if ($medio !== '') {
-                    $sets[] = 'medio_envio_respuesta = ?';
-                    $updParams[] = $medio;
-                }
-                if ($respuesta !== '') {
-                    $sets[] = 'respuesta = ?';
-                    $updParams[] = $respuesta;
-                }
-                if ($acciones !== '') {
-                    $sets[] = 'acciones_adoptadas = ?';
-                    $updParams[] = $acciones;
-                }
-                if ($fechaRespuesta !== null) {
-                    $sets[] = 'fecha_respuesta = COALESCE(?, fecha_respuesta)';
-                    $updParams[] = $fechaRespuesta;
-                }
-                $updParams[] = $id;
-                $pdo->prepare(
-                    'UPDATE reclamaciones SET ' . implode(', ', $sets) . ' WHERE id = ?'
-                )->execute($updParams);
-                lr_historial($id, 'ESTADO_CAMBIADO', 'Estado → ' . $nuevoEstado, (int)$admin['id']);
-                if ($respuesta !== '' && !empty($r['email'])) {
-                    $mailCfg = lr_config()['mail'] ?? [];
-                    if (!empty($mailCfg['enabled']) && !empty($mailCfg['from'])) {
-                        $headers = 'From: ' . $mailCfg['from_name'] . ' <' . $mailCfg['from'] . ">\r\n"
-                            . "Content-Type: text/plain; charset=UTF-8\r\n";
-                        @mail(
-                            $r['email'],
-                            'Respuesta a su Hoja de Reclamación ' . $r['codigo'],
-                            "Estimado(a) consumidor:\n\nCódigo: {$r['codigo']}\n\n{$respuesta}\n\n"
-                            . lr_config()['proveedor']['razon_social'] . "\n",
-                            $headers
-                        );
-                        lr_historial($id, 'RESPUESTA_ENVIADA', 'Respuesta enviada por correo.', (int)$admin['id']);
-                    }
-                }
-                $mensaje = 'Cambios guardados.';
-                // refrescar
-                $stmt->execute([$id]);
-                $r = $stmt->fetch();
+        if ($accion !== 'actualizar') {
+            $error = 'Acción no válida.';
+        } elseif (!isset($estados[$nuevoEstado])) {
+            $error = 'Estado inválido.';
+        } elseif ($medio !== '' && !in_array($medio, $medios, true)) {
+            $error = 'Medio de envío inválido.';
+        } elseif (mb_strlen($respuesta) > 10000 || mb_strlen($acciones) > 5000) {
+            $error = 'Texto demasiado largo (máx. 10 000 / 5 000 caracteres).';
+        } else {
+            // Saneado: sin etiquetas HTML ni caracteres de control (la salida se escapa con e())
+            $respuesta = lr_txt($respuesta, 10000);
+            $acciones = lr_txt($acciones, 5000);
+            $fechaRespuesta = null;
+            if (in_array($nuevoEstado, ['RESPONDIDO', 'CERRADO'], true) && $respuesta !== '') {
+                $fechaRespuesta = date('Y-m-d H:i:s');
             }
+            // Solo pisa respuesta/acciones/medio si el admin envió valor (no anula lo previo al vaciar)
+            $sets = ['estado = ?', 'usuario_responsable = ?'];
+            $updParams = [
+                $nuevoEstado,
+                $admin['username'],
+            ];
+            if ($medio !== '') {
+                $sets[] = 'medio_envio_respuesta = ?';
+                $updParams[] = $medio;
+            }
+            if ($respuesta !== '') {
+                $sets[] = 'respuesta = ?';
+                $updParams[] = $respuesta;
+            }
+            if ($acciones !== '') {
+                $sets[] = 'acciones_adoptadas = ?';
+                $updParams[] = $acciones;
+            }
+            if ($fechaRespuesta !== null) {
+                $sets[] = 'fecha_respuesta = COALESCE(?, fecha_respuesta)';
+                $updParams[] = $fechaRespuesta;
+            }
+            $updParams[] = $id;
+            $pdo->prepare(
+                'UPDATE reclamaciones SET ' . implode(', ', $sets) . ' WHERE id = ?'
+            )->execute($updParams);
+            lr_historial($id, 'ESTADO_CAMBIADO', 'Estado → ' . $nuevoEstado, (int)$admin['id']);
+            if ($respuesta !== '' && !empty($r['email'])) {
+                $mailCfg = lr_config()['mail'] ?? [];
+                if (!empty($mailCfg['enabled']) && !empty($mailCfg['from'])) {
+                    $headers = 'From: ' . $mailCfg['from_name'] . ' <' . $mailCfg['from'] . ">\r\n"
+                        . "Content-Type: text/plain; charset=UTF-8\r\n";
+                    @mail(
+                        $r['email'],
+                        'Respuesta a su Hoja de Reclamación ' . $r['codigo'],
+                        "Estimado(a) consumidor:\n\nCódigo: {$r['codigo']}\n\n{$respuesta}\n\n"
+                        . lr_config()['proveedor']['razon_social'] . "\n",
+                        $headers
+                    );
+                    lr_historial($id, 'RESPUESTA_ENVIADA', 'Respuesta enviada por correo.', (int)$admin['id']);
+                }
+            }
+            $mensaje = 'Cambios guardados.';
+            // refrescar
+            $stmt->execute([$id]);
+            $r = $stmt->fetch();
         }
     }
 }
@@ -120,7 +129,8 @@ function e(?string $s): string
 }
 
 $vencido = $r['estado'] !== 'CERRADO' && $r['estado'] !== 'RESPONDIDO' && $r['fecha_limite_respuesta'] < date('Y-m-d');
-$constanciaUrl = rtrim((string)(lr_config()['base_url'] ?? ''), '/') . '/api/constancia.php?codigo='
+$baseUrl = rtrim((string)(lr_config()['base_url'] ?? ''), '/');
+$pdfUrl = $baseUrl . '/api/pdf.php?codigo='
     . urlencode($r['codigo']) . '&token=' . urlencode($r['constancia_token']);
 ?>
 <!DOCTYPE html>
@@ -130,22 +140,37 @@ $constanciaUrl = rtrim((string)(lr_config()['base_url'] ?? ''), '/') . '/api/con
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title><?= e($r['codigo']) ?> — Admin</title>
+<link rel="icon" href="../public/assets/img/logo.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="assets/admin.css">
 </head>
 <body>
 <header class="top">
   <div class="top-inner">
-    <strong>Libro de Reclamaciones</strong>
+    <a class="brand" href="index.php">
+      <img class="brand-logo" src="../public/assets/img/logo-ProRed.png" alt="ProRed">
+      <span class="brand-divider"></span>
+      <span class="brand-name">Libro de Reclamaciones</span>
+    </a>
     <nav>
       <a href="index.php">Listado</a>
-      <span class="user"><?= e($admin['nombre'] ?: $admin['username']) ?></span>
+      <span class="user">
+        <span class="avatar"><?= e(strtoupper(mb_substr($admin['nombre'] ?: $admin['username'], 0, 1))) ?></span>
+        <span class="user-name"><?= e($admin['nombre'] ?: $admin['username']) ?></span>
+      </span>
       <a href="logout.php" class="logout">Salir</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <p><a href="index.php">&larr; Volver al listado</a></p>
+  <div class="page-head">
+    <div>
+      <h1 class="mono"><?= e($r['codigo']) ?></h1>
+      <p class="sub">Hoja de Reclamación — registrada el <?= e(date('d/m/Y H:i', strtotime($r['fecha_registro']))) ?></p>
+    </div>
+    <a class="back-link" href="index.php">&larr; Volver al listado</a>
+  </div>
 
   <?php if ($mensaje): ?><div class="ok"><?= e($mensaje) ?></div><?php endif; ?>
   <?php if ($error): ?><div class="err"><?= e($error) ?></div><?php endif; ?>
@@ -153,7 +178,6 @@ $constanciaUrl = rtrim((string)(lr_config()['base_url'] ?? ''), '/') . '/api/con
   <div class="detail-grid">
     <section class="card">
       <div class="card-head">
-        <h1 class="mono"><?= e($r['codigo']) ?></h1>
         <span class="tag st-<?= e(strtolower($r['estado'])) ?>"><?= e($estados[$r['estado']] ?? $r['estado']) ?></span>
         <span class="tag <?= $r['tipo'] === 'queja' ? 'tag-q' : 'tag-r' ?>"><?= e(strtoupper($r['tipo'])) ?></span>
         <?php if ($vencido): ?><span class="tag tag-venc">VENCIDO</span><?php endif; ?>
@@ -197,9 +221,7 @@ $constanciaUrl = rtrim((string)(lr_config()['base_url'] ?? ''), '/') . '/api/con
       <pre class="texto"><?= e($r['pedido']) ?></pre>
 
       <p class="constancia">
-        <a href="<?= e($constanciaUrl) ?>" target="_blank" rel="noopener">Ver constancia (imprimible)</a>
-        &nbsp;·&nbsp;
-        <a href="<?= e($constanciaUrl) ?>" target="_blank" rel="noopener" class="btn-sm" id="btnPdf">Generar PDF / Imprimir</a>
+        <a href="<?= e($pdfUrl) ?>" target="_blank" rel="noopener" class="btn-sm alt"><i class="fas fa-file-pdf"></i> Ver PDF</a>
       </p>
     </section>
 
@@ -225,7 +247,7 @@ $constanciaUrl = rtrim((string)(lr_config()['base_url'] ?? ''), '/') . '/api/con
         <label>Medio de envío</label>
         <select name="medio_envio_respuesta">
           <option value="">— Sin definir —</option>
-          <?php foreach (['Correo electrónico', 'WhatsApp', 'Teléfono', 'Presencial', 'Otro'] as $m): ?>
+          <?php foreach ($medios as $m): ?>
           <option value="<?= e($m) ?>" <?= $r['medio_envio_respuesta'] === $m ? 'selected' : '' ?>><?= e($m) ?></option>
           <?php endforeach; ?>
         </select>

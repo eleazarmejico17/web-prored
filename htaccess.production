@@ -1,0 +1,76 @@
+# ============================================================
+# public_html/.htaccess — RAÍZ (fusionado)
+# = .htaccess actual del hosting + enrutado a la carpeta web/
+# ============================================================
+DirectoryIndex index.html index.php
+RewriteEngine On
+
+# -------------------------------------------------
+# 1. Forzar HTTPS
+# -------------------------------------------------
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# -------------------------------------------------
+# 1b. El sitio vive en web/: bloquear acceso directo visible
+# -------------------------------------------------
+RewriteCond %{THE_REQUEST} \s/web/
+RewriteRule ^web(/|$) - [F,L]
+
+# -------------------------------------------------
+# 2. Ocultar index.html de las URLs
+# -------------------------------------------------
+# Si alguien visita /index.html lo redirigimos a la barra final /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+/)*index\.html\ HTTP/
+RewriteRule ^(([^/]+/)*)index\.html$ /$1 [R=301,L]
+
+# -------------------------------------------------
+# 3. Redirecciones 301 para SEO (Páginas movidas)
+# -------------------------------------------------
+# Si Google indexó con /public/
+RewriteRule ^public/cobertura\.html$ /cobertura/ [R=301,L]
+RewriteRule ^public/nosotros\.html$ /nosotros/ [R=301,L]
+RewriteRule ^public/empresas\.html$ /internet-empresas/ [R=301,L]
+RewriteRule ^public/pagos\.html$ /realizar-pagos/ [R=301,L]
+RewriteRule ^public/login\.html$ /realizar-pagos/ [R=301,L]
+
+# Si Google indexó en la raíz
+RewriteRule ^cobertura\.html$ /cobertura/ [R=301,L]
+RewriteRule ^nosotros\.html$ /nosotros/ [R=301,L]
+RewriteRule ^empresas\.html$ /internet-empresas/ [R=301,L]
+RewriteRule ^pagos\.html$ /realizar-pagos/ [R=301,L]
+RewriteRule ^politica\.html$ /politica-de-privacidad/ [R=301,L]
+RewriteRule ^login\.html$ /realizar-pagos/ [R=301,L]
+
+# -------------------------------------------------
+# 4. Seguridad: secretos nunca accesibles por HTTP
+# -------------------------------------------------
+RewriteRule ^\.env - [F,L]
+RewriteRule ^config\.php$ - [F,L]
+RewriteRule ^(sql|src|node_modules|\.git)(/|$) - [F,L]
+RewriteRule ^[^/]+\.(zip|tar|tgz)$ - [F,L]
+
+# -------------------------------------------------
+# 5. URL sin barra final con carpeta real en web/ → 301 con barra
+#    (evita que Apache exponga /web/ en la redirección)
+# -------------------------------------------------
+RewriteCond web/$1/index.html -f
+RewriteRule ^([^/]+(?:/[^/]+)*)$ $1/ [R=301,L]
+
+# -------------------------------------------------
+# 6. Todo lo demás → carpeta web/
+#    (otros sistemas y archivos raíz quedan excluidos)
+# -------------------------------------------------
+RewriteCond %{REQUEST_URI} !^/(almacen|crmservicios|financiero2|finanzas|inventario|cgi-bin|\.well-known)(/|$)
+RewriteRule ^(?!web(?:/|$))(.*)$ web/$1 [L]
+
+# -------------------------------------------------
+# PHP handler (NO tocar)
+# -------------------------------------------------
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the "ea-php82" package as the default "PHP" programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php82___lsphp .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

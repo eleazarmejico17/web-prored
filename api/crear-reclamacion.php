@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/includes/bootstrap.php';
+require_once dirname(__DIR__) . '/includes/constancia.php';
+require_once dirname(__DIR__) . '/includes/mailer.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     lr_json_out(['success' => false, 'message' => 'Método no permitido.'], 405);
@@ -9,6 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Intentar leer JSON o formulario
 $raw = file_get_contents('php://input') ?: '';
+if (strlen($raw) > 65536) {
+    lr_json_out(['success' => false, 'message' => 'Cuerpo de la solicitud demasiado grande.'], 413);
+}
 $ct = $_SERVER['CONTENT_TYPE'] ?? '';
 if (stripos($ct, 'application/json') !== false) {
     $data = json_decode($raw, true);
@@ -22,6 +27,11 @@ if (stripos($ct, 'application/json') !== false) {
 // Honeypot: campo oculto "website" debe quedar vacío
 if (!empty($data['website'])) {
     lr_json_out(['success' => false, 'message' => 'Solicitud rechazada.'], 400);
+}
+
+// Origen (complemento al CSRF): Origin/Referer, si vienen, deben ser del mismo host
+if (!lr_mismo_origen()) {
+    lr_json_out(['success' => false, 'message' => 'Origen no permitido.'], 403);
 }
 
 // CSRF
@@ -45,38 +55,94 @@ if (!lr_rate_ok('crear_reclamacion', $max)) {
 $errors = [];
 
 $str = static function ($k, $max = 255) use ($data): string {
-    $v = trim((string)($data[$k] ?? ''));
-    if (mb_strlen($v) > $max) {
-        $v = mb_substr($v, 0, $max);
-    }
-    return $v;
+    // Saneado: sin etiquetas HTML ni caracteres de control (defensa XSS en almacenamiento)
+    return lr_txt((string)($data[$k] ?? ''), $max);
 };
 
-$tipoPersona = in_array($data['tipo_persona'] ?? '', ['natural', 'juridica'], true)
-    ? $data['tipo_persona'] : 'natural';
+$tipoPersona = $data['tipo_persona'] ?? '';
+if (!in_array($tipoPersona, ['natural', 'juridica'], true)) {
+    $errors['tipo_persona'] = 'Seleccione tipo de persona.';
+    $tipoPersona = 'natural';
+}
 $nombre = $str('nombre_razon_social', 200);
 $tipoDoc = $data['tipo_documento'] ?? '';
 $numeroDoc = preg_replace('/\s+/', '', $str('numero_documento', 20));
 $domicilio = $str('domicilio', 255);
-$telefono = preg_replace('/[^\d+]/', '', $str('telefono', 30));
-$email = filter_var($str('email', 150), FILTER_VALIDATE_EMAIL) ? $str('email', 150) : '';
+$telefonoRaw = $str('telefono', 30);
+$telefono = preg_replace('/[^\d+]/', '', $telefonoRaw);
+$emailRaw = $str('email', 150);
+$email = filter_var($emailRaw, FILTER_VALIDATE_EMAIL) ? $emailRaw : '';
 
+// Formato de documento según tipo
+$docOk = false;
+if (!in_array($tipoDoc, ['dni', 'ce', 'ruc', 'otro'], true)) {
+    $errors['tipo_documento'] = 'Seleccione el tipo de documento.';
+} else {
+    switch ($tipoDoc) {
+        case 'dni':
+            $docOk = (bool)preg_match('/^\d{8}$/', $numeroDoc);
+            if (!$docOk) {
+                $errors['numero_documento'] = 'El DNI debe tener 8 dígitos.';
+            }
+            break;
+        case 'ruc':
+            $docOk = (bool)preg_match('/^\d{11}$/', $numeroDoc);
+            if (!$docOk) {
+                $errors['numero_documento'] = 'El RUC debe tener 11 dígitos.';
+            }
+            break;
+        case 'ce':
+            $docOk = (bool)preg_match('/^[0-9A-Za-z-]{6,12}$/', $numeroDoc);
+            if (!$docOk) {
+                $errors['numero_documento'] = 'Carné de extranjería inválido (6–12 caracteres).';
+            }
+            break;
+        default: // otro
+            $docOk = (bool)preg_match('/^[0-9A-Za-z-]{5,20}$/', $numeroDoc);
+            if (!$docOk) {
+                $errors['numero_documento'] = 'Número de documento inválido (5–20 caracteres).';
+            }
+    }
+}
+
+// Persona jurídica → debe identificarse con RUC
+if ($tipoPersona === 'juridica' && $tipoDoc !== 'ruc') {
+    $errors['tipo_documento'] = 'Para persona jurídica seleccione RUC.';
+    $docOk = false;
+}
+if ($numeroDoc === '' && !isset($errors['numero_documento'])) {
+    $errors['numero_documento'] = 'El número de documento es obligatorio.';
+}
+
+// Nombre / razón social
 if ($nombre === '') {
     $errors['nombre_razon_social'] = 'Nombre o razón social es obligatorio.';
+} elseif (mb_strlen($nombre) < 3) {
+    $errors['nombre_razon_social'] = 'Ingrese al menos 3 caracteres.';
+} elseif (!preg_match('/^[\p{L}\p{N} .,&\'\/-]+$/u', $nombre)) {
+    $errors['nombre_razon_social'] = 'Nombre con caracteres no válidos.';
 }
-if (!in_array($tipoDoc, ['dni', 'ce', 'ruc', 'otro'], true)) {
-    $errors['tipo_documento'] = 'Tipo de documento inválido.';
-}
-if ($numeroDoc === '' || !preg_match('/^[0-9A-Za-z-]{5,20}$/', $numeroDoc)) {
-    $errors['numero_documento'] = 'Número de documento inválido.';
-}
+
 if ($domicilio === '') {
     $errors['domicilio'] = 'Domicilio es obligatorio.';
+} elseif (mb_strlen($domicilio) < 5) {
+    $errors['domicilio'] = 'Ingrese una dirección más completa.';
 }
-if ($telefono === '' || strlen(preg_replace('/\D/', '', $telefono)) < 7) {
-    $errors['telefono'] = 'Teléfono inválido.';
+
+// Teléfono Perú: móvil 9 dígitos (empieza con 9); fijo 7–8 dígitos o 9 con 0 inicial (área); admite +51
+$digits = preg_replace('/\D/', '', $telefono);
+if (str_starts_with($telefono, '+51')) {
+    $digits = substr($digits, 2);
 }
-if ($email === '') {
+$len = strlen($digits);
+$telOk = ($len === 9 && $digits[0] === '9')          // móvil
+    || ($len === 9 && $digits[0] === '0')            // fijo con código de área (01, 064…)
+    || ($len >= 7 && $len <= 8);                     // fijo sin código
+if ($telefono === '' || !$telOk) {
+    $errors['telefono'] = 'Teléfono inválido (ej. 999 999 999 o 064 123456).';
+}
+
+if ($emailRaw === '' || $email === '') {
     $errors['email'] = 'Correo electrónico inválido.';
 }
 
@@ -86,11 +152,11 @@ $repDoc = '';
 if ($esMenor) {
     $repNombre = $str('representante_nombre', 200);
     $repDoc = preg_replace('/\s+/', '', $str('representante_documento', 30));
-    if ($repNombre === '') {
-        $errors['representante_nombre'] = 'Nombre del representante es obligatorio.';
+    if (mb_strlen($repNombre) < 3) {
+        $errors['representante_nombre'] = 'Nombre del representante obligatorio (mín. 3 caracteres).';
     }
-    if ($repDoc === '') {
-        $errors['representante_documento'] = 'Documento del representante es obligatorio.';
+    if (!preg_match('/^\d{8}$/', $repDoc) && !preg_match('/^[0-9A-Za-z-]{5,20}$/', $repDoc)) {
+        $errors['representante_documento'] = 'Documento del representante inválido.';
     }
 }
 
@@ -100,13 +166,15 @@ $servicio = $str('servicio', 100);
 $descripcionBien = $str('descripcion_bien', 500);
 if ($servicio === '') {
     $errors['servicio'] = 'Seleccione o describa el servicio.';
+} elseif (mb_strlen($servicio) < 3) {
+    $errors['servicio'] = 'Describa el servicio con al menos 3 caracteres.';
 }
 
 $monto = null;
 if (isset($data['monto_reclamado']) && $data['monto_reclamado'] !== '' && $data['monto_reclamado'] !== null) {
     $montoRaw = str_replace([',', ' '], '.', (string)$data['monto_reclamado']);
-    if (!is_numeric($montoRaw)) {
-        $errors['monto_reclamado'] = 'Monto inválido.';
+    if (!preg_match('/^\d+(\.\d{1,2})?$/', $montoRaw)) {
+        $errors['monto_reclamado'] = 'Monto inválido (solo números, ej. 99.90).';
     } elseif ((float)$montoRaw < 0 || (float)$montoRaw > 9999999.99) {
         $errors['monto_reclamado'] = 'Monto fuera de rango.';
     } else {
@@ -119,17 +187,28 @@ if (!in_array($tipo, ['reclamo', 'queja'], true)) {
     $errors['tipo'] = 'Seleccione Reclamo o Queja.';
 }
 
-$detalle = trim((string)($data['detalle'] ?? ''));
-$pedido = trim((string)($data['pedido'] ?? ''));
-if ($detalle === '' || preg_match('/^\s*$/', $detalle)) {
+$detalle = lr_txt((string)($data['detalle'] ?? ''), 5000);
+$pedido = lr_txt((string)($data['pedido'] ?? ''), 3000);
+if ($detalle === '') {
     $errors['detalle'] = 'El detalle es obligatorio.';
+} elseif (mb_strlen($detalle) < 20) {
+    $errors['detalle'] = 'Describe los hechos con al menos 20 caracteres.';
 } elseif (mb_strlen($detalle) > 5000) {
     $errors['detalle'] = 'El detalle no puede superar 5000 caracteres.';
 }
-if ($pedido === '' || preg_match('/^\s*$/', $pedido)) {
+if ($pedido === '') {
     $errors['pedido'] = 'El pedido del consumidor es obligatorio.';
+} elseif (mb_strlen($pedido) < 10) {
+    $errors['pedido'] = 'Especifica tu pedido con al menos 10 caracteres.';
 } elseif (mb_strlen($pedido) > 3000) {
     $errors['pedido'] = 'El pedido no puede superar 3000 caracteres.';
+}
+
+// Declaración de veracidad: obligatoria (no basta con omitir el campo)
+$declaro = $data['declaro'] ?? null;
+if ($declaro === null || $declaro === false || $declaro === ''
+    || in_array($declaro, ['0', 'no', 'false'], true)) {
+    $errors['declaro'] = 'Debe declarar la veracidad de la información.';
 }
 
 if ($errors) {
@@ -177,8 +256,8 @@ try {
         ?, ?, ?,
         ?, ?, ?,
         ?, ?, ?, ?,
-        ?, ?, ?, 'RECIBIDO', ?,
-        'WEB', ?
+        ?, ?, ?, \'RECIBIDO\', ?,
+        \'WEB\', ?
     )';
 
     $pdo->prepare($sql)->execute([
@@ -221,32 +300,27 @@ try {
     ], 500);
 }
 
-// Copia por correo (opcional)
-$mailCfg = lr_config()['mail'] ?? [];
+// Acuse de recibo al consumidor (PDF adjunto). Nunca afecta el registro ya guardado.
+$baseUrl = rtrim((string)(lr_config()['base_url'] ?? ''), '/');
+$pdfUrl = $baseUrl . '/api/pdf.php?codigo=' . urlencode($codigo) . '&token=' . urlencode($token);
 $emailEnviado = false;
-if (!empty($mailCfg['enabled']) && !empty($mailCfg['from']) && filter_var($mailCfg['from'], FILTER_VALIDATE_EMAIL)) {
-    $baseUrl = rtrim((string)(lr_config()['base_url'] ?? ''), '/');
-    $link = $baseUrl . '/api/constancia.php?codigo=' . urlencode($codigo) . '&token=' . urlencode($token);
-    $subject = 'Constancia Libro de Reclamaciones ' . $codigo;
-    $body = "Su Hoja de Reclamación fue registrada.\n\n"
-        . "Código: {$codigo}\n"
-        . "Fecha límite de respuesta: {$limite}\n"
-        . "Constancia: {$link}\n\n"
-        . lr_config()['proveedor']['razon_social'] . "\n";
-    $headers = 'From: ' . $mailCfg['from_name'] . ' <' . $mailCfg['from'] . ">\r\n"
-        . "Content-Type: text/plain; charset=UTF-8\r\n";
-    $safeEmail = $email;
-    if (@mail($safeEmail, $subject, $body, $headers)) {
+try {
+    $stmt = $pdo->prepare('SELECT * FROM reclamaciones WHERE id = ? LIMIT 1');
+    $stmt->execute([$id]);
+    $fila = $stmt->fetch();
+    if ($fila && lr_email_recibido($fila)) {
         $emailEnviado = true;
-        lr_historial($id, 'RESPUESTA_ENVIADA', 'Copia de constancia enviada al consumidor.');
+        lr_historial($id, 'ACUSE_ENVIADO', 'Acuse de recibo enviado a ' . $email . ' con PDF adjunto.');
     }
+} catch (Throwable $e) {
+    error_log('Libro reclamaciones (correo): ' . $e->getMessage());
 }
 
 lr_json_out([
     'success' => true,
     'codigo' => $codigo,
     'fecha_limite_respuesta' => $limite,
-    'constancia_url' => '/api/constancia.php?codigo=' . urlencode($codigo) . '&token=' . urlencode($token),
+    'pdf_url' => $pdfUrl,
     'email_enviado' => $emailEnviado,
     'mensaje' => 'La Hoja de Reclamación fue registrada correctamente.',
 ]);

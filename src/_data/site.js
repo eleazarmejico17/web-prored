@@ -3,7 +3,7 @@
 module.exports = {
   name: "ProRed",
   lang: "es",
-  version: "3.1",
+  version: "3.3",
   // Dominio canónico para OG / canonical / robots
   url: "https://proredperu.com",
 
@@ -56,7 +56,6 @@ module.exports = {
     { id: "internet-empresas", href: "internet-empresas/", label: "Internet Empresas" },
     { id: "cobertura", href: "cobertura/", label: "Cobertura" },
     { id: "realizar-pagos", href: "realizar-pagos/", label: "Pagos" },
-    { id: "libro-reclamaciones", href: "libro-reclamaciones/", label: "Libro de Reclamaciones" },
   ],
 
   footerLinks: [

@@ -13,7 +13,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("includes");
   eleventyConfig.addPassthroughCopy("sql");
-  eleventyConfig.addPassthroughCopy("config.php.example");
+  eleventyConfig.addPassthroughCopy("config.php");
+  eleventyConfig.addPassthroughCopy(".env.example");
 
   return {
     dir: {

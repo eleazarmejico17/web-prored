@@ -14,6 +14,23 @@ if (session_status() === PHP_SESSION_NONE) {
     ]);
 }
 
+// Cabeceras de seguridad globales
+if (!headers_sent()) {
+    header('X-Content-Type-Options: nosniff');
+    header('X-Frame-Options: SAMEORIGIN');
+    header('Referrer-Policy: same-origin');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()');
+    // CSP estricta para el panel admin (no usa scripts ni estilos inline)
+    if (str_contains($_SERVER['SCRIPT_NAME'] ?? '', '/admin/')) {
+        header(
+            "Content-Security-Policy: default-src 'self'; script-src 'self';"
+            . " style-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:;"
+            . " font-src 'self' https://cdnjs.cloudflare.com; object-src 'none';"
+            . " base-uri 'self'; frame-ancestors 'self'; form-action 'self'"
+        );
+    }
+}
+
 $ROOT = dirname(__DIR__);
 $CONFIG_FILE = $ROOT . '/config.php';
 
@@ -22,7 +39,7 @@ if (!is_file($CONFIG_FILE)) {
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode([
         'success' => false,
-        'message' => 'Configuración no encontrada. Copie config.php.example a config.php.',
+        'message' => 'Configuración no encontrada. Copie .env.example a .env y complete los valores.',
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
@@ -70,6 +87,47 @@ function lr_json_out(array $data, int $status = 200): never
 function lr_h(?string $s): string
 {
     return htmlspecialchars((string)$s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+/**
+ * Sanea texto libre: elimina etiquetas HTML, caracteres de control y
+ * caracteres de orientación de texto (bidi). Limita la longitud.
+ * Defensa en profundidad: la salida SIEMPRE debe escaparse con lr_h().
+ */
+function lr_txt(?string $s, int $max = 5000): string
+{
+    $s = strip_tags((string)$s);
+    $limpio = preg_replace(
+        '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F\x{200E}\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]/u',
+        '',
+        $s
+    );
+    if ($limpio !== null) {
+        $s = $limpio;
+    }
+    $s = trim($s);
+    if (mb_strlen($s) > $max) {
+        $s = mb_substr($s, 0, $max);
+    }
+    return $s;
+}
+
+/**
+ * Complemento al token CSRF: si la petición trae Origin o Referer,
+ * exige que apunte al mismo host. Sin cabeceras (curl/API) lo decide el CSRF.
+ */
+function lr_mismo_origen(): bool
+{
+    $hostReq = strtolower(explode(':', $_SERVER['HTTP_HOST'] ?? '')[0]);
+    foreach (['HTTP_ORIGIN', 'HTTP_REFERER'] as $h) {
+        $val = $_SERVER[$h] ?? '';
+        if ($val === '' || $val === 'null') {
+            continue;
+        }
+        $host = parse_url($val, PHP_URL_HOST);
+        return $host !== null && strtolower((string)$host) === $hostReq;
+    }
+    return true;
 }
 
 function lr_client_ip(): string

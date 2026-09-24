@@ -32,7 +32,9 @@ api/                 PHP: crear-reclamacion, constancia, session
 admin/               Panel del Libro de Reclamaciones
 includes/            Bootstrap PHP, auth, .htaccess (deny)
 sql/schema.sql       Esquema MySQL
-config.php.example   Plantilla de configuración (copiar → config.php en el server)
+.env                 Secretos: BD, URL base, correo (en .gitignore; ver .env.example)
+.env.example         Plantilla de variables de entorno
+config.php           Cableado de configuración (lee .env; sin secretos)
 sitemap.xml          Sitemap (se sirve desde la raíz)
 robots.txt           Robots + sitemap
 doc/                 Plan de arquitectura, spec del libro, instalación
@@ -47,9 +49,12 @@ Editar **`src/_data/site.js`**: teléfonos, WhatsApp, menús, footer, RUC, URL c
 
 1. `npm.cmd run build`
 2. Subir **el contenido de `dist/`** a la raíz del dominio (`public_html/`)
-3. Backend: ver [`doc/INSTALACION_LIBRO_RECLAMACIONES.md`](doc/INSTALACION_LIBRO_RECLAMACIONES.md)
+3. Crear `.env` en el servidor (copiar `.env.example` y poner credenciales reales de BD + `BASE_URL=https://tudominio.com`)
+4. phpMyAdmin → importar `sql/schema.sql`
+5. Backend: ver [`doc/INSTALACION_LIBRO_RECLAMACIONES.md`](doc/INSTALACION_LIBRO_RECLAMACIONES.md)
 
-`config.php` (credenciales) está en `.gitignore`: nunca commitearlo.
+`.env` está en `.gitignore`: **nunca commitearlo** (en el servidor sí va subido, solo a la raíz del sitio).
+Las credenciales se gestionan por variables de entorno — no dejarlas en el código ni en documentación.
 
 ## Documentación
 

@@ -23,30 +23,42 @@ La salida queda en `dist/` e **incluye**:
 | `public/` | CSS, JS, imágenes |
 | `sitemap.xml` | Sitemap |
 | `robots.txt` | Robots de rastreo |
-| `api/` | `crear-reclamacion.php`, `constancia.php`, `session.php` |
+| `api/` | `crear-reclamacion.php`, `pdf.php`, `session.php` |
 | `admin/` | Panel (`login`, `index`, `reclamacion`, `setup`, `assets/`) |
 | `includes/` | Bootstrap, auth, `.htaccess` (deny) |
 | `sql/schema.sql` | Esquema de BD |
-| `config.php.example` | Plantilla de configuración |
+| `config.php` | Cableado de configuración (lee `.env`; sin secretos) |
+| `.env.example` | Plantilla de variables de entorno |
+
+> El archivo `.env` **no va en `dist/`**: se crea directamente en el servidor (paso 3).
 
 ## 3. Desplegar en cPanel
 
-1. Subir **el contenido de `dist/`** a `public_html/` (o la raíz del dominio).
-2. phpMyAdmin → crear BD + usuario → importar `sql/schema.sql`.
-3. Copiar `config.php.example` → `config.php` (en la raíz) y completar:
-   - `db.*` (host, name, user, pass)
-   - `base_url` (ej. `https://proredperu.com`)
-   - `mail` opcional (SMTP del hosting usa `mail()` de PHP si `enabled: true` y `from` válido)
+Despliegue completo (recomendado): ejecutar `build-deploy.ps1` genera `deploy/prored-deploy-AAAAMMDD-HHmm.zip`
+con la estructura final: `.htaccess` (raíz, enrutado) + `web/` (todo el sitio, con su `.htaccess` y `.env`).
+
+1. Subir el ZIP a `public_html/` → Administrador de Archivos → **Extraer** → **borrar el ZIP**.
+   (Estructura resultante: `public_html/.htaccess`, `public_html/web/*`; los demás sistemas
+   (`almacen/`, `crmservicios/`, …) quedan excluidos del enrutado en el `.htaccess` raíz.)
+2. phpMyAdmin → crear BD + usuario → importar `web/sql/schema.sql`.
+3. Completar `public_html/web/.env` (ya viene con datos de producción; verificar):
+   - `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS` (datos del usuario de BD de cPanel)
+   - `BASE_URL` = `https://tudominio.com` (sin barra final; links de constancia y correo)
+   - `MAIL_ENABLED=true` + `MAIL_FROM` solo si se quiere copia automática por correo
+   - `config.php` ya está en `web/`: no requiere edición (lee el `.env`)
 4. Abrir `https://DOMINIO/admin/setup.php` → crear el primer usuario (mín. 10 caracteres).
 5. **Borrar o proteger** `admin/setup.php` en el servidor (ya no es necesario).
 6. Verificar:
    - `https://DOMINIO/libro-reclamaciones/` → formulario en 5 pasos
    - Enviar un reclamo de prueba → código `LR-AAAA-000001` + constancia
    - `https://DOMINIO/admin/` → login y listado
+   - `https://almacen.DOMINIO/` (y el resto de sistemas) → siguen respondiendo igual
+   - `https://DOMINIO/web/` → **403** (carpeta interna no visible)
 
 ## 4. Seguridad (checklist)
 
-- [ ] `config.php` fuera del repositorio (`.gitignore`) y con contraseña fuerte de BD
+- [ ] `.env` con credenciales reales **fuera del repositorio** (`.gitignore`) y contraseña fuerte de BD
+- [ ] `.htaccess` bloquea `.env*` y `config.php` (viene en el build de producción)
 - [ ] `includes/.htaccess` → `Require all denied` (viene en el repo)
 - [ ] `admin/setup.php` eliminado tras crear el admin
 - [ ] HTTPS forzado (`.htaccess` del hosting o AutoSSL)
@@ -57,7 +69,7 @@ La salida queda en `dist/` e **incluye**:
 
 - Formato de respuesta: **15 días hábiles** (D.S. 011-2011-PCM / Indecopi).
 - Reclamos de telecomunicaciones pueden requerir **OSIPTEL** → aviso visible en la página; validación legal pendiente.
-- La constancia es imprimible (`Imprimir / Guardar PDF` del navegador); no se genera PDF server-side.
+- La constancia es un **PDF server-side** (`api/pdf.php?codigo=…&token=…`, enlace en el paso 5 y en el correo).
 
 ## 6. Estructura de tablas
 
