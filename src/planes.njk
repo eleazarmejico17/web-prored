@@ -1,0 +1,219 @@
+---
+layout: base.njk
+title: Contrata Internet Hogar en Huancayo | Planes ProRed Fibra Óptica
+description: "Planes de internet fibra óptica para hogar en Huancayo: Internet, IPTV y Dúos con instalación gratuita y soporte 24/7."
+pathPrefix: "../"
+navId: planes
+extraCss:
+  - planes.css
+extraJs:
+  - tabs.js
+  - planes.js
+  - TyC.js
+---
+{% from "planes-tabs.njk" import planesTabs %}
+<!-- Hero Planes -->
+<header class="hero-page hero-planes">
+    <div class="container">
+        <h1>Planes de Internet Fibra Óptica para tu Hogar</h1>
+        <p>Planes diseñados para tu hogar, oficina y entretenimiento sin límites.</p>
+        <div class="hero-badges">
+            <span><i class="fas fa-bolt"></i> 100% Fibra Óptica</span>
+            <span><i class="fas fa-tools"></i> Instalación gratuita</span>
+            <span><i class="fas fa-tv"></i> Canales en HD</span>
+        </div>
+    </div>
+</header>
+
+<!-- Promociones Section -->
+<section class="promociones-section" role="region" aria-label="Promoción Instalación Gratuita">
+    <div class="container">
+        <div class="promo-banner fade-in-element">
+            <div class="promo-icon-side">
+                <img src="{{ pathPrefix }}public/assets/img/nuplinm.png" alt="Personaje ProRed" class="promo-character" />
+            </div>
+            <div class="promo-text">
+                <!-- <span class="badge-promo"><i class="fas fa-fire"></i> OFERTA LIMITADA</span> -->
+                <h3>INSTALACIÓN GRATUITA</h3>
+                <h5>Aplica en planes Internet y Planes Dúo</h5>
+                <h4>Instalación sin costo</h4>
+                <p>Solicita hoy la instalación gratuita en cualquier plan de Internet o Dúo. Promoción válida por tiempo limitado y sujeta a cobertura.</p>
+                <a href="https://api.whatsapp.com/send?phone={{ site.whatsapp.general }}&text=%C2%A1Hola!%20Quiero%20la%20promoci%C3%B3n%20de%20instalaci%C3%B3n%20gratuita%20en%20planes%20de%20Internet%20y%20D%C3%BAo" target="_blank" rel="noopener noreferrer" class="btn-promo-action"><i class="fab fa-whatsapp"></i> Reclamar instalación</a>
+                <button class="btn-terms" onclick="openTyCModal()"><i class="fas fa-file-alt"></i> Ver Términos y Condiciones</button>
+            </div>
+            <div class="promo-cta">
+                <img src="{{ pathPrefix }}public/assets/img/probot.png" alt="ProBot" class="promo-character" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content Sections -->
+<section class="planes-preview" id="planes-prev">
+    <div class="container">
+        <br>
+        <div class="section-header text-center mb-5 fade-in-element">
+            <h2 class="mb-3">Descubre los planes que tenemos para ti</h2>
+        </div>
+
+        {{ planesTabs(pathPrefix, site.whatsapp.general) }}
+    </div>
+</section>
+
+<!-- Beneficios Extra -->
+<section class="benefits-section">
+    <div class="container">
+        <div class="section-header text-center fade-in-element">
+            <span class="section-label">VENTAJAS</span>
+            <h2>¿Por qué elegir la Fibra de <span class="text-gradient">ProRed</span>?</h2>
+            <p class="section-subtitle">Tecnología de punta que marca la diferencia en tu día a día.</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card fade-in-element">
+                <div class="benefit-icon-wrapper">
+                    <i class="fas fa-infinity"></i>
+                </div>
+                <h4>Navegación Ilimitada</h4>
+                <p>Sin topes de consumo ni reducción de velocidad a fin de mes. Descarga y sube sin restricciones.
+                </p>
+                <div class="benefit-line"></div>
+            </div>
+            <div class="benefit-card fade-in-element">
+                <div class="benefit-icon-wrapper">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h4>Baja Latencia (Ping)</h4>
+                <p>Ideal para gamers y videollamadas fluidas sin lag. Experiencia en tiempo real garantizada.</p>
+                <div class="benefit-line"></div>
+            </div>
+            <div class="benefit-card fade-in-element">
+                <div class="benefit-icon-wrapper">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>Estabilidad Total</h4>
+                <p>La fibra óptica no se ve afectada por interferencias climáticas ni electromagnéticas.</p>
+                <div class="benefit-line"></div>
+            </div>
+            <div class="benefit-card fade-in-element">
+                <div class="benefit-icon-wrapper">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h4>Internet Simétrico</h4>
+                <p>Misma velocidad de subida y bajada. Perfecto para streaming, trabajo remoto y la nube.</p>
+                <div class="benefit-line"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="container">
+        <div class="faq-layout">
+            <div class="faq-info-side fade-in-element">
+                <span class="section-label">FAQ</span>
+                <h2>Preguntas <span class="text-gradient">Frecuentes</span></h2>
+                <p>¿Tienes dudas? Aquí respondemos las consultas más comunes de nuestros clientes.</p>
+                <a href="https://api.whatsapp.com/send?phone={{ site.whatsapp.general }}&text=Hola%2C%20tengo%20una%20consulta"
+                    target="_blank" rel="noopener noreferrer" class="btn-faq-contact"><i class="fab fa-whatsapp"></i> Hablar con un asesor</a>
+            </div>
+            <div class="faq-accordion-side">
+                <div class="faq-item fade-in-element">
+                    <div class="faq-question"><span>¿Qué incluye la instalación?</span> <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>La instalación incluye el tendido de fibra hasta tu domicilio, la configuración del
+                            router ONT de última generación y la verificación de velocidad en tus dispositivos.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in-element">
+                    <div class="faq-question"><span>¿Cómo puedo pagar mi recibo?</span> <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Puedes pagar a través de nuestra web en la sección "Pagos", mediante transferencia
+                            bancaria (BCP, BBVA, Banco de la Nación), mediante aplicativos como (Yape, Plin) o en
+                            nuestra oficina física en Concepción.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in-element">
+                    <div class="faq-question"><span>¿Puedo cambiar de plan?</span> <i class="fas fa-plus"></i></div>
+                    <div class="faq-answer">
+                        <p>Sí, puedes solicitar un cambio de plan en cualquier momento . El cambio se aplica en tu
+                            próximo ciclo de facturación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header text-center fade-in-element">
+            <span class="section-label">TESTIMONIOS</span>
+            <h2>Lo que dicen nuestros <span class="text-gradient">clientes</span></h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in-element">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"Llevo 6 meses con ProRed y la estabilidad es increíble. Trabajo desde casa y nunca he tenido
+                    caídas."</p>
+                <div class="testimonial-footer">
+                    <div class="client-avatar"><i class="fas fa-user"></i></div>
+                    <div class="client-info">
+                        <strong>Juan Pérez</strong>
+                        <span>Concepción</span>
+                    </div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in-element">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"El soporte técnico es muy rápido. Tuve una duda con mi Wi-Fi y me ayudaron por WhatsApp al
+                    instante."</p>
+                <div class="testimonial-footer">
+                    <div class="client-avatar"><i class="fas fa-user"></i></div>
+                    <div class="client-info">
+                        <strong>María García</strong>
+                        <span>San Jerónimo</span>
+                    </div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in-element">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"Excelente relación calidad-precio. Mis hijos juegan online y mi esposa hace videollamadas sin
+                    ningún problema."</p>
+                <div class="testimonial-footer">
+                    <div class="client-avatar"><i class="fas fa-user"></i></div>
+                    <div class="client-info">
+                        <strong>Carlos Rojas</strong>
+                        <span>Concepción</span>
+                    </div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Coverage Check CTA -->
+<section class="coverage-cta">
+    <div class="cta-wave-top"></div>
+    <div class="container">
+        <div class="cta-content text-center fade-in-element">
+            <div class="cta-icon-pulse"><i class="fas fa-map-marker-alt"></i></div>
+            <h2>¿Aún no tienes ProRed?</h2>
+            <p>Consulta disponibilidad en tu zona y obtén el mejor internet de Concepción.</p>
+            <div class="cta-buttons">
+                <a href="https://api.whatsapp.com/send?phone={{ site.whatsapp.general }}&text=Hola%2C%20quiero%20consultar%20cobertura%20en%20mi%20zona"
+                    class="btn-cta-primary" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> Consultar Cobertura</a>
+                <a href="{{ pathPrefix }}cobertura/" class="btn-cta-outline"><i class="fas fa-map"></i> Ver Mapa</a>
+            </div>
+        </div>
+    </div>
+</section>

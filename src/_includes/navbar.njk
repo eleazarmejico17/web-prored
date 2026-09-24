@@ -1,0 +1,32 @@
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="{{ pathPrefix if pathPrefix else './' }}" class="logo flex items-center" aria-label="ProRed - Inicio">
+            <img src="{{ pathPrefix }}public/assets/img/logo-ProRed.png" alt="ProRed" class="nav-logo" />
+        </a>
+
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            {% for item in site.navItems %}
+            <li>
+                {% if item.id == "inicio" %}
+                <a href="{{ pathPrefix if pathPrefix else '#inicio' }}" class="nav-link{% if item.id == navId %} active{% endif %}">{{ item.label }}</a>
+                {% else %}
+                <a href="{{ pathPrefix }}{{ item.href }}" class="nav-link{% if item.id == navId %} active{% endif %}">{{ item.label }}</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+            <li>
+                {% set ctaLabel = navCtaLabel if navCtaLabel else site.navCta.label %}
+                {% set ctaWhatsapp = navWhatsapp if navWhatsapp else site.navCta.whatsapp %}
+                {% set ctaText = navCtaText if navCtaText else site.whatsappDefaultText %}
+                <a href="https://api.whatsapp.com/send?phone={{ site.whatsapp[ctaWhatsapp] }}&text={{ ctaText | urlencode }}"
+                   class="btn btn-primary" target="_blank" rel="noopener noreferrer">{{ ctaLabel }}</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="navOverlay" class="nav-overlay" aria-hidden="true"></div>

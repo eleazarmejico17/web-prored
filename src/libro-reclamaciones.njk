@@ -1,0 +1,304 @@
+---
+layout: base.njk
+title: Libro de Reclamaciones Online | ProRed Huancayo
+description: Registra tu Reclamo o Queja ante el Libro de Reclamaciones de ProRed. Recibe un código de seguimiento y constancia de registro.
+pathPrefix: "../"
+navId: "libro-reclamaciones"
+extraCss:
+  - libro.css
+extraJs:
+  - libro.js
+---
+<section class="hero-page libro-hero">
+    <div class="container">
+        <h1>Libro de Reclamaciones</h1>
+        <p>Registra tu <strong>Reclamo</strong> o <strong>Queja</strong> de forma digital. Recibirás un código de seguimiento y una constancia imprimible.</p>
+        <div class="hero-badges">
+            <span><i class="fas fa-file-signature"></i> Hoja de Reclamación</span>
+            <span><i class="fas fa-clock"></i> Respuesta en 15 días hábiles</span>
+            <span><i class="fas fa-lock"></i> Datos protegidos</span>
+        </div>
+    </div>
+</section>
+
+<main class="libro-main">
+    <div class="container libro-container">
+
+        <div class="libro-aviso" role="note">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <strong>Aviso legal:</strong> este Libro de Reclamaciones atiende reclamos y quejas ante
+                <em>INVERSIONES STARNET PERU SAC (ProRed)</em> conforme al Decreto Supremo N.° 011-2011-PCM.
+                Los reclamos por servicios de telecomunicaciones regulados por <strong>OSIPTEL</strong>
+                pueden requerir un canal específico — validación legal pendiente.
+            </div>
+        </div>
+
+        <!-- Barra de pasos -->
+        <ol class="libro-steps" id="libroSteps" aria-label="Progreso">
+            <li class="active" data-step="1"><span>1</span> Identificación</li>
+            <li data-step="2"><span>2</span> Bien o servicio</li>
+            <li data-step="3"><span>3</span> Reclamo o queja</li>
+            <li data-step="4"><span>4</span> Confirmación</li>
+            <li data-step="5"><span>5</span> Constancia</li>
+        </ol>
+
+        <form id="libroForm" class="libro-form" novalidate
+              data-api="{{ pathPrefix }}api/crear-reclamacion.php"
+              data-session="{{ pathPrefix }}api/session.php"
+              data-constancia-base="{{ pathPrefix }}api/constancia.php">
+
+            <!-- Honeypot -->
+            <div class="hp" aria-hidden="true">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <!-- PASO 1 — Identificación -->
+            <fieldset class="libro-step active" data-step="1">
+                <legend>Identificación del consumidor</legend>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="tipo_persona">Tipo de persona *</label>
+                        <select id="tipo_persona" name="tipo_persona" required>
+                            <option value="natural">Persona natural</option>
+                            <option value="juridica">Persona jurídica</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="tipo_documento">Tipo de documento *</label>
+                        <select id="tipo_documento" name="tipo_documento" required>
+                            <option value="">Seleccione…</option>
+                            <option value="dni">DNI</option>
+                            <option value="ce">Carné de extranjería</option>
+                            <option value="ruc">RUC</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="nombre_razon_social">Nombre completo o razón social *</label>
+                    <input type="text" id="nombre_razon_social" name="nombre_razon_social" maxlength="200" required
+                           placeholder="Ej. Juan Pérez / Empresa S.A.C.">
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="numero_documento">N.° de documento *</label>
+                        <input type="text" id="numero_documento" name="numero_documento" maxlength="20" required
+                               inputmode="numeric" placeholder="DNI / CE / RUC">
+                    </div>
+                    <div class="field">
+                        <label for="telefono">Teléfono *</label>
+                        <input type="tel" id="telefono" name="telefono" maxlength="30" required
+                               inputmode="tel" placeholder="999 999 999">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="email">Correo electrónico *</label>
+                    <input type="email" id="email" name="email" maxlength="150" required
+                           placeholder="correo@ejemplo.com">
+                </div>
+
+                <div class="field">
+                    <label for="domicilio">Domicilio (dirección) *</label>
+                    <input type="text" id="domicilio" name="domicilio" maxlength="255" required
+                           placeholder="Av. …, Nro …, distrito, provincia">
+                </div>
+
+                <div class="field check">
+                    <label>
+                        <input type="checkbox" id="es_menor" name="es_menor" value="1">
+                        El consumidor es menor de edad
+                    </label>
+                </div>
+
+                <div id="representanteBox" class="hidden">
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="representante_nombre">Padre, madre o apoderado *</label>
+                            <input type="text" id="representante_nombre" name="representante_nombre" maxlength="200">
+                        </div>
+                        <div class="field">
+                            <label for="representante_documento">Documento del representante *</label>
+                            <input type="text" id="representante_documento" name="representante_documento" maxlength="30">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="libro-nav">
+                    <span></span>
+                    <button type="button" class="btn btn-primary btn-next" data-next="2">Continuar</button>
+                </div>
+            </fieldset>
+
+            <!-- PASO 2 — Bien o servicio -->
+            <fieldset class="libro-step" data-step="2">
+                <legend>Bien contratado o servicio</legend>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="tipo_bien">Tipo *</label>
+                        <select id="tipo_bien" name="tipo_bien" required>
+                            <option value="servicio">Servicio</option>
+                            <option value="producto">Producto</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="servicio">Servicio o producto *</label>
+                        <input type="text" id="servicio" name="servicio" maxlength="100" required
+                               list="serviciosList" placeholder="Internet fibra, router, etc.">
+                        <datalist id="serviciosList">
+                            <option value="Internet fibra óptica"></option>
+                            <option value="Plan hogar"></option>
+                            <option value="Plan empresas"></option>
+                            <option value="Plan dedicado"></option>
+                            <option value="Equipos (router/ONU)"></option>
+                            <option value="Instalación"></option>
+                            <option value="Facturación y cobros"></option>
+                            <option value="Soporte técnico"></option>
+                        </datalist>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="descripcion_bien">Descripción del bien (opcional)</label>
+                    <input type="text" id="descripcion_bien" name="descripcion_bien" maxlength="500"
+                           placeholder="Marca, modelo, plan, número de contrato…">
+                </div>
+
+                <div class="field">
+                    <label for="monto_reclamado">Monto reclamado (S/) — opcional</label>
+                    <input type="text" id="monto_reclamado" name="monto_reclamado"
+                           inputmode="decimal" placeholder="Ej. 99.90">
+                </div>
+
+                <div class="libro-nav">
+                    <button type="button" class="btn btn-outline btn-back" data-back="1">Atrás</button>
+                    <button type="button" class="btn btn-primary btn-next" data-next="3">Continuar</button>
+                </div>
+            </fieldset>
+
+            <!-- PASO 3 — Reclamo o queja -->
+            <fieldset class="libro-step" data-step="3">
+                <legend>Tipo y detalle</legend>
+
+                <div class="field">
+                    <span class="label-like">¿Es un Reclamo o una Queja? *</span>
+                    <div class="radios">
+                        <label class="radio-card">
+                            <input type="radio" name="tipo" value="reclamo" required>
+                            <span>
+                                <strong>Reclamo</strong>
+                                <small>Disconformidad con un bien o servicio (producto no conforme, cobro indebido…).</small>
+                            </span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="tipo" value="queja">
+                            <span>
+                                <strong>Queja</strong>
+                                <small>Malestar respecto de la atención, trato o demora del personal.</small>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="detalle">Detalle de los hechos *</label>
+                    <textarea id="detalle" name="detalle" rows="6" maxlength="5000" required
+                              placeholder="Describa qué ocurrió, fechas, número de ticket o llamada…"></textarea>
+                    <div class="hint"><span id="detalleCount">0</span>/5000</div>
+                </div>
+
+                <div class="field">
+                    <label for="pedido">¿Qué pides como consumidor? *</label>
+                    <textarea id="pedido" name="pedido" rows="4" maxlength="3000" required
+                              placeholder="Ej. Reembolso, reparación, reinstalación del servicio, disculpa escrita…"></textarea>
+                    <div class="hint"><span id="pedidoCount">0</span>/3000</div>
+                </div>
+
+                <div class="libro-nav">
+                    <button type="button" class="btn btn-outline btn-back" data-back="2">Atrás</button>
+                    <button type="button" class="btn btn-primary btn-next" data-next="4">Continuar</button>
+                </div>
+            </fieldset>
+
+            <!-- PASO 4 — Confirmación -->
+            <fieldset class="libro-step" data-step="4">
+                <legend>Revisar y enviar</legend>
+
+                <div id="resumen" class="resumen" aria-live="polite"></div>
+
+                <div class="field check">
+                    <label>
+                        <input type="checkbox" id="declaro" name="declaro" required>
+                        Declaro que la información es verdadera y autorizo su tratamiento para la
+                        atención de mi Hoja de Reclamación (ver
+                        <a href="{{ pathPrefix }}politica-de-privacidad/" target="_blank" rel="noopener">Política de Privacidad</a>).
+                    </label>
+                </div>
+
+                <div id="formError" class="libro-error hidden" role="alert"></div>
+
+                <div class="libro-nav">
+                    <button type="button" class="btn btn-outline btn-back" data-back="3">Atrás</button>
+                    <button type="submit" class="btn btn-primary btn-submit" id="btnSubmit">Registrar Hoja de Reclamación</button>
+                </div>
+            </fieldset>
+
+            <!-- PASO 5 — Éxito -->
+            <fieldset class="libro-step" data-step="5">
+                <legend>Registro exitoso</legend>
+
+                <div class="exito">
+                    <div class="exito-icon"><i class="fas fa-check-circle"></i></div>
+                    <h2>Hoja de Reclamación registrada</h2>
+                    <p>Guarda tu código de seguimiento. También puedes imprimir la constancia.</p>
+
+                    <div class="codigo-box">
+                        <span class="codigo" id="codigoOut">—</span>
+                    </div>
+
+                    <dl class="exito-datos">
+                        <dt>Fecha límite de respuesta</dt>
+                        <dd id="limiteOut">—</dd>
+                        <dt>Correo registrado</dt>
+                        <dd id="emailOut">—</dd>
+                        <dt>Copia por correo</dt>
+                        <dd id="emailStatusOut">—</dd>
+                    </dl>
+
+                    <div class="exito-acciones">
+                        <a class="btn btn-primary btn-a" id="btnConstancia" href="#" target="_blank" rel="noopener">
+                            <i class="fas fa-file-alt"></i> Ver constancia
+                        </a>
+                        <button type="button" class="btn btn-secondary btn-a alt" id="btnImprimir">
+                            <i class="fas fa-print"></i> Imprimir
+                        </button>
+                        <button type="button" class="btn btn-outline btn-a ghost" id="btnNuevo">
+                            <i class="fas fa-plus"></i> Nueva reclamación
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <aside class="libro-aside">
+            <h3>¿Qué sucede después?</h3>
+            <ol>
+                <li>Recibes un <strong>código</strong> (ej. LR-2026-000001).</li>
+                <li>ProRed atiende tu caso en un máximo de <strong>15 días hábiles</strong>.</li>
+                <li>Si marcaste «Respondido», recibirás la respuesta en tu correo (si está habilitado).</li>
+            </ol>
+            <h3>Contacto</h3>
+            <ul>
+                <li><i class="fas fa-phone"></i> {{ site.contact.landline }}</li>
+                <li><i class="fab fa-whatsapp"></i> {{ site.whatsappDisplay[0] }}</li>
+                <li><i class="fas fa-envelope"></i> {{ site.contact.privacyEmail }}</li>
+            </ul>
+        </aside>
+    </div>
+</main>

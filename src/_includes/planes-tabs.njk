@@ -1,0 +1,340 @@
+{# Bloque compartido de tabs de planes (Internet / IPTV / Dúo).
+   Uso: {% from "planes-tabs.njk" import planesTabs %} {{ planesTabs(pathPrefix, site.whatsapp.general) }}
+   (Las macros no heredan el contexto: pasar prefijo de ruta y WhatsApp explícitamente.) #}
+{% macro planesTabs(prefix = "", waGeneral = "51991445527") %}
+<div class="tabs-container fade-in-element">
+    <button class="tab-btn active" data-tab="internet">
+        <i class="fas fa-wifi"></i> Planes Internet
+    </button>
+    <button class="tab-btn" data-tab="iptv">
+        <i class="fas fa-tv"></i> Planes IPTV
+    </button>
+    <button class="tab-btn" data-tab="duo">
+        <i class="fas fa-wifi"></i> + <i class="fas fa-tv"></i> Planes Dúos
+    </button>
+</div>
+
+<div class="tabs-content">
+    <!-- Tab Internet -->
+    <div id="tabInternet" class="tab-pane active">
+        <div class="tv-section-immersive">
+            <div class="video-background-layer">
+                <video autoplay muted loop playsinline>
+                    <source src="{{ prefix }}public/assets/video/internet-background1.webm" type="video/webm">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="container content-layer">
+                <div class="tv-layout-split">
+                    <div class="tv-info-side fade-in-element">
+                        <h2 class="neon-title">PLANES<br>FIBRA<br>ÓPTICA</h2>
+                        <div class="deco-image-container">
+                            <img src="{{ prefix }}public/assets/img/bot-prored.png" alt="Velocidad" class="img-fluid floating-deco">
+                        </div>
+                        <p class="tv-slogan">
+                            Navega a la velocidad de la luz. <br>
+                            Sin cortes, simetría real y soporte 24/7.
+                        </p>
+                    </div>
+                    <div class="tv-cards-side">
+                        <div class="internet-grid-2x2">
+                            <div class="glass-card-v2 fade-in-element">
+                                <div class="card-speed-header">
+                                    <span class="speed-number">150</span>
+                                    <span class="speed-unit">MBPS</span>
+                                </div>
+                                <h3 class="glass-plan-title">Plan Inicial</h3>
+                                <div class="card-price-glass">S/ 50</div>
+                                <ul class="glass-mini-features">
+                                    <li><i class="fas fa-check"></i> Instalación gratis</li>
+                                    <li><i class="fas fa-check"></i> 100% Fibra óptica</li>
+                                    <li><i class="fas fa-check"></i> Internet Simétrico</li>
+                                    <li><i class="fas fa-check"></i> Soporte 24/7</li>
+                                </ul>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20Plan%20Inicial%20de%20150%20MBPS%20por%20S/%2050%20mensuales" target="_blank" class="btn-action">
+                                    Contratar
+                                </a>
+                            </div>
+
+                            <div class="glass-card-v2 featured-glass fade-in-element">
+                                <div class="badge-top">POPULAR</div>
+                                <div class="card-speed-header">
+                                    <span class="speed-number">250</span>
+                                    <span class="speed-unit">MBPS</span>
+                                </div>
+                                <h3 class="glass-plan-title">Plan Hogar</h3>
+                                <div class="card-price-glass">S/ 70</div>
+                                <ul class="glass-mini-features">
+                                    <li><i class="fas fa-check"></i> Instalación gratis</li>
+                                    <li><i class="fas fa-check"></i> 100% Fibra óptica</li>
+                                    <li><i class="fas fa-check"></i> Internet Simétrico</li>
+                                    <li><i class="fas fa-check"></i> Soporte 24/7</li>
+                                </ul>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20Plan%20Hogar%20de%20250%20MBPS%20por%20S/%2070%20mensuales" target="_blank" class="btn-action primary">
+                                    Contratar
+                                </a>
+                            </div>
+
+                            <div class="glass-card-v2 fade-in-element">
+                                <div class="card-speed-header">
+                                    <span class="speed-number">450</span>
+                                    <span class="speed-unit">MBPS</span>
+                                </div>
+                                <h3 class="glass-plan-title">Plan Premium</h3>
+                                <div class="card-price-glass">S/ 90</div>
+                                <ul class="glass-mini-features">
+                                    <li><i class="fas fa-check"></i> Instalación gratis</li>
+                                    <li><i class="fas fa-check"></i> 100% Fibra óptica</li>
+                                    <li><i class="fas fa-check"></i> Internet Simétrico</li>
+                                    <li><i class="fas fa-check"></i> Soporte 24/7</li>
+                                </ul>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20Plan%20Premium%20de%20450%20MBPS%20por%20S/%2090%20mensuales" target="_blank" class="btn-action">
+                                    Contratar
+                                </a>
+                            </div>
+
+                            <div class="glass-card-v2 fade-in-element">
+                                <div class="card-speed-header">
+                                    <span class="speed-number">650</span>
+                                    <span class="speed-unit">MBPS</span>
+                                </div>
+                                <h3 class="glass-plan-title">Plan Máximo</h3>
+                                <div class="card-price-glass">S/ 100</div>
+                                <ul class="glass-mini-features">
+                                    <li><i class="fas fa-check"></i> 100% Fibra óptica</li>
+                                    <li><i class="fas fa-check"></i> Internet Simétrico</li>
+                                    <li><i class="fas fa-check"></i> Instalación gratis</li>
+                                    <li><i class="fas fa-check"></i> Soporte 24/7</li>
+                                </ul>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20Plan%20Máximo%20de%20650%20MBPS%20por%20S/%20100%20mensuales" target="_blank" class="btn-action">
+                                    Contratar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab IPTV -->
+    <div id="tabIptv" class="tab-pane">
+        <div class="tv-section-immersive">
+            <div class="video-background-layer">
+                <video autoplay muted loop playsinline>
+                    <source src="{{ prefix }}public/assets/video/tv-background1.webm" type="video/webm">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="container content-layer">
+                <div class="tv-layout-split">
+                    <div class="tv-info-side fade-in-element">
+                        <h2 class="neon-title">PLANES<br>IPTV<br>NUPLIN</h2>
+                        <div class="deco-image-container">
+                            <img src="{{ prefix }}public/assets/img/bot-nuplin.png" alt="Deco" class="img-fluid floating-deco">
+                        </div>
+                        <p class="tv-slogan">Televisión en Alta Definición para todos tus dispositivos.</p>
+                    </div>
+                    <div class="tv-cards-side fade-in-element">
+                        <div class="cards-wrapper">
+                            <div class="glass-card-v2">
+                                <div class="card-header-glass">
+                                    <i class="fas fa-tv"></i>
+                                    <span>FLEX</span>
+                                </div>
+                                <div class="card-price-glass">
+                                    <!-- S/ 30 -->
+                                </div>
+                                <div class="mini-channels-grid">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (1).jpg" alt="Canal Flex">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (2).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (3).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (4).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (5).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (6).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (7).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (8).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (9).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (10).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (11).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (12).png" alt="">
+                                </div>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=Hola%20me%20interesa%20el%20plan%20IPTV" class="btn-action" target="_blank">Conseguir</a>
+                            </div>
+
+                            <div class="glass-card-v2 featured-glass">
+                                <div class="badge-top">TOP</div>
+                                <div class="card-header-glass">
+                                    <i class="fas fa-satellite-dish"></i>
+                                    <span>BÁSICO</span>
+                                </div>
+                                <div class="card-price-glass">
+                                    <!-- S/ 45 -->
+                                </div>
+                                <div class="mini-channels-grid">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (1).jpg" alt="Canal Básico">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (2).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (3).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (4).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (5).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (6).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico/basico (1).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico/basico (2).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico/basico (3).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico/basico (4).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico/basico (5).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico/basico (6).png" alt="">
+                                </div>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=Hola%20me%20interesa%20el%20plan%20IPTV" class="btn-action primary" target="_blank">Conseguir</a>
+                            </div>
+
+                            <div class="glass-card-v2">
+                                <div class="card-header-glass">
+                                    <i class="fas fa-star"></i>
+                                    <span>BÁSICO +</span>
+                                </div>
+                                <div class="card-price-glass">
+                                    <!-- S/ 60 -->
+                                </div>
+                                <div class="mini-channels-grid">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (1).jpg" alt="Canal Básico Plus">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (2).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (3).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (4).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (5).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (6).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (1).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (2).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (3).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (4).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (5).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (6).png" alt="">
+                                </div>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=Hola%20me%20interesa%20el%20plan%20IPTV" class="btn-action" target="_blank">Conseguir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Dúo -->
+    <div id="tabDuo" class="tab-pane">
+        <div class="tv-section-immersive">
+            <div class="video-background-layer">
+                <video autoplay muted loop playsinline>
+                    <source src="{{ prefix }}public/assets/video/duo-background1.webm" type="video/webm">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="container content-layer">
+                <div class="tv-layout-split">
+                    <div class="tv-info-side fade-in-element">
+                        <h2 class="neon-title">PLANES<br>DUO<br>POWER</h2>
+                        <div class="bots-container">
+                            <div class="deco-image-container">
+                                <img src="{{ prefix }}public/assets/img/bot-prored.png" alt="Duo Pack" class="img-fluid floating-deco">
+                            </div>
+                            <div class="deco-image-container">
+                                <img src="{{ prefix }}public/assets/img/bot-nuplin.png" alt="Duo Pack" class="img-fluid floating-deco">
+                            </div>
+                        </div>
+                        <p class="tv-slogan">
+                            La combinación perfecta.<br>
+                            Internet Fibra Óptica + TV Digital HD en una sola factura.
+                        </p>
+                        <div class="duo-badge-promo">
+                            <i class="fas fa-piggy-bank"></i> Ahorras hasta S/ 15
+                        </div>
+                    </div>
+                    <div class="tv-cards-side fade-in-element">
+                        <div class="internet-grid-2x2">
+                            <div class="glass-card-v2">
+                                <div class="duo-card-header">
+                                    <div class="speed-part">150 <span class="unit">MB</span></div>
+                                    <div class="plus-part">+ TV</div>
+                                </div>
+                                <div class="card-price-glass">S/ 75</div>
+                                <div class="duo-icons-row">
+                                    <span title="Internet"><i class="fas fa-wifi"></i>Fibra óptica</span>
+                                    <span title="TV"><i class="fas fa-tv"></i>Canales HD</span>
+                                </div>
+                                <div class="mini-channels-grid">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (1).jpg" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (2).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/flex/flex (3).png" alt="">
+                                </div>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20plan%20Dúo%20150%20MB%20%2B%20IPTV%20por%20S/%2075%20mensuales" target="_blank" class="btn-action">
+                                    Lo quiero
+                                </a>
+                            </div>
+
+                            <div class="glass-card-v2 featured-glass">
+                                <div class="badge-top">BEST SELLER</div>
+                                <div class="duo-card-header">
+                                    <div class="speed-part">250 <span class="unit">MB</span></div>
+                                    <div class="plus-part">+ TV</div>
+                                </div>
+                                <div class="card-price-glass">S/ 95</div>
+                                <div class="duo-icons-row">
+                                    <span title="Internet"><i class="fas fa-wifi"></i>Fibra óptica</span>
+                                    <span><i class="fas fa-tv"></i>Canales HD</span>
+                                </div>
+                                <div class="mini-channels-grid">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico/basico (1).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico/basico (2).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico/basico (3).png" alt="">
+                                </div>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20plan%20Dúo%20250%20MB%20%2B%20IPTV%20por%20S/%2095%20mensuales" target="_blank" class="btn-action primary">
+                                    Lo quiero
+                                </a>
+                            </div>
+
+                            <div class="glass-card-v2">
+                                <div class="duo-card-header">
+                                    <div class="speed-part">450 <span class="unit">MB</span></div>
+                                    <div class="plus-part">+ TV</div>
+                                </div>
+                                <div class="card-price-glass">S/ 115</div>
+                                <div class="duo-icons-row">
+                                    <span title="Internet"><i class="fas fa-wifi"></i>Fibra óptica</span>
+                                    <span><i class="fas fa-tv"></i>Canales HD</span>
+                                </div>
+                                <div class="mini-channels-grid">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (1).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (2).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (3).png" alt="">
+                                </div>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20plan%20Dúo%20450%20MB%20%2B%20IPTV%20por%20S/%20115%20mensuales" target="_blank" class="btn-action">
+                                    Lo quiero
+                                </a>
+                            </div>
+
+                            <div class="glass-card-v2">
+                                <div class="duo-card-header">
+                                    <div class="speed-part">650 <span class="unit">MB</span></div>
+                                    <div class="plus-part">+ TV</div>
+                                </div>
+                                <div class="card-price-glass">S/ 125</div>
+                                <div class="duo-icons-row">
+                                    <span title="Internet"><i class="fas fa-wifi"></i>Fibra óptica</span>
+                                    <span><i class="fas fa-tv"></i>Canales HD</span>
+                                </div>
+                                <div class="mini-channels-grid">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (1).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (2).png" alt="">
+                                    <img src="{{ prefix }}public/assets/img/tv/basico+/basico+ (3).png" alt="">
+                                </div>
+                                <a href="https://api.whatsapp.com/send?phone={{ waGeneral }}&text=¡Hola!%20Estoy%20interesado%20en%20contratar%20el%20plan%20Dúo%20650%20MB%20%2B%20IPTV%20por%20S/%20125%20mensuales" target="_blank" class="btn-action">
+                                    Lo quiero
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

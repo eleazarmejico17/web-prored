@@ -2,30 +2,7 @@
 // Código específico de planes/index.html
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Tabs de planes
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    
-    if (tabBtns.length && tabPanes.length) {
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', function () {
-                // Quitar clase activa de todos los botones
-                tabBtns.forEach(b => b.classList.remove('active'));
-                // Agregar clase activa al botón clickeado
-                this.classList.add('active');
-                
-                // Quitar clase activa de todos los paneles
-                tabPanes.forEach(pane => pane.classList.remove('active'));
-                
-                // Mostrar el panel correspondiente
-                const targetId = 'tab' + this.dataset.tab.charAt(0).toUpperCase() + this.dataset.tab.slice(1);
-                const targetPane = document.getElementById(targetId);
-                if (targetPane) {
-                    targetPane.classList.add('active');
-                }
-            });
-        });
-    }
+    // Tabs de planes → tabs.js
 
     // Animaciones de entrada al hacer scroll
     const observerOptions = {

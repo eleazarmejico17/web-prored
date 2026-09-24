@@ -1,0 +1,178 @@
+---
+layout: base.njk
+title: Consulta tu Cobertura de Internet en Huancayo y Junín - ProRed
+description: "Verifica si ProRed llega a tu zona en Junín con nuestro mapa interactivo de cobertura de fibra óptica."
+pathPrefix: "../"
+navId: cobertura
+extraCss:
+  - cobertura.css
+cdnCss:
+  - https://unpkg.com/leaflet@1.9.4/dist/leaflet.css
+extraJs:
+  - cobertura.js
+cdnJs:
+  - https://unpkg.com/leaflet@1.9.4/dist/leaflet.js
+---
+<!-- Hero Cobertura -->
+<section class="hero-page hero-cobertura">
+    <div class="container">
+        <h1>Verifica la Cobertura de Fibra Óptica en tu zona</h1>
+        <p>Descubre si ProRed llega a tu zona en Junín y explora nuestro mapa interactivo.</p>
+        <div class="hero-badges">
+            <span><i class="fas fa-map-marked-alt"></i> Cobertura en zonas aledañas</span>
+            <span><i class="fas fa-headset"></i> Soporte Local 24/7</span>
+            <span><i class="fas fa-stopwatch"></i> Verifica cobertura en 1 minuto</span>
+        </div>
+    </div>
+</section>
+<!-- Sección combinada: Formulario + Mapa -->
+<section class="cobertura-combinada">
+    <div class="container">
+        <h2 class="text-center mb-4 fade-in-element">Contáctanos y te atenderemos</h2>
+        <p class="text-center text-secondary fade-in-element" style="max-width: 700px; margin: 0 auto 40px;">
+            Completa tus datos y marca tu ubicación en el mapa para verificar cobertura
+        </p>
+
+        <div class="cobertura-grid">
+            <!-- Formulario Simplificado -->
+            <div class="formulario-card fade-in-element">
+                <form id="solicitudForm">
+                    <h3 class="text-center mb-4"><i class="fas fa-paper-plane text-primary mr-2"></i> Déjanos tus datos</h3>
+                    <div class="form-group">
+                        <label for="documento"><i class="fas fa-id-card"></i> Documento (DNI o CE) - Opcional</label>
+                        <input type="text" id="documento" class="form-control"
+                            placeholder="Ej: 12345678 (opcional)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="celular"><i class="fas fa-mobile-alt"></i> Celular</label>
+                        <div style="display: flex; align-items: center;">
+                            <span style="padding: 0 10px; background: #f0f7ff; border: 1px solid #ddd; border-right: none; border-radius: 5px 0 0 5px; height: 50px; display: flex; align-items: center;">+51</span>
+                            <input type="tel" id="celular" class="form-control" style="border-radius: 0 10px 10px 0; height: 50px;"
+                                placeholder="987 654 321" required pattern="9[0-9]{8}" maxlength="9">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccion"><i class="fas fa-map-marker-alt"></i> Dirección</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="direccion" class="form-control"
+                                placeholder="Selecciona en el mapa..." required readonly>
+                            <button type="button" id="btnBuscarDireccion" class="btn-small" style="height: 50px;" title="Buscar manualmente">
+                                <i class="fas fa-keyboard"></i>
+                            </button>
+                        </div>
+                        <small class="form-text"><i class="fas fa-info-circle"></i> Haz clic en el mapa para completar automáticamente</small>
+                    </div>
+
+                    <!-- Campos ocultos para coordenadas -->
+                    <input type="hidden" id="latitud" value="">
+                    <input type="hidden" id="longitud" value="">
+
+                    <div class="form-group">
+                        <div class="ubicacion-info" id="ubicacionInfo" style="display: none;">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                            <span id="coordenadasTexto">Ubicación no marcada</span>
+                            <button type="button" id="btnLimpiarUbicacion" class="btn-small" style="margin-left: auto;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-verificar" id="btnEnviarWhatsApp">
+                        <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+                    </button>
+
+                    <p class="text-small" style="margin-top: 10px; font-size: 0.85rem; color: #666;">
+                        Al enviar, se abrirá WhatsApp con tus datos para que nuestro equipo te contacte
+                    </p>
+                </form>
+            </div>
+
+            <!-- Mapa Interactivo -->
+            <div class="fade-in-element">
+                <div class="mapa-container">
+                    <div id="map"></div>
+                    <div class="mapa-instructions">
+                        <i class="fas fa-mouse-pointer"></i>
+                        Haz clic en el mapa para marcar tu ubicación exacta
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Proceso de Instalación Mejorado -->
+<section class="proceso-section">
+    <div class="container">
+        <h2 class="text-center mb-4 fade-in-element">Proceso de Instalación</h2>
+        <p class="text-center text-secondary fade-in-element" style="max-width: 700px; margin: 0 auto 30px;">
+            Simple, rápido y sin complicaciones
+        </p>
+
+        <div class="proceso-timeline">
+            <div class="proceso-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-icon"><i class="fas fa-phone-alt"></i></div>
+                    <h3 class="step-title">Solicita el Servicio</h3>
+                    <p class="step-description">Contáctanos por teléfono, WhatsApp o visita nuestra oficina</p>
+                </div>
+            </div>
+
+            <div class="proceso-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-icon"><i class="fas fa-search-location"></i></div>
+                    <h3 class="step-title">Verificamos Cobertura</h3>
+                    <p class="step-description">Confirmamos la disponibilidad del servicio en tu zona</p>
+                </div>
+            </div>
+
+            <div class="proceso-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-icon"><i class="fas fa-calendar-check"></i></div>
+                    <h3 class="step-title">Agendamos Visita</h3>
+                    <p class="step-description">Coordinamos fecha y hora para la instalación</p>
+                </div>
+            </div>
+
+            <div class="proceso-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-icon"><i class="fas fa-tools"></i></div>
+                    <h3 class="step-title">Instalación Gratis</h3>
+                    <p class="step-description">Nuestros técnicos realizan la instalación sin costo</p>
+                </div>
+            </div>
+
+            <div class="proceso-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <div class="step-icon"><i class="fas fa-wifi"></i></div>
+                    <h3 class="step-title">¡Listo para Navegar!</h3>
+                    <p class="step-description">Disfruta de internet de alta velocidad al instante</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section style="background: linear-gradient(135deg, #E58E21 0%, #F4A347 100%); color: white; padding: 60px 0; text-align: center;">
+    <div class="container">
+        <h2 style="color: white; margin-bottom: 20px;">¿Tenemos cobertura en tu zona?</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.95;">
+            Contáctanos y te ayudamos a verificar la disponibilidad
+        </p>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="tel:991 445 527" class="btn btn-primary" style="background: white; color: #E58E21;">
+                <i class="fas fa-phone"></i> Llamar Ahora
+            </a>
+            <a href="https://api.whatsapp.com/send?phone={{ site.whatsapp.general }}&text=Hola%21%20quiero%20saber%20si%20ProRed%20tiene%20cobertura%20en%20mi%20zona" class="btn btn-outline" style="border-color: white; color: white;" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </div>
+</section>

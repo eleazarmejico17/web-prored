@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    {% if description %}
+    <meta name="description" content="{{ description }}">
+    {% endif %}
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:title" content="{{ title }}">
+    {% if description %}
+    <meta property="og:description" content="{{ description }}">
+    {% endif %}
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:locale" content="es_PE">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ title }}">
+    {% if description %}
+    <meta name="twitter:description" content="{{ description }}">
+    {% endif %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% for css in preCss | default([]) %}
+    <link rel="stylesheet" href="{{ pathPrefix }}public/assets/css/{{ css }}?v={{ site.version }}">
+    {% endfor %}
+    <link rel="stylesheet" href="{{ pathPrefix }}public/assets/css/styles.css?v={{ site.version }}">
+    {% for css in extraCss | default([]) %}
+    <link rel="stylesheet" href="{{ pathPrefix }}public/assets/css/{{ css }}?v={{ site.version }}">
+    {% endfor %}
+    {% for css in cdnCss | default([]) %}
+    <link rel="stylesheet" href="{{ css }}">
+    {% endfor %}
+    <link rel="stylesheet" href="{{ pathPrefix }}public/assets/css/cookies.css?v={{ site.version }}">
+    <link rel="icon" type="image/x-icon" href="{{ pathPrefix }}public/assets/img/logo.ico">
+</head>
+<body>
+    {% include "navbar.njk" %}
+
+    {{ content | safe }}
+
+    {% include "footer.njk" %}
+
+    {% if showPaymentNotification %}
+    {% include "payment-notification.njk" %}
+    {% endif %}
+    {% include "whatsapp-float.njk" %}
+
+    <script src="{{ pathPrefix }}public/assets/js/script.js?v={{ site.version }}"></script>
+    <script src="{{ pathPrefix }}public/assets/js/cookies.js?v={{ site.version }}"></script>
+    {% for js in cdnJs | default([]) %}
+    <script src="{{ js }}"></script>
+    {% endfor %}
+    {% for js in extraJs | default([]) %}
+    <script src="{{ pathPrefix }}public/assets/js/{{ js }}?v={{ site.version }}"></script>
+    {% endfor %}
+</body>
+</html>

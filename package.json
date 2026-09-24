@@ -1,0 +1,13 @@
+{
+  "name": "web-prored",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Sitio estático ProRed — fibra óptica (Eleventy)",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}

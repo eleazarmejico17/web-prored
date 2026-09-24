@@ -1,0 +1,5 @@
+{% set fw = floatWhatsapp if floatWhatsapp else "general" %}
+{% set fwText = floatWhatsappText if floatWhatsappText else site.whatsappDefaultText %}
+<a href="https://api.whatsapp.com/send?phone={{ site.whatsapp[fw] }}&text={{ fwText | urlencode }}" class="whatsapp-float" target="_blank" aria-label="Chatea por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
