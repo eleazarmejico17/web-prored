@@ -314,6 +314,20 @@
     width: 100%;
 }
 
+/* Grid 3 columnas (Internet: 3 planes alineados en una fila) */
+.internet-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1200px) {
+    .internet-grid-3 {
+        grid-template-columns: 1fr;
+        width: 80%;
+        margin: 0 auto;
+        gap: 20px;
+    }
+}
+
 .card-speed-header { margin-bottom: 5px; line-height: 1; }
 
 .speed-number {
@@ -445,6 +459,12 @@
 }
 
 .tv-cards-side { width: 50%; }
+
+/* Internet: tarjetas más anchas (3 en una fila) en escritorio */
+@media (min-width: 992px) {
+    #tabInternet .tv-info-side { width: 35%; }
+    #tabInternet .tv-cards-side { width: 63%; }
+}
 
 .cards-wrapper {
     display: flex;

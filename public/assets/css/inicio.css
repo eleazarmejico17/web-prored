@@ -310,6 +310,20 @@
     width: 100%;
 }
 
+/* --- GRID 3 COLUMNAS (Internet: 3 planes alineados en una fila) --- */
+.internet-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1200px) {
+    .internet-grid-3 {
+        grid-template-columns: 1fr;
+        width: 80%;
+        margin: 0 auto;
+        gap: 20px;
+    }
+}
+
 /* --- ESTILOS ESPECÍFICOS DE INTERNET (TEXTO) --- */
 .card-speed-header {
     margin-bottom: 5px;
@@ -480,6 +494,12 @@
 /* --- LADO DERECHO (CARDS) --- */
 .tv-cards-side {
     width: 50%; /* 50% en escritorio */
+}
+
+/* Internet: tarjetas más anchas (3 en una fila) en escritorio */
+@media (min-width: 992px) {
+    #tabInternet .tv-info-side { width: 35%; }
+    #tabInternet .tv-cards-side { width: 63%; }
 }
 
 .cards-wrapper {
