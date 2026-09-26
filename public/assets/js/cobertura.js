@@ -34,9 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // Centro aproximado de Junín
         mapa = L.map('map').setView([-11.9176, -75.3147], 13);
         
-        // Capa base de OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+        // Capa base: Esri World Street Map (sin API key)
+        // Reemplaza tile.openstreetmap.org, que bloqueó a esta web por su política de uso de tiles
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: '© <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mapa);
         
         // Crear icono personalizado interactivo
